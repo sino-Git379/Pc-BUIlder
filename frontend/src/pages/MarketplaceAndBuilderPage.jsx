@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import { useTheme } from '../context/ThemeContext';
 import { resolveComponentCategoryKind } from '../data/hardwareMedia';
@@ -45,6 +46,7 @@ export default function MarketplaceAndBuilderPage() {
     openModal,
   } = useApp();
   const { t } = useTheme();
+  const navigate = useNavigate();
 
   const CATEGORY_PILLS = useMemo(
     () => CATEGORY_KEYS.map((k) => ({ key: k.key, label: t(k.tKey) })),
@@ -272,6 +274,37 @@ export default function MarketplaceAndBuilderPage() {
     <main className="animate-page-enter w-full pt-4 sm:pt-6 pb-20 lg:pb-16 bg-background min-h-screen">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-margin">
         <div className="flex flex-col w-full">
+          {/* Interactive 3D PC Builder Feature Banner */}
+          <div className="mb-6 rounded-2xl bg-gradient-to-r from-cyan-950/80 via-slate-900/95 to-blue-950/85 border border-cyan-500/40 p-5 md:p-6 shadow-xl relative overflow-hidden flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div className="flex items-center gap-4">
+              <div className="w-14 h-14 rounded-2xl bg-cyan-500/15 border border-cyan-500/40 flex items-center justify-center text-cyan-300 shrink-0 shadow-inner">
+                <span className="material-symbols-outlined text-[32px]">view_in_ar</span>
+              </div>
+              <div>
+                <div className="flex items-center gap-2 mb-1">
+                  <h3 className="font-headline-sm text-lg md:text-xl font-extrabold text-white tracking-tight">
+                    Интерактивный 3D-Конструктор ПК
+                  </h3>
+                  <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-cyan-500 text-black tracking-wider uppercase">
+                    3D LIVE
+                  </span>
+                </div>
+                <p className="text-slate-300 text-sm max-w-xl">
+                  Собирайте компьютер в реальном 3D-пространстве: пошаговая установка деталей, анимация сборки, взрыв-схема (Exploded View), выбор ракурсов и ARGB-подсветки!
+                </p>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => navigate('/builder')}
+              className="btn-interactive px-5 py-3 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-black font-extrabold text-sm tracking-wide shadow-lg shadow-cyan-500/20 flex items-center gap-2 shrink-0 transition-transform hover:scale-105 active:scale-95"
+            >
+              <span className="material-symbols-outlined text-[20px]">build_circle</span>
+              <span>Открыть 3D-Конструктор</span>
+              <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
+            </button>
+          </div>
+
           {/* Marketplace Utility & Header Navigation */}
           <section className="w-full mb-space-lg flex flex-col gap-space-md">
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">

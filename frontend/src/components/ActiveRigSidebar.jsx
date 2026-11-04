@@ -167,6 +167,38 @@ export default function ActiveRigSidebar() {
               </div>
             </div>
 
+            {/* Interactive 3D PC Builder Action Card */}
+            <div className="p-3 sm:p-3.5 bg-gradient-to-r from-cyan-950/40 to-slate-900/60 border-b border-cyan-500/20 flex flex-col gap-2">
+              <button
+                type="button"
+                onClick={() => {
+                  navigate('/builder');
+                  setIsRigOpen(false);
+                }}
+                className="w-full rounded-xl p-3 bg-gradient-to-r from-cyan-950/80 via-slate-900 to-blue-950/80 border border-cyan-500/40 hover:border-cyan-400 flex items-center justify-between group transition-all duration-300 shadow-md hover:shadow-cyan-500/10"
+              >
+                <div className="flex items-center gap-2.5 text-left min-w-0">
+                  <div className="w-10 h-10 rounded-xl bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-cyan-300 group-hover:scale-105 transition-transform shrink-0">
+                    <span className="material-symbols-outlined text-[22px]">view_in_ar</span>
+                  </div>
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-1.5">
+                      <span className="font-bold text-sm text-cyan-200">3D-Конструктор ПК</span>
+                      <span className="px-1.5 py-0.2 rounded font-mono text-[9px] font-bold bg-cyan-500/30 text-cyan-300 border border-cyan-500/40">
+                        3D LIVE
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-slate-300 truncate">
+                      Интерактивная 3D-сборка и взрыв-схема
+                    </p>
+                  </div>
+                </div>
+                <span className="material-symbols-outlined text-cyan-400 group-hover:translate-x-1 transition-transform shrink-0">
+                  arrow_forward
+                </span>
+              </button>
+            </div>
+
             {/* RigForge AI 3D Visualizer Card with Primary "Generate Build" Action */}
             <div className="p-3 sm:p-3.5 bg-surface-container-low/60 flex flex-col gap-2">
               <div

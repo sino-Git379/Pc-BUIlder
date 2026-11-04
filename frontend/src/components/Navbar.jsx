@@ -57,7 +57,12 @@ export default function Navbar() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const isMarketplace = location.pathname === '/' || location.pathname === '/builder';
+  const isBuilder =
+    location.pathname.startsWith('/builder') || location.pathname.startsWith('/builds');
+  const isMarketplace =
+    location.pathname === '/' ||
+    location.pathname.startsWith('/parts') ||
+    location.pathname.startsWith('/components');
   const isMessages =
     location.pathname.startsWith('/messages') || location.pathname.startsWith('/chat');
 
@@ -107,6 +112,23 @@ export default function Navbar() {
               }`}
             >
               {t('marketplace')}
+            </button>
+
+            {/* Direct 3D Builder Link */}
+            <button
+              type="button"
+              onClick={() => navigate('/builder')}
+              className={`btn-interactive px-space-md py-space-sm rounded-lg font-body-md text-body-md flex items-center gap-2 transition-all ${
+                isBuilder
+                  ? 'text-cyan-300 font-bold bg-cyan-950/70 border border-cyan-500/50 shadow-xs'
+                  : 'text-cyan-400 hover:text-cyan-300 hover:bg-cyan-950/40'
+              }`}
+            >
+              <span className="material-symbols-outlined text-[19px] text-cyan-400 animate-pulse">view_in_ar</span>
+              <span className="font-bold">{locale === 'ru' ? '3D Конструктор' : locale === 'tj' ? '3D Созанда' : '3D PC Builder'}</span>
+              <span className="px-1.5 py-0.2 rounded font-mono text-[9px] font-extrabold bg-cyan-500/25 text-cyan-300 border border-cyan-500/40">
+                3D LIVE
+              </span>
             </button>
 
             <div className="relative flex items-center">
@@ -165,6 +187,21 @@ export default function Navbar() {
         {/* Right Actions: Theme, Locale, Active Rig Toggle, User Profile */}
         <div className="flex items-center gap-space-sm sm:gap-space-md">
           <div className="flex items-center gap-space-xs">
+            {/* Quick 3D Builder Button */}
+            <button
+              type="button"
+              onClick={() => navigate('/builder')}
+              title="Open Interactive 3D PC Builder Viewport"
+              className={`btn-interactive px-2.5 py-1.5 rounded-lg flex items-center gap-1.5 font-label-md text-label-md font-bold transition-all ${
+                isBuilder
+                  ? 'bg-cyan-500 text-black shadow-sm ring-2 ring-cyan-400/50'
+                  : 'bg-cyan-950/40 hover:bg-cyan-900/60 text-cyan-400 border border-cyan-500/30'
+              }`}
+            >
+              <span className="material-symbols-outlined text-[18px]">view_in_ar</span>
+              <span className="hidden sm:inline">3D Builder</span>
+            </button>
+
             {/* Active Rig Split-Sidebar Quick Button */}
             <button
               type="button"
