@@ -9,6 +9,7 @@ import ModalManager from './components/ModalManager';
 import ToastContainer from './components/ToastContainer';
 import ErrorBoundary from './components/ErrorBoundary';
 import MarketplaceAndBuilderPage from './pages/MarketplaceAndBuilderPage';
+import BuilderPage from './pages/BuilderPage';
 import CheckoutEscrowPage from './pages/CheckoutEscrowPage';
 import LiveMessengerPage from './pages/LiveMessengerPage';
 import ProfilePage from './pages/ProfilePage';
@@ -18,20 +19,18 @@ import RegisterPage from './pages/RegisterPage';
 function RouteSynchronizer() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { setIsRigOpen, user } = useApp();
+  const { user } = useApp();
 
   useEffect(() => {
     const path = location.pathname;
-    if (path.startsWith('/builder')) {
-      setIsRigOpen(true);
-    } else if (path.startsWith('/accounts/session')) {
+    if (path.startsWith('/accounts/session')) {
       if (user) {
         navigate('/profile');
       } else {
         navigate('/accounts/login');
       }
     }
-  }, [location.pathname, setIsRigOpen, user, navigate]);
+  }, [location.pathname, user, navigate]);
 
   return null;
 }
@@ -47,8 +46,8 @@ export default function App() {
             <ErrorBoundary>
               <Routes>
                 <Route path="/" element={<MarketplaceAndBuilderPage />} />
-                <Route path="/builder/*" element={<MarketplaceAndBuilderPage />} />
-                <Route path="/builds/*" element={<MarketplaceAndBuilderPage />} />
+                <Route path="/builder/*" element={<BuilderPage />} />
+                <Route path="/builds/*" element={<BuilderPage />} />
                 <Route path="/components/*" element={<MarketplaceAndBuilderPage />} />
                 <Route path="/parts/*" element={<MarketplaceAndBuilderPage />} />
                 <Route path="/accounts/login" element={<LoginPage />} />
