@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}PCForge · Marketplace{% endblock %}
+{% block content %}
+<header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-low/95 backdrop-blur-md border-b border-outline-variant/25 shadow-sm">
+  <div class="h-16 w-full max-w-[1440px] mx-auto px-margin-lg flex items-center justify-between gap-space-lg">
+    <div class="flex items-center gap-space-lg shrink-0">
+      <a href="/" class="flex items-center gap-space-sm">
+        <div class="w-7 h-7 rounded-lg bg-surface-container flex items-center justify-center">
+          <span class="material-symbols-outlined text-primary text-headline-sm">memory</span>
+        </div>
+        <span class="font-headline-sm text-headline-sm text-on-surface tracking-tight font-semibold">PC<span class="text-primary">Forge</span></span>
+      </a>
+      <div class="h-4 w-px bg-outline-variant/60 hidden sm:block"></div>
+      <nav class="hidden lg:flex items-center gap-space-xs" data-active-classes="bg-surface-container text-primary font-semibold">
+        <a class="px-space-md py-space-xs rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="marketplace" href="/">Marketplace</a>
+        <a class="px-space-md py-space-xs rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="pc-builder" href="/builder/">PC Builder</a>
+        <a class="px-space-md py-space-xs rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="components" href="/components/">Components</a>
+        <a class="px-space-md py-space-xs rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="messages" href="/chat/">Messages</a>
+      </nav>
+    </div>
+    <div class="flex-1 max-w-xl hidden md:block">
+      <div class="relative flex items-center w-full">
+        <span class="material-symbols-outlined absolute left-space-md text-outline pointer-events-none text-body-lg">search</span>
+        <input class="w-full h-9 pl-10 pr-14 bg-surface-container-lowest text-on-surface placeholder:text-outline text-body-sm font-body-sm rounded-lg border border-outline-variant/25 focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Search CPUs, GPUs, motherboards, listings..." type="text"/>
+        <div class="absolute right-space-sm flex items-center">
+          <kbd class="px-space-xs py-0.5 bg-surface-container-high text-on-surface-variant rounded font-code-sm text-code-sm">⌘K</kbd>
+        </div>
+      </div>
+    </div>
+    <div class="flex items-center gap-space-sm shrink-0">
+      <button class="hidden sm:inline-flex items-center gap-space-xs px-space-md py-space-xs h-9 bg-surface-container text-on-surface hover:bg-surface-container-high hover:text-primary transition-colors rounded-lg font-body-sm text-body-sm" type="button">
+        <span class="material-symbols-outlined text-headline-sm">add</span>
+        <span>Post Listing</span>
+      </button>
+      <a class="relative p-space-xs text-on-surface-variant hover:text-on-surface transition-colors flex items-center justify-center" data-path="messages" href="/chat/">
+        <span class="material-symbols-outlined text-headline-md">mail</span>
+      </a>
+      <div class="h-4 w-px bg-outline-variant/60 hidden sm:block"></div>
+      <button class="flex items-center gap-space-sm pl-space-xs pr-space-sm py-space-xs bg-surface-container-lowest hover:bg-surface-container-high transition-colors rounded-lg" type="button">
+        <div class="relative shrink-0">
+          <img src="{% static 'images/placeholder.svg' %}" alt="Profile" class="w-8 h-8 rounded-full object-cover"/>
+          <span class="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-primary ring-2 ring-surface-container-lowest"></span>
+        </div>
+        <span class="hidden xl:inline font-body-sm text-body-sm text-on-surface font-medium">Войти</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="min-h-screen bg-background pt-24 px-4 sm:px-8 flex-1">
+  <div class="mx-auto max-w-7xl py-10">
+    <p class="font-code-sm uppercase tracking-widest text-primary">PCForge / Hardware exchange</p>
+    <h1 class="mt-3 text-headline-xl font-semibold">Hardware Marketplace</h1>
+    <p class="mt-2 max-w-2xl text-on-surface-variant">Объявления сообщества из каталога PCForge.</p>
+    <label class="mt-8 block max-w-xl">
+      <span class="sr-only">Поиск товаров</span>
+      <input id="hardware-search-input" class="w-full rounded-xl bg-surface-container-lowest border border-outline-variant/30 px-4 py-3 text-on-surface placeholder:text-outline focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all" placeholder="Поиск по товарам…">
+    </label>
+    <div id="listing-grid" class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {% for listing in listings %}<article class="group overflow-hidden rounded-2xl bg-surface-container-low cursor-pointer hover:bg-surface-container transition-all shadow-sm border border-outline-variant/25" data-listing-id="{{ listing.id }}"><div class="block aspect-[4/3] bg-surface-container overflow-hidden">{% if listing.component.image %}<img src="{{ listing.component.image.url }}" alt="{{ listing.component.brand }} {{ listing.component.name }}" class="h-full w-full object-cover transition-transform group-hover:scale-105">{% else %}<div class="flex h-full items-center justify-center text-primary"><span class="material-symbols-outlined text-5xl">memory</span></div>{% endif %}</div><div class="p-5"><p class="font-code-sm uppercase text-primary">{{ listing.component.category.name }}</p><h2 class="mt-2 text-headline-sm font-semibold">{{ listing.component.brand }} {{ listing.component.name }}</h2><p class="mt-2 text-on-surface-variant line-clamp-2">{{ listing.description|default:listing.component.description }}</p><div class="mt-5 flex items-center justify-between"><strong class="text-headline-sm">${{ listing.price }}</strong><span class="rounded-lg bg-surface-container-high px-2.5 py-1 text-body-sm text-on-surface-variant font-medium">{{ listing.get_condition_display }}</span></div><p class="mt-2 text-body-sm text-on-surface-variant flex items-center gap-1.5"><span class="material-symbols-outlined text-base">person</span>{{ listing.seller.username }}</p><div class="mt-4 flex gap-2"><button type="button" class="flex-1 rounded-xl bg-primary px-3 py-2 font-semibold text-on-primary text-body-sm hover:bg-primary/90" data-add-to-cart="{{ listing.id }}">Add to cart</button><button type="button" class="rounded-xl bg-surface-container-high px-3 py-2 text-on-surface text-body-sm hover:bg-surface-container-highest" data-open-detail="{{ listing.id }}">Details</button></div></div></article>{% empty %}<div class="col-span-full rounded-2xl bg-surface-container-low p-12 text-center border border-outline-variant/20"><span class="material-symbols-outlined text-4xl text-primary">inventory_2</span><h2 class="mt-3 text-headline-lg">Нет товаров</h2><p class="mt-2 text-on-surface-variant">Активных объявлений пока нет.</p></div>{% endfor %}
+    </div>
+  </div>
+</main>
+
+<!-- Floating Animated Cart Button (Bottom Right) -->
+<button id="floating-cart-btn" type="button" aria-label="Cart" class="fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary text-on-primary shadow-xl hover:scale-105 active:scale-95 transition-all duration-200 group">
+  <span class="material-symbols-outlined text-2xl transition-transform group-hover:-rotate-6">shopping_cart</span>
+  <span id="floating-cart-badge" class="hidden absolute -top-2 -right-2 flex h-6 min-w-6 items-center justify-center rounded-full bg-tertiary px-1.5 text-xs font-bold text-on-tertiary shadow-md ring-2 ring-background transition-transform">0</span>
+</button>
+
+<!-- Offcanvas Cart Backdrop & Sidebar -->
+<div id="cart-offcanvas-backdrop" class="fixed inset-0 z-50 bg-black/40 backdrop-blur-xs opacity-0 pointer-events-none transition-opacity duration-300"></div>
+<aside id="cart-offcanvas" aria-label="Shopping cart" class="fixed top-0 right-0 bottom-0 z-50 w-full max-w-md bg-surface-container-low border-l border-outline-variant/30 shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300 ease-in-out">
+  <div class="p-5 border-b border-outline-variant/25 flex items-center justify-between bg-surface-container/50">
+    <div class="flex items-center gap-2.5">
+      <div class="h-9 w-9 rounded-xl bg-primary/15 text-primary flex items-center justify-center">
+        <span class="material-symbols-outlined text-xl">shopping_bag</span>
+      </div>
+      <div>
+        <h2 class="text-headline-sm font-bold text-on-surface">Cart</h2>
+        <p id="offcanvas-cart-subtitle" class="text-xs text-on-surface-variant">0 items selected</p>
+      </div>
+    </div>
+    <button type="button" id="close-cart-offcanvas" class="h-8 w-8 rounded-full bg-surface-container-high hover:bg-surface-container-highest text-on-surface flex items-center justify-center transition-colors">
+      <span class="material-symbols-outlined text-base">close</span>
+    </button>
+  </div>
+
+  <div id="offcanvas-cart-items" class="flex-1 overflow-y-auto p-5 flex flex-col gap-3">
+    <p class="text-center text-on-surface-variant py-12">Your cart is empty.</p>
+  </div>
+
+  <div class="p-5 border-t border-outline-variant/25 bg-surface-container/60 flex flex-col gap-4">
+    <div class="flex items-center justify-between">
+      <span class="text-body-md text-on-surface-variant font-medium">Total amount</span>
+      <strong id="offcanvas-cart-total" class="text-2xl font-bold text-primary">$0.00</strong>
+    </div>
+    <button type="button" id="offcanvas-checkout-btn" disabled class="w-full rounded-xl bg-primary px-5 py-3.5 font-semibold text-on-primary hover:bg-primary/90 disabled:opacity-40 disabled:pointer-events-none transition-all flex items-center justify-center gap-2 shadow-md">
+      <span class="material-symbols-outlined text-lg">credit_card</span>
+      <span>Checkout</span>
+    </button>
+  </div>
+</aside>
+
+<footer class="w-full bg-surface-container-lowest border-t border-outline-variant/20 px-6 py-4 text-body-sm text-on-surface-variant">PCForge</footer>
+{% endblock %}

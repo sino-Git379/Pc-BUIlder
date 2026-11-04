@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-tertiary-fixed-variant": "#6d3900", "on-secondary-fixed": "#00201a", "on-tertiary": "#4d2700", "on-error-container": "#ffdad6", "tertiary-container": "#ffa657", "tertiary-fixed": "#ffdcc2", "surface": "#111416", "on-primary-container": "#005547", "on-primary": "#00382e", "tertiary": "#ffcca5", "on-tertiary-container": "#723c00", "primary": "#46efcf", "primary-fixed": "#57fbdb", "on-secondary-container": "#006050", "on-background": "#e1e2e5", "on-secondary": "#00382e", "secondary-fixed": "#42fdd9", "outline-variant": "#3b4a45", "on-primary-fixed-variant": "#005144", "tertiary-fixed-dim": "#ffb77c", "surface-container-high": "#272a2c", "surface-dim": "#111416", "inverse-surface": "#e1e2e5", "inverse-primary": "#006b5b", "primary-fixed-dim": "#2adec0", "outline": "#85948f", "on-primary-fixed": "#00201a", "background": "#111416", "primary-container": "#00d2b4", "surface-container-highest": "#323537", "secondary-container": "#00e3c0", "surface-variant": "#323537", "secondary": "#52ffdc", "on-error": "#690005", "on-tertiary-fixed": "#2e1500", "surface-tint": "#2adec0", "surface-container-low": "#191c1e", "secondary-fixed-dim": "#00dfbd", "surface-container-lowest": "#0c0f11", "error-container": "#93000a", "inverse-on-surface": "#2e3133", "surface-container": "#1d2022", "on-secondary-fixed-variant": "#005143", "on-surface-variant": "#bacac4", "on-surface": "#e1e2e5", "error": "#ffb4ab", "surface-bright": "#37393c" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "gutter": "1rem", "margin-md": "1.5rem", "space-3xl": "3rem", "gutter-lg": "1.5rem", "space-xl": "1.5rem", "margin": "1rem", "space-xs": "0.25rem", "space-2xl": "2rem", "space-md": "0.75rem", "space-sm": "0.5rem", "space-lg": "1rem", "margin-lg": "2.5rem" }, "fontFamily": { "code-md": [ "JetBrains Mono" ], "body-lg": [ "Geist" ], "display": [ "Geist" ], "headline-md": [ "Geist" ], "body-md": [ "Geist" ], "code-sm": [ "JetBrains Mono" ], "headline-lg": [ "Geist" ], "headline-xl": [ "Geist" ], "body-sm": [ "Geist" ], "label-md": [ "Geist" ], "headline-xl-mobile": [ "Geist" ], "label-caps": [ "JetBrains Mono" ], "headline-sm": [ "Geist" ] }, "fontSize": { "code-md": [ "13px", { "lineHeight": "18px", "letterSpacing": "-0.01em", "fontWeight": "500" } ], "body-lg": [ "16px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400" } ], "display": [ "40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "headline-md": [ "20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "500" } ], "body-md": [ "14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" } ], "code-sm": [ "11px", { "lineHeight": "16px", "letterSpacing": "0em", "fontWeight": "500" } ], "headline-lg": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "headline-xl": [ "32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "body-sm": [ "13px", { "lineHeight": "18px", "letterSpacing": "0.005em", "fontWeight": "400" } ], "label-md": [ "12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" } ], "headline-xl-mobile": [ "26px", { "lineHeight": "34px", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "label-caps": [ "10px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "600" } ], "headline-sm": [ "16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" } ] } } } };</script></head><body class="bg-background font-body-md text-on-surface antialiased min-h-screen flex flex-col"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-low/95 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.4)]"><div class="h-16 w-full max-w-[1440px] mx-auto px-margin-lg flex items-center justify-between gap-space-lg"><div class="flex items-center gap-space-lg shrink-0"><div class="flex items-center gap-space-sm"><div class="w-7 h-7 rounded bg-surface-container flex items-center justify-center"><span class="material-symbols-outlined text-primary text-headline-sm">memory</span></div><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight font-semibold">PC<span class="text-primary">Forge</span></span></div><div class="h-4 w-px bg-outline-variant/60 hidden sm:block"></div><nav class="hidden lg:flex items-center gap-space-xs" data-active-classes="bg-surface-container text-primary font-semibold"><a class="px-space-md py-space-xs rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="marketplace" href="#">Marketplace</a><a class="px-space-md py-space-xs rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="pc-builder" href="#">PC Builder</a><a class="px-space-md py-space-xs rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="components" href="#">Components</a><a class="px-space-md py-space-xs rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="messages" href="#">Messages</a></nav></div><div class="flex-1 max-w-xl hidden md:block"><div class="relative flex items-center w-full"><span class="material-symbols-outlined absolute left-space-md text-outline pointer-events-none text-body-lg">search</span><input class="w-full h-9 pl-10 pr-14 bg-surface-container-lowest text-on-surface placeholder:text-outline text-body-sm font-body-sm rounded focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Search CPUs, GPUs, motherboards, listings..." type="text"/><div class="absolute right-space-sm flex items-center"><kbd class="px-space-xs py-0.5 bg-surface-container-high text-on-surface-variant rounded font-code-sm text-code-sm">⌘K</kbd></div></div></div><div class="flex items-center gap-space-md shrink-0"><button class="hidden sm:inline-flex items-center gap-space-xs px-space-md py-space-xs h-9 bg-surface-container text-on-surface hover:bg-surface-container-high hover:text-primary transition-colors rounded font-body-sm text-body-sm" type="button"><span class="material-symbols-outlined text-headline-sm">add</span><span>Post Listing</span></button><a class="relative p-space-xs text-on-surface-variant hover:text-on-surface transition-colors flex items-center justify-center" data-path="messages" href="#"><span class="material-symbols-outlined text-headline-md">mail</span><span class="absolute top-0 right-0 h-4 min-w-[1rem] px-1 bg-primary text-on-primary font-code-sm text-code-sm rounded-full flex items-center justify-center">3</span></a><div class="h-4 w-px bg-outline-variant/60 hidden sm:block"></div><button class="flex items-center gap-space-sm pl-space-xs pr-space-sm py-space-xs bg-surface-container-lowest hover:bg-surface-container-high transition-colors rounded" type="button"><div class="relative shrink-0"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1Xh-W0JzB0PFC_eNd1OHTAvzFGLYe3WHH7TKUBuck9DX_DcgQoXZazqMtErsnPJfffvFTKERWt-9AIUgjUh3WNp7odP-vepApcrSnVik2N7fwAaxxo6YbTR7YRKl-pqU1ND2cSDdO8Oln8QZxpbk6HtZ6blEvR0hvOpilRgbabR20Ch2YCq_Wbkcigkra8xRn8SBK6wfSGr8MUtEijZlfThwsl2WZ9Ck4PYU-aTOZJXDg"/><span class="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-primary ring-2 ring-surface-container-lowest"></span></div><span class="hidden xl:inline font-body-sm text-body-sm text-on-surface font-medium">j.vance</span></button></div></div></header><main class="w-full pt-16 flex-1 bg-background"><div class="flex flex-col w-full">
+<!-- Precision Header & Engineering Telemetry Band -->
+<section class="w-full bg-surface-container-lowest/80 backdrop-blur px-margin-lg py-space-xl">
+<div class="max-w-[1440px] mx-auto flex flex-col gap-space-lg">
+<!-- Overline Metadata & Testbench State Controller -->
+<div class="flex flex-wrap items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm font-code-sm text-code-sm text-outline">
+<span class="text-primary font-semibold">02</span>
+<span>//</span>
+<span>HARDWARE REFERENCE DATABASE</span>
+<span>//</span>
+<span class="text-on-surface font-semibold tracking-wider">COMPONENT CATALOG</span>
+</div>
+<!-- View / State Testbench Toggles -->
+<div class="flex items-center gap-space-xs bg-surface-container-low p-1 rounded">
+<span class="font-code-sm text-code-sm text-outline px-space-xs uppercase tracking-wider">Testbench:</span>
+<button class="view-pill px-space-sm py-1 rounded font-code-sm text-code-sm bg-primary text-on-primary font-semibold transition-all" id="view-btn-table" onclick="switchCatalogView('table')">
+            Table View
+          </button>
+<button class="view-pill px-space-sm py-1 rounded font-code-sm text-code-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" id="view-btn-drawer" onclick="togglePickerDrawer(true)">
+            Picker Drawer
+          </button>
+<button class="view-pill px-space-sm py-1 rounded font-code-sm text-code-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" id="view-btn-skeleton" onclick="switchCatalogView('skeleton')">
+            Loading Skeleton
+          </button>
+<button class="view-pill px-space-sm py-1 rounded font-code-sm text-code-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" id="view-btn-empty" onclick="switchCatalogView('empty')">
+            Zero Results
+          </button>
+<button class="view-pill px-space-sm py-1 rounded font-code-sm text-code-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" id="view-btn-error" onclick="switchCatalogView('error')">
+            Node Error
+          </button>
+</div>
+</div>
+<!-- Main Headline & Description -->
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-lg">
+<div class="max-w-3xl flex flex-col gap-space-xs">
+<h1 class="font-headline-xl text-headline-xl text-on-surface font-semibold tracking-tight">
+            Component Specification Catalog
+          </h1>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            Searchable hardware telemetry database with verified architectural parameters, socket topologies, and power envelope profiles for workstation and enthusiast builds.
+          </p>
+</div>
+<!-- Telemetry Badges Strip -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<div class="flex items-center gap-space-xs px-space-sm py-1 bg-surface-container rounded font-code-sm text-code-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+<span class="text-outline">SPECIMENS:</span>
+<span class="text-on-surface font-semibold">1,842</span>
+</div>
+<div class="flex items-center gap-space-xs px-space-sm py-1 bg-surface-container rounded font-code-sm text-code-sm">
+<span class="text-outline">BENCHMARKS:</span>
+<span class="text-secondary font-semibold">24H CYCLE</span>
+</div>
+<div class="flex items-center gap-space-xs px-space-sm py-1 bg-surface-container rounded font-code-sm text-code-sm">
+<span class="text-outline">VALIDATION:</span>
+<span class="text-primary font-semibold">ZERO-TOLERANCE</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Filter Controls Section -->
+<section class="w-full bg-surface-container-low px-margin-lg py-space-lg">
+<div class="max-w-[1440px] mx-auto flex flex-col gap-space-md">
+<!-- Search Input Bar with CAD Aesthetic -->
+<div class="flex flex-col md:flex-row items-stretch gap-space-md">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-space-md top-1/2 -translate-y-1/2 text-outline pointer-events-none text-body-lg">manage_search</span>
+<input class="w-full h-11 pl-11 pr-24 bg-surface-container-lowest text-on-surface placeholder:text-outline font-body-sm text-body-sm rounded focus:outline-none focus:bg-surface-container-high transition-colors" id="catalog-search" placeholder="Search component by model name, architecture, or brand (e.g. 7800X3D, RTX 4080, B650)..." type="text" value=""/>
+<div class="absolute right-space-md top-1/2 -translate-y-1/2 flex items-center gap-1 pointer-events-none">
+<kbd class="px-1.5 py-0.5 bg-surface-container-high text-on-surface-variant font-code-sm text-code-sm rounded">Ctrl</kbd>
+<kbd class="px-1.5 py-0.5 bg-surface-container-high text-on-surface-variant font-code-sm text-code-sm rounded">F</kbd>
+</div>
+</div>
+<!-- Rig Staging Indicator -->
+<div class="flex items-center gap-space-md px-space-lg bg-surface-container rounded">
+<div class="flex flex-col">
+<span class="font-code-sm text-code-sm text-outline">CURRENT RIG STAGING</span>
+<span class="font-code-md text-code-md text-primary font-semibold" id="active-rig-tally">3 Components Staged</span>
+</div>
+<button class="px-space-md py-1.5 bg-surface-container-high hover:bg-surface-bright text-on-surface font-body-sm text-body-sm rounded flex items-center gap-space-xs transition-colors" onclick="togglePickerDrawer(true)">
+<span class="material-symbols-outlined text-headline-sm text-primary">view_sidebar</span>
+<span>Workbench View</span>
+</button>
+</div>
+</div>
+<!-- Category Filter Tabs -->
+<div class="flex items-center gap-space-xs overflow-x-auto pb-1 scrollbar-none">
+<button class="px-space-md py-1.5 rounded font-code-sm text-code-sm bg-primary text-on-primary font-semibold whitespace-nowrap">
+          All Categories (1,842)
+        </button>
+<button class="px-space-md py-1.5 rounded font-code-sm text-code-sm bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors whitespace-nowrap">
+          Processors (CPU)
+        </button>
+<button class="px-space-md py-1.5 rounded font-code-sm text-code-sm bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors whitespace-nowrap">
+          Graphics Cards (GPU)
+        </button>
+<button class="px-space-md py-1.5 rounded font-code-sm text-code-sm bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors whitespace-nowrap">
+          Motherboards
+        </button>
+<button class="px-space-md py-1.5 rounded font-code-sm text-code-sm bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors whitespace-nowrap">
+          Memory (RAM)
+        </button>
+<button class="px-space-md py-1.5 rounded font-code-sm text-code-sm bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors whitespace-nowrap">
+          Power Supplies (PSU)
+        </button>
+<button class="px-space-md py-1.5 rounded font-code-sm text-code-sm bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors whitespace-nowrap">
+          Storage (NVMe M.2)
+        </button>
+<button class="px-space-md py-1.5 rounded font-code-sm text-code-sm bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors whitespace-nowrap">
+          Cooling Systems
+        </button>
+</div>
+<!-- Secondary Spec Dropdowns & Envelope Filters -->
+<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-space-sm pt-space-xs">
+<!-- Socket Filter -->
+<div class="flex flex-col gap-1">
+<label class="font-code-sm text-code-sm text-outline">SOCKET TOPOLOGY</label>
+<select class="h-9 px-space-sm bg-surface-container-lowest text-on-surface font-code-sm text-code-sm rounded focus:outline-none focus:bg-surface-container-high">
+<option>AM5 (Zen 4/5)</option>
+<option>LGA1700 (Intel 12-14th)</option>
+<option>LGA1851 (Arrow Lake)</option>
+<option>sTR5 (Threadripper)</option>
+<option>Any Socket</option>
+</select>
+</div>
+<!-- RAM Standard -->
+<div class="flex flex-col gap-1">
+<label class="font-code-sm text-code-sm text-outline">RAM STANDARD</label>
+<select class="h-9 px-space-sm bg-surface-container-lowest text-on-surface font-code-sm text-code-sm rounded focus:outline-none focus:bg-surface-container-high">
+<option>DDR5 (JEDEC / EXPO)</option>
+<option>DDR4 (XMP 2.0)</option>
+<option>LPDDR5X (Embedded)</option>
+<option>Any Memory Spec</option>
+</select>
+</div>
+<!-- Form Factor -->
+<div class="flex flex-col gap-1">
+<label class="font-code-sm text-code-sm text-outline">FORM FACTOR</label>
+<select class="h-9 px-space-sm bg-surface-container-lowest text-on-surface font-code-sm text-code-sm rounded focus:outline-none focus:bg-surface-container-high">
+<option>ATX (Standard)</option>
+<option>Micro-ATX (Compact)</option>
+<option>Mini-ITX (SFF)</option>
+<option>E-ATX (Workstation)</option>
+<option>PCIe 3-Slot / 300mm+</option>
+</select>
+</div>
+<!-- TDP Envelope Range -->
+<div class="flex flex-col gap-1">
+<label class="font-code-sm text-code-sm text-outline">MAX TDP ENVELOPE</label>
+<div class="relative flex items-center">
+<input class="w-full h-9 px-space-sm bg-surface-container-lowest text-on-surface font-code-sm text-code-sm rounded focus:outline-none" type="text" value="≤ 350W"/>
+<span class="absolute right-space-sm font-code-sm text-code-sm text-outline">TDP</span>
+</div>
+</div>
+<!-- Required PSU Minimum -->
+<div class="flex flex-col gap-1">
+<label class="font-code-sm text-code-sm text-outline">REC. MIN PSU</label>
+<select class="h-9 px-space-sm bg-surface-container-lowest text-on-surface font-code-sm text-code-sm rounded focus:outline-none focus:bg-surface-container-high">
+<option>Any Wattage</option>
+<option>≥ 650W Rec</option>
+<option>≥ 750W Rec</option>
+<option>≥ 850W Rec</option>
+<option>≥ 1000W Rec</option>
+</select>
+</div>
+<!-- Sort Control -->
+<div class="flex flex-col gap-1">
+<label class="font-code-sm text-code-sm text-outline">SORT CRITERIA</label>
+<select class="h-9 px-space-sm bg-surface-container-lowest text-on-surface font-code-sm text-code-sm rounded focus:outline-none focus:bg-surface-container-high">
+<option>Avg Price (Low → High)</option>
+<option>Avg Price (High → Low)</option>
+<option>Thermal TDP (Ascending)</option>
+<option>Architectural Recency</option>
+<option>Alphabetical (A-Z)</option>
+</select>
+</div>
+</div>
+<!-- Active Filter Chips Bar & Metrics Summary -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pt-space-xs">
+<div class="flex flex-wrap items-center gap-space-xs">
+<span class="font-code-sm text-code-sm text-outline mr-1">ACTIVE CONSTRAINTS:</span>
+<span class="inline-flex items-center gap-1 px-space-sm py-0.5 bg-surface-container text-on-surface font-code-sm text-code-sm rounded hover:bg-surface-container-high cursor-pointer">
+<span>Category: Processors (CPU)</span>
+<span class="material-symbols-outlined text-label-md text-outline hover:text-on-surface">close</span>
+</span>
+<span class="inline-flex items-center gap-1 px-space-sm py-0.5 bg-surface-container text-on-surface font-code-sm text-code-sm rounded hover:bg-surface-container-high cursor-pointer">
+<span>Socket: AM5</span>
+<span class="material-symbols-outlined text-label-md text-outline hover:text-on-surface">close</span>
+</span>
+<span class="inline-flex items-center gap-1 px-space-sm py-0.5 bg-surface-container text-on-surface font-code-sm text-code-sm rounded hover:bg-surface-container-high cursor-pointer">
+<span>RAM: DDR5 EXPO</span>
+<span class="material-symbols-outlined text-label-md text-outline hover:text-on-surface">close</span>
+</span>
+<span class="inline-flex items-center gap-1 px-space-sm py-0.5 bg-surface-container text-on-surface font-code-sm text-code-sm rounded hover:bg-surface-container-high cursor-pointer">
+<span>TDP: ≤ 170W</span>
+<span class="material-symbols-outlined text-label-md text-outline hover:text-on-surface">close</span>
+</span>
+<button class="font-code-sm text-code-sm text-primary hover:underline ml-space-xs">
+            Reset All Filters
+          </button>
+</div>
+<div class="font-code-sm text-code-sm text-outline">
+          Showing <span class="text-on-surface font-semibold">18</span> of <span class="text-on-surface">1,842</span> verified specimens
+        </div>
+</div>
+</div>
+</section>
+<!-- Main Content Showcase Matrix: Active Views -->
+<section class="w-full px-margin-lg py-space-xl flex-1">
+<div class="max-w-[1440px] mx-auto">
+<!-- 1. DENSE TELEMETRY TABLE VIEW (Default Active State) -->
+<div class="catalog-view-state block" id="catalog-view-table">
+<div class="bg-surface-container-lowest rounded overflow-x-auto shadow-md">
+<table class="w-full text-left font-body-sm text-body-sm">
+<!-- Table Header -->
+<thead class="bg-surface-container text-outline font-code-sm text-code-sm uppercase tracking-wider">
+<tr>
+<th class="py-space-md px-space-md font-semibold">SPECIMEN / ARCHITECTURE</th>
+<th class="py-space-md px-space-sm font-semibold">CLASS</th>
+<th class="py-space-md px-space-sm font-semibold">SOCKET / INTERFACE</th>
+<th class="py-space-md px-space-sm font-semibold">MEMORY PROFILE</th>
+<th class="py-space-md px-space-sm font-semibold">TDP ENVELOPE</th>
+<th class="py-space-md px-space-sm font-semibold">REC. PSU</th>
+<th class="py-space-md px-space-sm font-semibold">PHYSICAL ENVELOPE</th>
+<th class="py-space-md px-space-md font-semibold text-right">BENCHMARK AVG</th>
+<th class="py-space-md px-space-md font-semibold text-center w-36">ACTIONS</th>
+</tr>
+</thead>
+<!-- Table Body: 8 Technical Rows -->
+<tbody class="divide-y-0 text-on-surface">
+<!-- Row 1: Ryzen 7 7800X3D -->
+<tr class="hover:bg-surface-container-high/60 transition-colors group">
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-md">
+<img class="w-10 h-10 rounded bg-surface-container object-cover shrink-0" data-alt="Close up architectural macro shot of an AMD Ryzen processor integrated heat spreader with precision laser etching under clinical studio lighting on charcoal substrate." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAJ2eAwUDfTVZl7VDzBPbuLD8lNx7j83agK1b0tUipPsfOoKEUVT79JLWXySGK-c0kIIlK7pJvt4nSQG91AZAJzxj0uCSrZwfAliLO0qhIsBY_vwQK0BYB1_2lQgQlXWZU-Aic1HJMeSa_MqPzf9_NDVjDKWvzlMvM2pZbSzd8sbja6CjfifMLZGXTbbn2rJ9fwRsV0nkmgocPWJmv9970gnI1GoV34wxT1ZtouZuU"/>
+<div class="flex flex-col">
+<div class="font-body-md text-body-md font-semibold text-on-surface group-hover:text-primary transition-colors">
+                        AMD Ryzen 7 7800X3D
+                      </div>
+<span class="font-code-sm text-code-sm text-on-surface-variant">
+                        AMD • Zen 4 3D V-Cache • 8C/16T • 4.2-5.0GHz
+                      </span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-sm">
+<span class="px-space-xs py-0.5 rounded bg-surface-container font-code-sm text-code-sm font-semibold text-primary">CPU</span>
+</td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm">
+<span class="text-on-surface">AM5</span>
+<span class="text-outline text-label-caps block">LGA1718</span>
+</td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm text-on-surface-variant">
+                  DDR5-5200 (EXPO)
+                </td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm">
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="text-on-surface font-semibold">120W TDP</span>
+</div>
+<span class="text-outline text-label-caps block">PPT: 162W MAX</span>
+</td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm text-on-surface-variant">
+                  650W Rec
+                </td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm text-on-surface-variant">
+                  AM5 Substrate (40×40mm)
+                </td>
+<td class="py-space-md px-space-md text-right font-code-md text-code-md font-semibold text-on-surface">
+                  $389.00 <span class="text-outline font-normal text-code-sm">USD</span>
+</td>
+<td class="py-space-md px-space-md text-center">
+<div class="flex items-center justify-end gap-1">
+<button class="px-space-sm py-1 bg-primary text-on-primary hover:bg-primary-container font-code-sm text-code-sm font-semibold rounded transition-colors whitespace-nowrap" onclick="stageComponent('AMD Ryzen 7 7800X3D')" title="Stage into current rig">
+                      + Add
+                    </button>
+<button class="p-1 text-outline hover:text-on-surface hover:bg-surface-container rounded transition-colors" onclick="inspectSpecDrawer('AMD Ryzen 7 7800X3D', 'Zen 4 3D V-Cache', '120W', 'AM5')" title="Inspect Full Telemetry">
+<span class="material-symbols-outlined text-headline-sm">tune</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2: RTX 4080 Super -->
+<tr class="hover:bg-surface-container-high/60 transition-colors group bg-surface-container-low/40">
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-md">
+<img class="w-10 h-10 rounded bg-surface-container object-cover shrink-0" data-alt="Industrial side view of NVIDIA Founders Edition dual axial flow GPU shroud in dark matte gunmetal finish on obsidian background with soft rim light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxO4Qur4MvbHj59w7CIyw98d5TujZV6EMxTFJFvS2ZpCUMn3PxBXSSTJa89vTJJ2_ksZkRWBjIetUQWXIbHo0VzvC2-1gpn4Leub8w6p8JaOHmHjw42_Xa0ko6_-BpIPQ2h07MnuLCWhQTFB-6rBh6PDWfQS-npH2_X0HPWCUX8J1DdX6d5yrcRzXHMQfqi6eHG_hWZpkF1l-F8PenDH9rTyqU92u4wqV3DqpO6p2O"/>
+<div class="flex flex-col">
+<div class="font-body-md text-body-md font-semibold text-on-surface group-hover:text-primary transition-colors">
+                        NVIDIA GeForce RTX 4080 Super
+                      </div>
+<span class="font-code-sm text-code-sm text-on-surface-variant">
+                        NVIDIA • Ada Lovelace AD103-400 • 16GB GDDR6X • 10240 CUDA
+                      </span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-sm">
+<span class="px-space-xs py-0.5 rounded bg-surface-container font-code-sm text-code-sm font-semibold text-secondary">GPU</span>
+</td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm">
+<span class="text-on-surface">PCIe 4.0 x16</span>
+<span class="text-outline text-label-caps block">Gen 4 Direct</span>
+</td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm text-on-surface-variant">
+                  16GB GDDR6X (23Gbps)
+                </td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm">
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-container"></span>
+<span class="text-on-surface font-semibold">320W TDP</span>
+</div>
+<span class="text-outline text-label-caps block">12VHPWR 16-Pin</span>
+</td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm text-on-surface-variant">
+                  750W Rec
+                </td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm text-on-surface-variant">
+                  3-Slot • 304×137mm
+                </td>
+<td class="py-space-md px-space-md text-right font-code-md text-code-md font-semibold text-on-surface">
+                  $999.00 <span class="text-outline font-normal text-code-sm">USD</span>
+</td>
+<td class="py-space-md px-space-md text-center">
+<div class="flex items-center justify-end gap-1">
+<button class="px-space-sm py-1 bg-primary text-on-primary hover:bg-primary-container font-code-sm text-code-sm font-semibold rounded transition-colors whitespace-nowrap" onclick="stageComponent('NVIDIA GeForce RTX 4080 Super')" title="Stage into current rig">
+                      + Add
+                    </button>
+<button class="p-1 text-outline hover:text-on-surface hover:bg-surface-container rounded transition-colors" onclick="inspectSpecDrawer('NVIDIA RTX 4080 Super', 'Ada Lovelace AD103', '320W', 'PCIe 4.0 x16')">
+<span class="material-symbols-outlined text-headline-sm">tune</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3: ASUS ROG Strix B650E-E -->
+<tr class="hover:bg-surface-container-high/60 transition-colors group">
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-md">
+<img class="w-10 h-10 rounded bg-surface-container object-cover shrink-0" data-alt="Top down technical render of a matte black workstation motherboard circuit board with visible traces, VRM heatsinks, and AM5 CPU socket on slate plane." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTpRRmbJDEuBzp9KJyxpa5v-DR4R9T6WCMvYnV2FBwNy4vnSIxbki8RZThwduSoPxIjR0Ubr3H3nW7I4GMtx7M_1ubqmKIeon24wYhbchfMQc6HBZHvkwK7KHa3gVfgpt9GGLqvzssxSYScHHStJST6ERklZbEmRyz_gfUZf0oUGsUprNlhTLPx28E11bUCt5wUW0-AbPJP6IchwQCEh2dkm4hQQXpbiWIDxQvUI5s"/>
+<div class="flex flex-col">
+<div class="font-body-md text-body-md font-semibold text-on-surface group-hover:text-primary transition-colors">
+                        ASUS ROG Strix B650E-E Gaming WiFi
+                      </div>
+<span class="font-code-sm text-code-sm text-on-surface-variant">
+                        ASUS • AMD B650E PCH • 16+2 Power Stages • PCIe 5.0 M.2
+                      </span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-sm">
+<span class="px-space-xs py-0.5 rounded bg-surface-container font-code-sm text-code-sm font-semibold text-on-surface">MOBO</span>
+</td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm">
+<span class="text-on-surface">AM5</span>
+<span class="text-outline text-label-caps block">PCIe 5.0 x16 Primary</span>
+</td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm text-on-surface-variant">
+                  4× DIMM (DDR5-8000+ OC)
+                </td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm">
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+<span class="text-on-surface font-semibold">45W PCH</span>
+</div>
+<span class="text-outline text-label-caps block">Passive Heatsink</span>
+</td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm text-on-surface-variant">
+                  650W Rec
+                </td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm text-on-surface-variant">
+                  ATX • 305×244mm
+                </td>
+<td class="py-space-md px-space-md text-right font-code-md text-code-md font-semibold text-on-surface">
+                  $329.00 <span class="text-outline font-normal text-code-sm">USD</span>
+</td>
+<td class="py-space-md px-space-md text-center">
+<div class="flex items-center justify-end gap-1">
+<button class="px-space-sm py-1 bg-primary text-on-primary hover:bg-primary-container font-code-sm text-code-sm font-semibold rounded transition-colors whitespace-nowrap" onclick="stageComponent('ASUS ROG Strix B650E-E')">
+                      + Add
+                    </button>
+<button class="p-1 text-outline hover:text-on-surface hover:bg-surface-container rounded transition-colors" onclick="inspectSpecDrawer('ASUS ROG Strix B650E-E', 'AMD B650E Chipset', '45W', 'AM5')">
+<span class="material-symbols-outlined text-headline-sm">tune</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4: G.Skill Trident Z5 Neo -->
+<tr class="hover:bg-surface-container-high/60 transition-colors group bg-surface-container-low/40">
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-md">
+<img class="w-10 h-10 rounded bg-surface-container object-cover shrink-0" data-alt="Dual DDR5 desktop RAM memory sticks with brushed aluminum black heatspreaders set symmetrically on high-tech diagnostic table with cool tone ambient lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuApsY3mw1Es8bbyu7SFl4qVZkAnUDmVJQ65RkyVhPASP9vQom2w-z9bgBlhFlbQ4mFenn7WvI2DgTxbAyh7e4mzuTa8K_WLr7EH831Dh5SQtG_rLv30648O6eFqsltNshs3iuJ2IStJLz1i4Qy5vOUPhgSWDL3DdqvAYb1uVZ1B4I-HTB3QL2ahPo4AJAUOKaN5v2fWNpBY7YbR0SHVRxYkIELACk5QFpTL9ZXvr2TQ"/>
+<div class="flex flex-col">
+<div class="font-body-md text-body-md font-semibold text-on-surface group-hover:text-primary transition-colors">
+                        G.Skill Trident Z5 Neo 64GB (2x32GB)
+                      </div>
+<span class="font-code-sm text-code-sm text-on-surface-variant">
+                        G.Skill • DDR5-6000 CL30-36-36-96 • 1.35V • SK Hynix A-Die
+                      </span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-sm">
+<span class="px-space-xs py-0.5 rounded bg-surface-container font-code-sm text-code-sm font-semibold text-on-surface-variant">RAM</span>
+</td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm">
+<span class="text-on-surface">DIMM 288-pin</span>
+<span class="text-outline text-label-caps block">Dual-Channel Kit</span>
+</td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm text-on-surface-variant">
+                  DDR5-6000 (AMD EXPO)
+                </td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm">
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+<span class="text-on-surface font-semibold">15W</span>
+</div>
+<span class="text-outline text-label-caps block">1.35V VDD/VDDQ</span>
+</td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm text-on-surface-variant">
+                  550W Rec
+                </td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm text-on-surface-variant">
+                  Height: 44mm (Low Profile)
+                </td>
+<td class="py-space-md px-space-md text-right font-code-md text-code-md font-semibold text-on-surface">
+                  $215.00 <span class="text-outline font-normal text-code-sm">USD</span>
+</td>
+<td class="py-space-md px-space-md text-center">
+<div class="flex items-center justify-end gap-1">
+<button class="px-space-sm py-1 bg-primary text-on-primary hover:bg-primary-container font-code-sm text-code-sm font-semibold rounded transition-colors whitespace-nowrap" onclick="stageComponent('G.Skill Trident Z5 Neo 64GB')">
+                      + Add
+                    </button>
+<button class="p-1 text-outline hover:text-on-surface hover:bg-surface-container rounded transition-colors" onclick="inspectSpecDrawer('G.Skill Trident Z5 Neo', 'DDR5-6000 CL30', '15W', '288-Pin')">
+<span class="material-symbols-outlined text-headline-sm">tune</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 5: Seasonic Vertex GX-1000 -->
+<tr class="hover:bg-surface-container-high/60 transition-colors group">
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-md">
+<img class="w-10 h-10 rounded bg-surface-container object-cover shrink-0" data-alt="Modular computer power supply unit in textured charcoal steel enclosure with braided black modular terminal ports viewed at technical three-quarter angle." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNS3q54Z-jRMBnbHgSi9KnEQvbAxd7SPwMlqdg8NqY8pD2keiPvprtA_KjHT2QYlODam9uYG6fA-4EJLZjgn6AV3_xkHLJJ-RoyQnagqDSBe_SZG3o8O7LwhIKfDa-Ex0C2ut-73oo5NCqSeq82DxfUgsMFli3X67Ds25UW-_oNbIZxGudsA8I-89UGqq0F0xyic9s-bG9Agsc0trAhmQIBkVuf4d5kkDu6bgOM3tO"/>
+<div class="flex flex-col">
+<div class="font-body-md text-body-md font-semibold text-on-surface group-hover:text-primary transition-colors">
+                        Seasonic Vertex GX-1000 ATX 3.0
+                      </div>
+<span class="font-code-sm text-code-sm text-on-surface-variant">
+                        Seasonic • 1000W 80+ Gold • ATX 3.0 &amp; PCIe 5.0 Ready • Full Modular
+                      </span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-sm">
+<span class="px-space-xs py-0.5 rounded bg-surface-container font-code-sm text-code-sm font-semibold text-primary-fixed-dim">PSU</span>
+</td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm">
+<span class="text-on-surface">ATX12V v3.0</span>
+<span class="text-outline text-label-caps block">Native 12V-2x6</span>
+</td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm text-outline">
+                  N/A (Power Source)
+                </td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm">
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span class="text-on-surface font-semibold">1000W Output</span>
+</div>
+<span class="text-outline text-label-caps block">83.3A on +12V</span>
+</td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm text-outline">
+                  Primary Supply
+                </td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm text-on-surface-variant">
+                  ATX • 160mm Depth
+                </td>
+<td class="py-space-md px-space-md text-right font-code-md text-code-md font-semibold text-on-surface">
+                  $239.00 <span class="text-outline font-normal text-code-sm">USD</span>
+</td>
+<td class="py-space-md px-space-md text-center">
+<div class="flex items-center justify-end gap-1">
+<button class="px-space-sm py-1 bg-primary text-on-primary hover:bg-primary-container font-code-sm text-code-sm font-semibold rounded transition-colors whitespace-nowrap" onclick="stageComponent('Seasonic Vertex GX-1000')">
+                      + Add
+                    </button>
+<button class="p-1 text-outline hover:text-on-surface hover:bg-surface-container rounded transition-colors" onclick="inspectSpecDrawer('Seasonic Vertex GX-1000', 'ATX 3.0 / PCIe 5.0', '1000W', 'Standard ATX')">
+<span class="material-symbols-outlined text-headline-sm">tune</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 6: Samsung 990 PRO 4TB -->
+<tr class="hover:bg-surface-container-high/60 transition-colors group bg-surface-container-low/40">
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-md">
+<img class="w-10 h-10 rounded bg-surface-container object-cover shrink-0" data-alt="Compact M.2 NVMe SSD stick with integrated black grooved aluminum thermal heatsink and subtle laser engraved typography on matte gray workbench." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-B7i6Pfhbd6YiDwpLCkMetDf7fsKml8w07gW8E8WnZryE0rlzd5H31iYt1MQvCXEjQycKt6u_6ODiRXWkZHhWh78QleP0V5XY3fqEtQzlRjJqBPjxoMXx0Mbup_OyvuKiYsmyzAncqoNm8aMCtryv6_5gRRefliKGpER-BgygFAm0xLy6URuBtbxtFw8jC7-0i0xxP0izRptay6cZeisGnYF1_nXaOPzydpV_ovmH"/>
+<div class="flex flex-col">
+<div class="font-body-md text-body-md font-semibold text-on-surface group-hover:text-primary transition-colors">
+                        Samsung 990 PRO 4TB Heatsink
+                      </div>
+<span class="font-code-sm text-code-sm text-on-surface-variant">
+                        Samsung • Pascal Controller • 7450/6900 MB/s • V-NAND TLC
+                      </span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-sm">
+<span class="px-space-xs py-0.5 rounded bg-surface-container font-code-sm text-code-sm font-semibold text-on-surface">NVMe</span>
+</td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm">
+<span class="text-on-surface">M.2 PCIe 4.0 x4</span>
+<span class="text-outline text-label-caps block">Key M 2280</span>
+</td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm text-outline">
+                  4GB LPDDR4 DRAM Cache
+                </td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm">
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+<span class="text-on-surface font-semibold">9.3W Peak</span>
+</div>
+<span class="text-outline text-label-caps block">0.05W Idle</span>
+</td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm text-on-surface-variant">
+                  500W Rec
+                </td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm text-on-surface-variant">
+                  M.2 2280 • 8.2mm Height
+                </td>
+<td class="py-space-md px-space-md text-right font-code-md text-code-md font-semibold text-on-surface">
+                  $349.00 <span class="text-outline font-normal text-code-sm">USD</span>
+</td>
+<td class="py-space-md px-space-md text-center">
+<div class="flex items-center justify-end gap-1">
+<button class="px-space-sm py-1 bg-primary text-on-primary hover:bg-primary-container font-code-sm text-code-sm font-semibold rounded transition-colors whitespace-nowrap" onclick="stageComponent('Samsung 990 PRO 4TB')">
+                      + Add
+                    </button>
+<button class="p-1 text-outline hover:text-on-surface hover:bg-surface-container rounded transition-colors" onclick="inspectSpecDrawer('Samsung 990 PRO 4TB', 'PCIe 4.0 NVMe', '9.3W', 'M.2 2280')">
+<span class="material-symbols-outlined text-headline-sm">tune</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 7: Intel Core i7-14700K -->
+<tr class="hover:bg-surface-container-high/60 transition-colors group">
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-md">
+<img class="w-10 h-10 rounded bg-surface-container object-cover shrink-0" data-alt="Rectangular Intel socket processor with nickel-plated integrated heat spreader under sharp directional architectural lighting on dark carbon workbench." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQmKMhnFYxs1BgZRLgHP7SXL7SknPFhQyaqzrYQPqP3vspZP5tXFvECEfHqvnI_4zC-LjYq-gN8oa0-IUzxTubkLKC9qGeD2t4F-Gqm3O2ksbdLPsFwHH0WJRoCfmXAtSmhaeted7HuunboV8d-XCJrdayTDV4yAGyiOFcrFfxwJ5lg3vgY9R6ep70lOuTU1fyC05Q1UsGDJ-PjWMqjHJXBO37PxfRfO_cDCcZw3XE"/>
+<div class="flex flex-col">
+<div class="font-body-md text-body-md font-semibold text-on-surface group-hover:text-primary transition-colors">
+                        Intel Core i7-14700K
+                      </div>
+<span class="font-code-sm text-code-sm text-on-surface-variant">
+                        Intel • Raptor Lake Refresh • 20C (8P+12E)/28T • up to 5.6GHz
+                      </span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-sm">
+<span class="px-space-xs py-0.5 rounded bg-surface-container font-code-sm text-code-sm font-semibold text-primary">CPU</span>
+</td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm">
+<span class="text-on-surface">LGA1700</span>
+<span class="text-outline text-label-caps block">Intel 700 Series PCH</span>
+</td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm text-on-surface-variant">
+                  DDR5-5600 / DDR4-3200
+                </td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm">
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+<span class="text-on-surface font-semibold">253W PL2</span>
+</div>
+<span class="text-outline text-label-caps block">Base PL1: 125W</span>
+</td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm text-on-surface-variant">
+                  750W Rec
+                </td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm text-on-surface-variant">
+                  LGA1700 (45×37.5mm)
+                </td>
+<td class="py-space-md px-space-md text-right font-code-md text-code-md font-semibold text-on-surface">
+                  $399.00 <span class="text-outline font-normal text-code-sm">USD</span>
+</td>
+<td class="py-space-md px-space-md text-center">
+<div class="flex items-center justify-end gap-1">
+<button class="px-space-sm py-1 bg-primary text-on-primary hover:bg-primary-container font-code-sm text-code-sm font-semibold rounded transition-colors whitespace-nowrap" onclick="stageComponent('Intel Core i7-14700K')">
+                      + Add
+                    </button>
+<button class="p-1 text-outline hover:text-on-surface hover:bg-surface-container rounded transition-colors" onclick="inspectSpecDrawer('Intel Core i7-14700K', 'Raptor Lake Refresh', '253W', 'LGA1700')">
+<span class="material-symbols-outlined text-headline-sm">tune</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 8: Noctua NH-D15 chromax.black -->
+<tr class="hover:bg-surface-container-high/60 transition-colors group bg-surface-container-low/40">
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-md">
+<img class="w-10 h-10 rounded bg-surface-container object-cover shrink-0" data-alt="Dual-tower matte black aluminum fin stack CPU air cooler with dual 140mm black fans on technical engineering platform with soft reflection." src="https://lh3.googleusercontent.com/aida-public/AB6AXuABj_koRr8K83UKql8BWhLe8fap8Un92HkNqHovwbBUV4r9Jl1tSr6V6LhbkIOSIg7tFffYTcgRI5vQPXdxDmk2uKWgYCGlFJai21cgvz_a4Ez9kyYCByRWyrZgF-OFWJyfSujMfopiqLRlaC4EeOaKmUkOBrcxBX1Rl8k4LM7QtoZCm7G-XG2dlocILYD5njWApp9-i9Mj5I-SUZQJiooxC0gjpRLJasVnmn2RP4At"/>
+<div class="flex flex-col">
+<div class="font-body-md text-body-md font-semibold text-on-surface group-hover:text-primary transition-colors">
+                        Noctua NH-D15 chromax.black
+                      </div>
+<span class="font-code-sm text-code-sm text-on-surface-variant">
+                        Noctua • Dual Tower • Dual NF-A15 HS-PWM 140mm • SecuFirm2
+                      </span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-sm">
+<span class="px-space-xs py-0.5 rounded bg-surface-container font-code-sm text-code-sm font-semibold text-tertiary">COOLER</span>
+</td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm">
+<span class="text-on-surface">AM5 / LGA1700</span>
+<span class="text-outline text-label-caps block">Multi-Socket Bracket</span>
+</td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm text-outline">
+                  64mm RAM Clearance (1 fan)
+                </td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm">
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span class="text-on-surface font-semibold">250W Rating</span>
+</div>
+<span class="text-outline text-label-caps block">NSPR: 183 Score</span>
+</td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm text-outline">
+                  N/A (12V Fan Header)
+                </td>
+<td class="py-space-md px-space-sm font-code-sm text-code-sm text-on-surface-variant">
+                  165mm Height • 150×161mm
+                </td>
+<td class="py-space-md px-space-md text-right font-code-md text-code-md font-semibold text-on-surface">
+                  $119.00 <span class="text-outline font-normal text-code-sm">USD</span>
+</td>
+<td class="py-space-md px-space-md text-center">
+<div class="flex items-center justify-end gap-1">
+<button class="px-space-sm py-1 bg-primary text-on-primary hover:bg-primary-container font-code-sm text-code-sm font-semibold rounded transition-colors whitespace-nowrap" onclick="stageComponent('Noctua NH-D15 chromax.black')">
+                      + Add
+                    </button>
+<button class="p-1 text-outline hover:text-on-surface hover:bg-surface-container rounded transition-colors" onclick="inspectSpecDrawer('Noctua NH-D15', 'Dual Tower Air', '250W Dissipation', 'AM5/LGA1700')">
+<span class="material-symbols-outlined text-headline-sm">tune</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Catalog Paging & Telemetry Footer -->
+<div class="mt-space-md flex flex-col sm:flex-row items-center justify-between gap-space-md px-space-sm">
+<div class="flex items-center gap-space-sm font-code-sm text-code-sm text-outline">
+<span>ROWS PER PAGE:</span>
+<span class="px-2 py-0.5 bg-surface-container text-on-surface rounded font-semibold">8</span>
+<span>•</span>
+<span>DATA FEED LATENCY: 28ms</span>
+</div>
+<div class="flex items-center gap-space-xs font-code-sm text-code-sm">
+<button class="px-space-sm py-1 bg-surface-container text-outline hover:text-on-surface rounded disabled:opacity-40" disabled="">
+              PREV
+            </button>
+<span class="px-space-sm py-1 bg-primary text-on-primary font-semibold rounded">1</span>
+<button class="px-space-sm py-1 bg-surface-container text-on-surface-variant hover:text-on-surface rounded">2</button>
+<button class="px-space-sm py-1 bg-surface-container text-on-surface-variant hover:text-on-surface rounded">3</button>
+<span class="text-outline px-1">...</span>
+<button class="px-space-sm py-1 bg-surface-container text-on-surface-variant hover:text-on-surface rounded">231</button>
+<button class="px-space-sm py-1 bg-surface-container text-on-surface-variant hover:text-on-surface rounded">
+              NEXT
+            </button>
+</div>
+</div>
+</div>
+<!-- 2. LOADING SKELETON STATE -->
+<div class="catalog-view-state hidden" id="catalog-view-skeleton">
+<div class="bg-surface-container-lowest rounded p-space-lg shadow-md flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="h-5 w-64 bg-surface-container-high rounded animate-pulse"></div>
+<div class="h-5 w-32 bg-surface-container-high rounded animate-pulse"></div>
+</div>
+<!-- Mock Skeleton Table Headers -->
+<div class="grid grid-cols-8 gap-4 py-space-sm bg-surface-container rounded px-space-md">
+<div class="h-4 bg-surface-container-high rounded col-span-3"></div>
+<div class="h-4 bg-surface-container-high rounded"></div>
+<div class="h-4 bg-surface-container-high rounded"></div>
+<div class="h-4 bg-surface-container-high rounded"></div>
+<div class="h-4 bg-surface-container-high rounded"></div>
+<div class="h-4 bg-surface-container-high rounded"></div>
+</div>
+<!-- Pulsing Shimmer Rows -->
+<div class="flex flex-col gap-space-sm">
+<div class="p-space-md bg-surface-container/40 rounded flex items-center justify-between gap-space-md animate-pulse">
+<div class="flex items-center gap-space-md flex-1">
+<div class="w-10 h-10 bg-surface-container-high rounded"></div>
+<div class="flex flex-col gap-2 flex-1 max-w-sm">
+<div class="h-4 w-3/4 bg-surface-container-high rounded"></div>
+<div class="h-3 w-1/2 bg-surface-container rounded"></div>
+</div>
+</div>
+<div class="h-4 w-20 bg-surface-container-high rounded"></div>
+<div class="h-4 w-24 bg-surface-container-high rounded"></div>
+<div class="h-4 w-16 bg-surface-container-high rounded"></div>
+<div class="h-7 w-20 bg-surface-container-high rounded"></div>
+</div>
+<div class="p-space-md bg-surface-container/40 rounded flex items-center justify-between gap-space-md animate-pulse">
+<div class="flex items-center gap-space-md flex-1">
+<div class="w-10 h-10 bg-surface-container-high rounded"></div>
+<div class="flex flex-col gap-2 flex-1 max-w-sm">
+<div class="h-4 w-2/3 bg-surface-container-high rounded"></div>
+<div class="h-3 w-3/5 bg-surface-container rounded"></div>
+</div>
+</div>
+<div class="h-4 w-20 bg-surface-container-high rounded"></div>
+<div class="h-4 w-24 bg-surface-container-high rounded"></div>
+<div class="h-4 w-16 bg-surface-container-high rounded"></div>
+<div class="h-7 w-20 bg-surface-container-high rounded"></div>
+</div>
+<div class="p-space-md bg-surface-container/40 rounded flex items-center justify-between gap-space-md animate-pulse">
+<div class="flex items-center gap-space-md flex-1">
+<div class="w-10 h-10 bg-surface-container-high rounded"></div>
+<div class="flex flex-col gap-2 flex-1 max-w-sm">
+<div class="h-4 w-4/5 bg-surface-container-high rounded"></div>
+<div class="h-3 w-1/3 bg-surface-container rounded"></div>
+</div>
+</div>
+<div class="h-4 w-20 bg-surface-container-high rounded"></div>
+<div class="h-4 w-24 bg-surface-container-high rounded"></div>
+<div class="h-4 w-16 bg-surface-container-high rounded"></div>
+<div class="h-7 w-20 bg-surface-container-high rounded"></div>
+</div>
+<div class="p-space-md bg-surface-container/40 rounded flex items-center justify-between gap-space-md animate-pulse">
+<div class="flex items-center gap-space-md flex-1">
+<div class="w-10 h-10 bg-surface-container-high rounded"></div>
+<div class="flex flex-col gap-2 flex-1 max-w-sm">
+<div class="h-4 w-1/2 bg-surface-container-high rounded"></div>
+<div class="h-3 w-2/3 bg-surface-container rounded"></div>
+</div>
+</div>
+<div class="h-4 w-20 bg-surface-container-high rounded"></div>
+<div class="h-4 w-24 bg-surface-container-high rounded"></div>
+<div class="h-4 w-16 bg-surface-container-high rounded"></div>
+<div class="h-7 w-20 bg-surface-container-high rounded"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- 3. ZERO RESULTS EMPTY STATE -->
+<div class="catalog-view-state hidden" id="catalog-view-empty">
+<div class="bg-surface-container-lowest rounded p-space-3xl flex flex-col items-center justify-center text-center shadow-md">
+<div class="w-16 h-16 rounded bg-surface-container flex items-center justify-center mb-space-md">
+<span class="material-symbols-outlined text-outline text-headline-xl">filter_alt_off</span>
+</div>
+<span class="font-code-sm text-code-sm text-outline mb-1">[NULL_SPECIMEN_QUERY_EXCEPTION]</span>
+<h2 class="font-headline-md text-headline-md text-on-surface font-semibold mb-space-xs">
+            Zero Architectural Matches Found
+          </h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-lg mb-space-lg">
+            No components match socket <span class="font-code-sm text-on-surface font-semibold">AM5</span> with DDR4 memory filter. AMD AM5 platform strictly requires DDR5 memory topologies. Clear conflicting constraints or broaden thermal tolerances.
+          </p>
+<div class="flex items-center gap-space-sm">
+<button class="px-space-lg py-2 bg-primary text-on-primary font-body-sm text-body-sm font-semibold rounded hover:bg-primary-container transition-colors" onclick="switchCatalogView('table')">
+              Reset Conflicting Filters
+            </button>
+<button class="px-space-lg py-2 bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-body-sm rounded transition-colors" onclick="switchCatalogView('table')">
+              View All 1,842 Specs
+            </button>
+</div>
+</div>
+</div>
+<!-- 4. HARDWARE TELEMETRY ERROR STATE -->
+<div class="catalog-view-state hidden" id="catalog-view-error">
+<div class="bg-surface-container-lowest rounded p-space-3xl flex flex-col items-center justify-center text-center shadow-md">
+<div class="w-16 h-16 rounded bg-error-container/20 flex items-center justify-center mb-space-md">
+<span class="material-symbols-outlined text-error text-headline-xl">dns</span>
+</div>
+<span class="font-code-sm text-code-sm text-error font-semibold mb-1">[DATABASE_SYNC_FAILURE // TIMEOUT]</span>
+<h2 class="font-headline-md text-headline-md text-on-surface font-semibold mb-space-xs">
+            Hardware Spec Node 0x8F Failed to Respond
+          </h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md mb-space-lg">
+            Telemetry stream synchronization with node <span class="font-code-sm text-error">cluster-db-us-west</span> encountered socket timeout (504). Thermal benchmarks cannot be guaranteed for recent SKU revisions.
+          </p>
+<div class="flex items-center gap-space-sm">
+<button class="px-space-lg py-2 bg-primary text-on-primary font-body-sm text-body-sm font-semibold rounded hover:bg-primary-container transition-colors flex items-center gap-space-xs" onclick="switchCatalogView('table')">
+<span class="material-symbols-outlined text-headline-sm">refresh</span>
+<span>Retry Telemetry Connection</span>
+</button>
+<button class="px-space-lg py-2 bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-body-sm rounded transition-colors">
+              Load Cached Local Profile
+            </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive Slide-In Component Picker Drawer (CAD Workbench Overlay) -->
+<aside class="fixed top-0 right-0 bottom-0 w-full sm:w-[460px] bg-surface-container-low shadow-xl z-50 transform translate-x-full transition-transform duration-200 ease-out flex flex-col" id="picker-drawer">
+<!-- Drawer Header -->
+<div class="p-space-lg bg-surface-container flex items-center justify-between shrink-0">
+<div class="flex flex-col">
+<span class="font-code-sm text-code-sm text-primary font-semibold">WORKBENCH PICKER MODE</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold" id="drawer-title">
+          Select Component for Rig
+        </h3>
+</div>
+<button class="p-1 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded transition-colors" onclick="togglePickerDrawer(false)">
+<span class="material-symbols-outlined text-headline-md">close</span>
+</button>
+</div>
+<!-- Drawer Quick Search & Category Filter -->
+<div class="p-space-md bg-surface-container-lowest shrink-0 flex flex-col gap-space-xs">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-space-sm top-1/2 -translate-y-1/2 text-outline text-body-md pointer-events-none">search</span>
+<input class="w-full h-8 pl-8 pr- space-sm bg-surface-container text-on-surface placeholder:text-outline font-body-sm text-body-sm rounded focus:outline-none" placeholder="Filter compact specs (e.g. AM5, 120W)..." type="text"/>
+</div>
+<div class="flex items-center gap-space-xs overflow-x-auto pb-1 text-code-sm font-code-sm">
+<span class="px-2 py-0.5 bg-primary text-on-primary font-semibold rounded shrink-0">CPUs (14)</span>
+<span class="px-2 py-0.5 bg-surface-container text-on-surface-variant rounded shrink-0">GPUs (8)</span>
+<span class="px-2 py-0.5 bg-surface-container text-on-surface-variant rounded shrink-0">Motherboards (12)</span>
+</div>
+</div>
+<!-- Drawer Scrollable Component Stack -->
+<div class="flex-1 overflow-y-auto p-space-md flex flex-col gap-space-sm">
+<!-- Compact Card 1 -->
+<div class="p-space-md bg-surface-container rounded hover:bg-surface-container-high transition-colors flex flex-col gap-space-xs">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<img class="w-8 h-8 rounded bg-surface-container-lowest object-cover shrink-0" data-alt="Micro macro lens view of high-performance desktop processor chip golden contact pads on deep slate base." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8FNQYcGV2Qljp8frcFTvYxp8an6Cu9vHam08p5xsbqml2v9LMuIbUMJb2VcRxyKP8liPq-3vIeysB2LAJQyldk6eBvyRN329xLedZTuenRdwkFDPJKWmyKHB1exatSa1TiIbCdUaFziOkxuXt2jKnI8zzluvM_rY4pE4yScRLmK0Pblwy5JRphwZR_2IFjjO0InYyjkAEGfPGQMl_SROLqDy6s7DLk-g2ZaGoMlHI"/>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">AMD Ryzen 7 7800X3D</span>
+<span class="font-code-sm text-code-sm text-outline">Socket AM5 • 8C/16T</span>
+</div>
+</div>
+<span class="font-code-md text-code-md font-semibold text-primary">$389</span>
+</div>
+<div class="flex items-center gap-space-xs font-code-sm text-code-sm pt-1">
+<span class="px-1.5 py-0.5 bg-surface-container-lowest rounded text-on-surface-variant">120W TDP</span>
+<span class="px-1.5 py-0.5 bg-surface-container-lowest rounded text-on-surface-variant">DDR5 EXPO</span>
+<span class="px-1.5 py-0.5 bg-surface-container-lowest rounded text-on-surface-variant">Rec 650W</span>
+</div>
+<div class="pt-2 flex items-center justify-between">
+<span class="font-code-sm text-code-sm text-primary flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> 100% Compatible
+          </span>
+<button class="px-space-md py-1 bg-primary text-on-primary hover:bg-primary-container font-code-sm text-code-sm font-semibold rounded transition-colors" onclick="stageComponent('AMD Ryzen 7 7800X3D'); togglePickerDrawer(false);">
+            Select Component
+          </button>
+</div>
+</div>
+<!-- Compact Card 2 -->
+<div class="p-space-md bg-surface-container rounded hover:bg-surface-container-high transition-colors flex flex-col gap-space-xs">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<img class="w-8 h-8 rounded bg-surface-container-lowest object-cover shrink-0" data-alt="Technical CAD render of Intel Core desktop processor heatspreader on precision test bench." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFZTtOLJ4EU9RN2Kjn1Rwd3ugDTtasvoIqejQ-AguUi6Ljs7SGq_CCnYW_NpgpyNmJ8tbZkKScRb05-QQfcXt85dEjbMYgWV6Z0J691bwu0BAXWFIBcuwvmbuFG9xhMpC2hVbGmNeG-KB_-TqNiWyXBq5lw5PcqXmraRrV7uzPn2PANEjp6t2EVR5tROv1EkWZNIntqyCJjB-dq03aEQYFv1GrTBhT5SBa3gbWAhai"/>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">Intel Core i7-14700K</span>
+<span class="font-code-sm text-code-sm text-outline">Socket LGA1700 • 20C/28T</span>
+</div>
+</div>
+<span class="font-code-md text-code-md font-semibold text-primary">$399</span>
+</div>
+<div class="flex items-center gap-space-xs font-code-sm text-code-sm pt-1">
+<span class="px-1.5 py-0.5 bg-surface-container-lowest rounded text-tertiary">253W Max</span>
+<span class="px-1.5 py-0.5 bg-surface-container-lowest rounded text-on-surface-variant">DDR5/DDR4</span>
+<span class="px-1.5 py-0.5 bg-surface-container-lowest rounded text-on-surface-variant">Rec 750W</span>
+</div>
+<div class="pt-2 flex items-center justify-between">
+<span class="font-code-sm text-code-sm text-tertiary flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Socket Swap Req
+          </span>
+<button class="px-space-md py-1 bg-surface-container-highest hover:bg-surface-bright text-on-surface font-code-sm text-code-sm font-semibold rounded transition-colors" onclick="stageComponent('Intel Core i7-14700K'); togglePickerDrawer(false);">
+            Select Component
+          </button>
+</div>
+</div>
+<!-- Compact Card 3 -->
+<div class="p-space-md bg-surface-container rounded hover:bg-surface-container-high transition-colors flex flex-col gap-space-xs">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<img class="w-8 h-8 rounded bg-surface-container-lowest object-cover shrink-0" data-alt="AMD Ryzen 9 series flagship desktop workstation processor package on black engineering surface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlfnp6pqikL3-Yi1erb4Ldu99Vd-5iTZ1ZO3Hlr4Ziwwgzj-eGK9XtUU1nCnceD4wViGMZGPtk9RjnBrN7A-NioRWFJ9RU-6CVsXHVOlex-_9sgpygxiUml-dFMHVRtYoP4KsIpq5HKTNQaH6s1T6MMOYNGXmrrFW7z2MKf5ylq1lRQBQqOttFxU8cG-dxsBLoDNrGVOoYAmvQ0b9k3sCnEy_yW7D5dddFSzuJ1eaE"/>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">AMD Ryzen 9 7950X3D</span>
+<span class="font-code-sm text-code-sm text-outline">Socket AM5 • 16C/32T</span>
+</div>
+</div>
+<span class="font-code-md text-code-md font-semibold text-primary">$569</span>
+</div>
+<div class="flex items-center gap-space-xs font-code-sm text-code-sm pt-1">
+<span class="px-1.5 py-0.5 bg-surface-container-lowest rounded text-on-surface-variant">120W TDP</span>
+<span class="px-1.5 py-0.5 bg-surface-container-lowest rounded text-on-surface-variant">128MB Cache</span>
+<span class="px-1.5 py-0.5 bg-surface-container-lowest rounded text-on-surface-variant">Rec 750W</span>
+</div>
+<div class="pt-2 flex items-center justify-between">
+<span class="font-code-sm text-code-sm text-primary flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> 100% Compatible
+          </span>
+<button class="px-space-md py-1 bg-primary text-on-primary hover:bg-primary-container font-code-sm text-code-sm font-semibold rounded transition-colors" onclick="stageComponent('AMD Ryzen 9 7950X3D'); togglePickerDrawer(false);">
+            Select Component
+          </button>
+</div>
+</div>
+</div>
+<!-- Drawer Footer Actions -->
+<div class="p-space-md bg-surface-container flex items-center justify-between shrink-0">
+<span class="font-code-sm text-code-sm text-outline">Rig Socket: <strong class="text-on-surface">AM5</strong></span>
+<button class="px-space-md py-1.5 bg-surface-container-high hover:bg-surface-bright text-on-surface font-body-sm text-body-sm rounded transition-colors" onclick="togglePickerDrawer(false)">
+        Close Overlay
+      </button>
+</div>
+</aside>
+<!-- Spec Inspector Dialog Drawer (Slide-Over Detail Inspector) -->
+<div class="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 hidden flex justify-end" id="inspector-overlay">
+<div class="w-full max-w-lg bg-surface-container-low h-full flex flex-col p-space-xl shadow-xl overflow-y-auto">
+<div class="flex items-center justify-between mb-space-lg">
+<span class="font-code-sm text-code-sm text-primary font-semibold">[HARDWARE_SPEC_INSPECTION_MODE]</span>
+<button class="p-1 text-on-surface-variant hover:text-on-surface rounded" onclick="closeInspector()">
+<span class="material-symbols-outlined text-headline-md">close</span>
+</button>
+</div>
+<div class="flex flex-col gap-space-md">
+<h2 class="font-headline-lg text-headline-lg font-semibold text-on-surface" id="inspect-title">
+          AMD Ryzen 7 7800X3D
+        </h2>
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="p-space-md bg-surface-container rounded">
+<span class="font-code-sm text-code-sm text-outline block">THERMAL TARGET</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold" id="inspect-tdp">120W TDP</span>
+</div>
+<div class="p-space-md bg-surface-container rounded">
+<span class="font-code-sm text-code-sm text-outline block">SOCKET PINOUT</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold" id="inspect-socket">AM5 LGA1718</span>
+</div>
+</div>
+<div class="p-space-md bg-surface-container rounded flex flex-col gap-space-xs">
+<span class="font-code-sm text-code-sm text-outline">ARCHITECTURAL DIE TOPOLOGY</span>
+<p class="font-body-md text-body-md text-on-surface" id="inspect-arch">
+            Zen 4 3D V-Cache • 8 Cores / 16 Threads • 96MB L3 V-Cache directly stacked over primary Compute Complex Die (CCD0).
+          </p>
+</div>
+<div class="p-space-md bg-surface-container rounded flex flex-col gap-space-sm">
+<span class="font-code-sm text-code-sm text-outline">VERIFIED CLEARANCES &amp; ELECTRICAL ENVELOPE</span>
+<div class="flex justify-between py-1 font-code-sm text-code-sm">
+<span class="text-on-surface-variant">Package Height:</span>
+<span class="text-on-surface font-semibold">7.28mm (Substrate to IHS)</span>
+</div>
+<div class="flex justify-between py-1 font-code-sm text-code-sm">
+<span class="text-on-surface-variant">TJMax Thermal Limit:</span>
+<span class="text-on-surface font-semibold">89°C Maximum</span>
+</div>
+<div class="flex justify-between py-1 font-code-sm text-code-sm">
+<span class="text-on-surface-variant">Recommended Cooler Class:</span>
+<span class="text-on-surface font-semibold">240mm AIO or Dual-Tower 140mm</span>
+</div>
+<div class="flex justify-between py-1 font-code-sm text-code-sm">
+<span class="text-on-surface-variant">PCIe Generation:</span>
+<span class="text-on-surface font-semibold">PCIe 5.0 (24 Lanes Total)</span>
+</div>
+</div>
+<div class="mt-space-lg flex items-center justify-end gap-space-sm">
+<button class="px-space-lg py-2 bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-body-sm rounded transition-colors" onclick="closeInspector()">
+            Dismiss Spec Sheet
+          </button>
+<button class="px-space-lg py-2 bg-primary text-on-primary hover:bg-primary-container font-body-sm text-body-sm font-semibold rounded transition-colors" onclick="stageComponent(document.getElementById('inspect-title').innerText); closeInspector();">
+            Stage Specimen Into Rig
+          </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Real-time Staged Rig Toast -->
+<div class="fixed bottom-space-lg right-space-lg bg-surface-container-high shadow-xl rounded p-space-md flex items-center gap-space-md transition-all duration-200 transform translate-y-24 opacity-0 z-50 pointer-events-none" id="catalog-toast">
+<div class="w-8 h-8 rounded bg-primary/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-headline-sm">check_circle</span>
+</div>
+<div class="flex flex-col">
+<span class="font-code-sm text-code-sm text-primary font-semibold">[RIG_SPECIMEN_STAGED]</span>
+<span class="font-body-sm text-body-sm text-on-surface" id="toast-message">Component added to PC Builder</span>
+</div>
+<button class="text-outline hover:text-on-surface p-1 ml-space-sm pointer-events-auto" onclick="hideToast()">
+<span class="material-symbols-outlined text-label-md">close</span>
+</button>
+</div>
+</div>
+<!-- Inline JavaScript for Reactive Micro-Interactions & State Testing -->
+<script>
+  let stagedCount = 3;
+
+  function switchCatalogView(viewName) {
+    // Hide all view states
+    const views = document.querySelectorAll('.catalog-view-state');
+    views.forEach(view => view.classList.add('hidden'));
+
+    // Reset button styles
+    const pills = document.querySelectorAll('.view-pill');
+    pills.forEach(pill => {
+      pill.classList.remove('bg-primary', 'text-on-primary', 'font-semibold');
+      pill.classList.add('text-on-surface-variant');
+    });
+
+    // Show selected view
+    const targetView = document.getElementById('catalog-view-' + viewName);
+    if (targetView) {
+      targetView.classList.remove('hidden');
+    }
+
+    // Highlight button
+    const targetBtn = document.getElementById('view-btn-' + viewName);
+    if (targetBtn) {
+      targetBtn.classList.remove('text-on-surface-variant');
+      targetBtn.classList.add('bg-primary', 'text-on-primary', 'font-semibold');
+    }
+  }
+
+  function togglePickerDrawer(open) {
+    const drawer = document.getElementById('picker-drawer');
+    if (open) {
+      drawer.classList.remove('translate-x-full');
+    } else {
+      drawer.classList.add('translate-x-full');
+    }
+  }
+
+  function inspectSpecDrawer(name, arch, tdp, socket) {
+    document.getElementById('inspect-title').innerText = name;
+    document.getElementById('inspect-arch').innerText = arch + ' • Verified architectural specimen with CAD mechanical pin tolerances.';
+    document.getElementById('inspect-tdp').innerText = tdp;
+    document.getElementById('inspect-socket').innerText = socket;
+    document.getElementById('inspector-overlay').classList.remove('hidden');
+  }
+
+  function closeInspector() {
+    document.getElementById('inspector-overlay').classList.add('hidden');
+  }
+
+  function stageComponent(componentName) {
+    stagedCount++;
+    const tally = document.getElementById('active-rig-tally');
+    if (tally) {
+      tally.innerText = stagedCount + ' Components Staged';
+    }
+    showToast(componentName + ' staged into workbench build.');
+  }
+
+  function showToast(message) {
+    const toast = document.getElementById('catalog-toast');
+    const toastMsg = document.getElementById('toast-message');
+    toastMsg.innerText = message;
+    toast.classList.remove('translate-y-24', 'opacity-0', 'pointer-events-none');
+    toast.classList.add('translate-y-0', 'opacity-100');
+
+    setTimeout(() => {
+      hideToast();
+    }, 3800);
+  }
+
+  function hideToast() {
+    const toast = document.getElementById('catalog-toast');
+    toast.classList.add('translate-y-24', 'opacity-0', 'pointer-events-none');
+    toast.classList.remove('translate-y-0', 'opacity-100');
+  }
+
+  // Keyboard shortcut listener (Ctrl+F focus)
+  document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'f') {
+      const search = document.getElementById('catalog-search');
+      if (search && document.activeElement !== search) {
+        e.preventDefault();
+        search.focus();
+      }
+    }
+    if (e.key === 'Escape') {
+      togglePickerDrawer(false);
+      closeInspector();
+    }
+  });
+</script></main><footer class="w-full bg-surface-container-lowest"><div class="w-full max-w-[1440px] mx-auto px-margin-lg h-12 flex flex-col sm:flex-row items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm"><span class="w-2 h-2 rounded-full bg-primary shrink-0"></span><span class="font-code-sm text-code-sm text-on-surface-variant">All systems operational</span><span class="font-code-sm text-code-sm text-outline">•</span><span class="font-code-sm text-code-sm text-outline">Hardware DB v2.4</span></div><div class="flex items-center gap-space-lg"><a class="font-body-sm text-body-sm text-outline hover:text-on-surface transition-colors" href="#">Documentation</a><a class="font-body-sm text-body-sm text-outline hover:text-on-surface transition-colors" href="#">Component Guidelines</a><a class="font-body-sm text-body-sm text-outline hover:text-on-surface transition-colors" href="#">Peer Safety</a><a class="font-body-sm text-body-sm text-outline hover:text-on-surface transition-colors" href="#">Terms</a></div></div></footer></body></html>

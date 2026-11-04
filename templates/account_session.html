@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}PCForge · Account{% endblock %}
+{% block content %}
+<header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-low/95 backdrop-blur-md border-b border-outline-variant/25 shadow-sm">
+  <div class="h-16 max-w-[1440px] mx-auto px-margin-lg flex items-center justify-between gap-space-lg">
+    <div class="flex items-center gap-space-lg shrink-0">
+      <a class="flex items-center gap-space-sm font-headline-sm text-headline-sm font-semibold text-on-surface" href="/">
+        <div class="w-7 h-7 rounded-lg bg-surface-container flex items-center justify-center">
+          <span class="material-symbols-outlined text-primary text-headline-sm">memory</span>
+        </div>
+        <span>PC<span class="text-primary">Forge</span></span>
+      </a>
+      <div class="h-4 w-px bg-outline-variant/60 hidden sm:block"></div>
+      <nav class="hidden lg:flex items-center gap-space-xs">
+        <a class="px-space-md py-space-xs rounded-lg text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="marketplace" href="/">Marketplace</a>
+        <a class="px-space-md py-space-xs rounded-lg text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="pc-builder" href="/builder/">PC Builder</a>
+        <a class="px-space-md py-space-xs rounded-lg text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="components" href="/components/">Components</a>
+        <a class="px-space-md py-space-xs rounded-lg text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="messages" href="/chat/">Messages</a>
+      </nav>
+    </div>
+    <div class="flex items-center gap-space-sm">
+      <button class="hidden sm:inline-flex items-center gap-space-xs px-space-md py-space-xs h-9 bg-surface-container text-on-surface hover:bg-surface-container-high hover:text-primary transition-colors rounded-lg font-body-sm text-body-sm" type="button">
+        <span class="material-symbols-outlined text-headline-sm">add</span>
+        <span>Post Listing</span>
+      </button>
+      <a class="relative p-space-xs text-on-surface-variant hover:text-on-surface transition-colors flex items-center justify-center" data-path="messages" href="/chat/">
+        <span class="material-symbols-outlined text-headline-md">mail</span>
+      </a>
+      <button id="profile-button" class="rounded-lg bg-surface-container px-3 py-2 text-body-sm font-medium" type="button">Sign in</button>
+    </div>
+  </div>
+</header>
+
+<main class="min-h-screen bg-background pt-24 px-4 sm:px-8 flex-1">
+  <div class="mx-auto max-w-6xl py-10">
+    <div class="flex items-center justify-between gap-4 flex-wrap">
+      <div>
+        <p class="font-code-sm uppercase tracking-widest text-primary">PCForge / Account</p>
+        <h1 class="mt-2 text-headline-xl font-semibold text-on-surface">Personal account</h1>
+        <p id="account-identity" class="mt-1 text-on-surface-variant" role="status">Checking your session…</p>
+      </div>
+      <div id="admin-panel-actions" class="hidden">
+        <button id="open-admin-panel-btn" class="flex items-center gap-2 rounded-xl bg-primary/15 hover:bg-primary/25 text-primary border border-primary/35 px-5 py-2.5 font-semibold text-body-sm shadow-sm transition-all" type="button">
+          <span class="material-symbols-outlined text-xl">admin_panel_settings</span>
+          <span>Admin panel</span>
+        </button>
+      </div>
+    </div>
+
+    <div id="account-guest" class="mt-6 hidden rounded-2xl bg-surface-container-low p-6 border border-outline-variant/25">
+      <p>Sign in to view your account.</p>
+      <a href="/accounts/login/" class="mt-4 inline-block rounded-xl bg-primary px-5 py-3 font-semibold text-on-primary">Sign in</a>
+    </div>
+
+    <section id="account-manager" class="mt-8 hidden">
+      <h2 class="text-headline-lg font-semibold">My listings</h2>
+      <div id="manager-listings" class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2"></div>
+    </section>
+
+    <section id="account-buyer" class="mt-8 hidden grid gap-8 lg:grid-cols-2">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary">memory</span>
+          <h2 class="text-headline-lg font-semibold">My saved builds</h2>
+        </div>
+        <div id="buyer-builds" class="mt-4 grid gap-3"></div>
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary">receipt_long</span>
+          <h2 class="text-headline-lg font-semibold">Order history</h2>
+        </div>
+        <div id="buyer-orders" class="mt-4 grid gap-3"></div>
+      </div>
+    </section>
+
+    <button id="signout-btn" class="mt-8 hidden rounded-xl bg-surface-container-high hover:bg-surface-container-highest px-5 py-3 font-medium transition-colors" type="button">Sign out</button>
+  </div>
+</main>
+<footer class="w-full bg-surface-container-lowest border-t border-outline-variant/20 px-6 py-4 text-body-sm text-on-surface-variant">PCForge</footer>
+{% endblock %}

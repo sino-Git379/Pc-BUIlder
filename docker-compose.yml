@@ -1,0 +1,46 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY:-rigforge-production-super-secret-key-change-me}
+      - DJANGO_DEBUG=${DJANGO_DEBUG:-False}
+      - ALLOWED_HOSTS=${ALLOWED_HOSTS:-localhost,127.0.0.1,web,student3.softclub.tj,www.student3.softclub.tj,157.180.29.248}
+      - CSRF_TRUSTED_ORIGINS=${CSRF_TRUSTED_ORIGINS:-http://localhost,http://127.0.0.1,http://student3.softclub.tj,https://student3.softclub.tj,http://157.180.29.248}
+      - SQLITE_DB_PATH=/app/data/db.sqlite3
+      - AI_RENDER_API_KEY=${AI_RENDER_API_KEY:-}
+      - AI_RENDER_PROVIDER=${AI_RENDER_PROVIDER:-gemini}
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - GROQ_API_KEY=${GROQ_API_KEY:-}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - GUNICORN_WORKERS=${GUNICORN_WORKERS:-3}
+    volumes:
+      - sqlite_data:/app/data
+      - media_volume:/app/media
+      - static_volume:/app/staticfiles
+    expose:
+      - "8000"
+
+  nginx:
+    image: nginx:1.27-alpine
+    restart: unless-stopped
+    depends_on:
+      - web
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - static_volume:/app/staticfiles:ro
+      - media_volume:/app/media:ro
+
+volumes:
+  sqlite_data:
+    name: rigforge_sqlite_data
+  static_volume:
+    name: rigforge_static_volume
+  media_volume:
+    name: rigforge_media_volume

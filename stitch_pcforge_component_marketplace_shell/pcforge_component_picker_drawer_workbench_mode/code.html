@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-tertiary-fixed-variant": "#6d3900", "on-secondary-fixed": "#00201a", "on-tertiary": "#4d2700", "on-error-container": "#ffdad6", "tertiary-container": "#ffa657", "tertiary-fixed": "#ffdcc2", "surface": "#111416", "on-primary-container": "#005547", "on-primary": "#00382e", "tertiary": "#ffcca5", "on-tertiary-container": "#723c00", "primary": "#46efcf", "primary-fixed": "#57fbdb", "on-secondary-container": "#006050", "on-background": "#e1e2e5", "on-secondary": "#00382e", "secondary-fixed": "#42fdd9", "outline-variant": "#3b4a45", "on-primary-fixed-variant": "#005144", "tertiary-fixed-dim": "#ffb77c", "surface-container-high": "#272a2c", "surface-dim": "#111416", "inverse-surface": "#e1e2e5", "inverse-primary": "#006b5b", "primary-fixed-dim": "#2adec0", "outline": "#85948f", "on-primary-fixed": "#00201a", "background": "#111416", "primary-container": "#00d2b4", "surface-container-highest": "#323537", "secondary-container": "#00e3c0", "surface-variant": "#323537", "secondary": "#52ffdc", "on-error": "#690005", "on-tertiary-fixed": "#2e1500", "surface-tint": "#2adec0", "surface-container-low": "#191c1e", "secondary-fixed-dim": "#00dfbd", "surface-container-lowest": "#0c0f11", "error-container": "#93000a", "inverse-on-surface": "#2e3133", "surface-container": "#1d2022", "on-secondary-fixed-variant": "#005143", "on-surface-variant": "#bacac4", "on-surface": "#e1e2e5", "error": "#ffb4ab", "surface-bright": "#37393c" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "gutter": "1rem", "margin-md": "1.5rem", "space-3xl": "3rem", "gutter-lg": "1.5rem", "space-xl": "1.5rem", "margin": "1rem", "space-xs": "0.25rem", "space-2xl": "2rem", "space-md": "0.75rem", "space-sm": "0.5rem", "space-lg": "1rem", "margin-lg": "2.5rem" }, "fontFamily": { "code-md": [ "JetBrains Mono" ], "body-lg": [ "Geist" ], "display": [ "Geist" ], "headline-md": [ "Geist" ], "body-md": [ "Geist" ], "code-sm": [ "JetBrains Mono" ], "headline-lg": [ "Geist" ], "headline-xl": [ "Geist" ], "body-sm": [ "Geist" ], "label-md": [ "Geist" ], "headline-xl-mobile": [ "Geist" ], "label-caps": [ "JetBrains Mono" ], "headline-sm": [ "Geist" ] }, "fontSize": { "code-md": [ "13px", { "lineHeight": "18px", "letterSpacing": "-0.01em", "fontWeight": "500" } ], "body-lg": [ "16px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400" } ], "display": [ "40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "headline-md": [ "20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "500" } ], "body-md": [ "14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" } ], "code-sm": [ "11px", { "lineHeight": "16px", "letterSpacing": "0em", "fontWeight": "500" } ], "headline-lg": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "headline-xl": [ "32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "body-sm": [ "13px", { "lineHeight": "18px", "letterSpacing": "0.005em", "fontWeight": "400" } ], "label-md": [ "12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" } ], "headline-xl-mobile": [ "26px", { "lineHeight": "34px", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "label-caps": [ "10px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "600" } ], "headline-sm": [ "16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" } ] } } } };</script></head><body class="bg-background font-body-md text-on-surface antialiased min-h-screen flex flex-col"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-low/95 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.4)]"><div class="h-16 w-full max-w-[1440px] mx-auto px-margin-lg flex items-center justify-between gap-space-lg"><div class="flex items-center gap-space-lg shrink-0"><div class="flex items-center gap-space-sm"><div class="w-7 h-7 rounded bg-surface-container flex items-center justify-center"><span class="material-symbols-outlined text-primary text-headline-sm">memory</span></div><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight font-semibold">PC<span class="text-primary">Forge</span></span></div><div class="h-4 w-px bg-outline-variant/60 hidden sm:block"></div><nav class="hidden lg:flex items-center gap-space-xs" data-active-classes="bg-surface-container text-primary font-semibold"><a class="px-space-md py-space-xs rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="marketplace" href="#">Marketplace</a><a class="px-space-md py-space-xs rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="pc-builder" href="#">PC Builder</a><a class="px-space-md py-space-xs rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="components" href="#">Components</a><a class="px-space-md py-space-xs rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="messages" href="#">Messages</a></nav></div><div class="flex-1 max-w-xl hidden md:block"><div class="relative flex items-center w-full"><span class="material-symbols-outlined absolute left-space-md text-outline pointer-events-none text-body-lg">search</span><input class="w-full h-9 pl-10 pr-14 bg-surface-container-lowest text-on-surface placeholder:text-outline text-body-sm font-body-sm rounded focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Search CPUs, GPUs, motherboards, listings..." type="text"/><div class="absolute right-space-sm flex items-center"><kbd class="px-space-xs py-0.5 bg-surface-container-high text-on-surface-variant rounded font-code-sm text-code-sm">⌘K</kbd></div></div></div><div class="flex items-center gap-space-md shrink-0"><button class="hidden sm:inline-flex items-center gap-space-xs px-space-md py-space-xs h-9 bg-surface-container text-on-surface hover:bg-surface-container-high hover:text-primary transition-colors rounded font-body-sm text-body-sm" type="button"><span class="material-symbols-outlined text-headline-sm">add</span><span>Post Listing</span></button><a class="relative p-space-xs text-on-surface-variant hover:text-on-surface transition-colors flex items-center justify-center" data-path="messages" href="#"><span class="material-symbols-outlined text-headline-md">mail</span><span class="absolute top-0 right-0 h-4 min-w-[1rem] px-1 bg-primary text-on-primary font-code-sm text-code-sm rounded-full flex items-center justify-center">3</span></a><div class="h-4 w-px bg-outline-variant/60 hidden sm:block"></div><button class="flex items-center gap-space-sm pl-space-xs pr-space-sm py-space-xs bg-surface-container-lowest hover:bg-surface-container-high transition-colors rounded" type="button"><div class="relative shrink-0"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1Xh-W0JzB0PFC_eNd1OHTAvzFGLYe3WHH7TKUBuck9DX_DcgQoXZazqMtErsnPJfffvFTKERWt-9AIUgjUh3WNp7odP-vepApcrSnVik2N7fwAaxxo6YbTR7YRKl-pqU1ND2cSDdO8Oln8QZxpbk6HtZ6blEvR0hvOpilRgbabR20Ch2YCq_Wbkcigkra8xRn8SBK6wfSGr8MUtEijZlfThwsl2WZ9Ck4PYU-aTOZJXDg"/><span class="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-primary ring-2 ring-surface-container-lowest"></span></div><span class="hidden xl:inline font-body-sm text-body-sm text-on-surface font-medium">j.vance</span></button></div></div></header><main class="w-full pt-16 flex-1 bg-background"><div class="flex flex-col w-full relative min-h-[calc(100vh-4rem)] overflow-hidden">
+<!-- Subtle Blueprint Calibration Grid Layer -->
+<div class="absolute inset-0 pointer-events-none opacity-20 bg-[radial-gradient(#3b4a45_1px,transparent_1px)] [background-size:24px_24px]"></div>
+<!-- WORKBENCH UNDERLAY (DIMMED STAGING CANVAS) -->
+<div class="w-full max-w-[1440px] mx-auto px-margin-lg py-space-xl flex flex-col gap-space-xl transition-all duration-300">
+<!-- Workbench Telemetry Breadcrumbs & Matrix Header -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="font-code-sm text-code-sm text-primary tracking-widest uppercase">SYS_LOG // 02</span>
+<span class="font-code-sm text-code-sm text-outline">/</span>
+<span class="font-code-sm text-code-sm text-on-surface-variant font-semibold uppercase tracking-wider">PC Builder Workbench</span>
+<span class="font-code-sm text-code-sm text-outline">/</span>
+<span class="font-code-sm text-code-sm text-outline tracking-wider">Rig Spec Matrix</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface font-semibold tracking-tight">Project: Deep Learning &amp; 4K Workstation</h1>
+</div>
+<!-- Telemetry Status Pills -->
+<div class="flex items-center gap-space-md flex-wrap">
+<div class="px-space-md py-1 bg-surface-container-high rounded flex items-center gap-space-sm shadow-sm">
+<span class="material-symbols-outlined text-primary text-body-md">bolt</span>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-outline uppercase tracking-wider">Load / Headroom</span>
+<span class="font-code-sm text-code-sm text-on-surface font-medium">565W / 850W PSU</span>
+</div>
+</div>
+<div class="px-space-md py-1 bg-surface-container-high rounded flex items-center gap-space-sm shadow-sm">
+<span class="material-symbols-outlined text-primary text-body-md">verified</span>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-outline uppercase tracking-wider">Matrix Status</span>
+<span class="font-code-sm text-code-sm text-primary font-medium">0 Conflicts Detected</span>
+</div>
+</div>
+<button class="h-9 px-space-md bg-surface-container-high text-on-surface rounded font-body-sm text-body-sm hover:bg-surface-variant transition-colors flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-body-md">save</span>
+<span>Save Rig</span>
+</button>
+</div>
+</div>
+<!-- Multi-Column Workbench Staging Matrix -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-lg">
+<!-- Primary Staging List (8 Cols) -->
+<div class="lg:col-span-8 flex flex-col gap-space-sm">
+<!-- Slot 1: Motherboard (Configured) -->
+<div class="p-space-md bg-surface-container rounded flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded bg-surface-container-low flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-headline-sm">developer_board</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-caps text-label-caps uppercase text-outline">SLOT 01 // MOTHERBOARD</span>
+<span class="px-1.5 py-0.5 bg-primary/10 text-primary font-code-sm text-code-sm rounded">Socket AM5</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface font-medium">ASUS ROG Strix B650E-E Gaming WiFi</span>
+</div>
+</div>
+<div class="flex items-center gap-space-lg">
+<span class="font-code-sm text-code-sm text-on-surface-variant">$349.99</span>
+<span class="px-space-sm py-0.5 bg-surface-container-high text-primary font-code-sm text-code-sm rounded">Configured</span>
+</div>
+</div>
+<!-- Slot 2: CPU (ACTIVE SELECTION TARGET) -->
+<div class="p-space-md bg-surface-container-high rounded flex items-center justify-between shadow-md relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>
+<div class="flex items-center gap-space-md pl-1">
+<div class="w-10 h-10 rounded bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-headline-sm animate-pulse">memory</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-caps text-label-caps uppercase text-primary font-semibold">SLOT 02 // PROCESSOR (CPU)</span>
+<span class="px-1.5 py-0.5 bg-primary text-on-primary font-code-sm text-code-sm rounded font-medium">AWAITING SELECTION</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface font-medium tracking-tight">Active Component Drawer Open</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="font-code-sm text-code-sm text-primary flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-primary animate-ping"></span> Inspecting AM5 Nodes
+            </span>
+</div>
+</div>
+<!-- Slot 3: Memory (Configured) -->
+<div class="p-space-md bg-surface-container rounded flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded bg-surface-container-low flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-headline-sm">storage</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-caps text-label-caps uppercase text-outline">SLOT 03 // MEMORY (RAM)</span>
+<span class="px-1.5 py-0.5 bg-surface-container-high text-on-surface-variant font-code-sm text-code-sm rounded">2x32GB DDR5-6000</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface font-medium">G.Skill Trident Z5 Neo 64GB DDR5-6000 CL30</span>
+</div>
+</div>
+<div class="flex items-center gap-space-lg">
+<span class="font-code-sm text-code-sm text-on-surface-variant">$209.99</span>
+<span class="px-space-sm py-0.5 bg-surface-container-high text-on-surface-variant font-code-sm text-code-sm rounded">Configured</span>
+</div>
+</div>
+<!-- Slot 4: GPU (Configured) -->
+<div class="p-space-md bg-surface-container rounded flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded bg-surface-container-low flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-headline-sm">view_in_ar</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-caps text-label-caps uppercase text-outline">SLOT 04 // GRAPHICS ACCELERATOR</span>
+<span class="px-1.5 py-0.5 bg-surface-container-high text-on-surface-variant font-code-sm text-code-sm rounded">320W TDP</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface font-medium">NVIDIA GeForce RTX 4080 Super Founders Edition 16GB</span>
+</div>
+</div>
+<div class="flex items-center gap-space-lg">
+<span class="font-code-sm text-code-sm text-on-surface-variant">$999.00</span>
+<span class="px-space-sm py-0.5 bg-surface-container-high text-on-surface-variant font-code-sm text-code-sm rounded">Configured</span>
+</div>
+</div>
+<!-- Slot 5: Storage (Configured) -->
+<div class="p-space-md bg-surface-container rounded flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded bg-surface-container-low flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-headline-sm">hard_drive</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-caps text-label-caps uppercase text-outline">SLOT 05 // PRIMARY STORAGE (NVME)</span>
+<span class="px-1.5 py-0.5 bg-surface-container-high text-on-surface-variant font-code-sm text-code-sm rounded">PCIe 4.0 x4</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface font-medium">Samsung 990 PRO 4TB NVMe M.2 SSD</span>
+</div>
+</div>
+<div class="flex items-center gap-space-lg">
+<span class="font-code-sm text-code-sm text-on-surface-variant">$319.99</span>
+<span class="px-space-sm py-0.5 bg-surface-container-high text-on-surface-variant font-code-sm text-code-sm rounded">Configured</span>
+</div>
+</div>
+<!-- Slot 6: PSU (Configured) -->
+<div class="p-space-md bg-surface-container rounded flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded bg-surface-container-low flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-headline-sm">power</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-caps text-label-caps uppercase text-outline">SLOT 06 // POWER SUPPLY</span>
+<span class="px-1.5 py-0.5 bg-surface-container-high text-on-surface-variant font-code-sm text-code-sm rounded">ATX 3.0 // 1000W</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface font-medium">Seasonic Vertex GX-1000 80+ Gold Fully Modular</span>
+</div>
+</div>
+<div class="flex items-center gap-space-lg">
+<span class="font-code-sm text-code-sm text-on-surface-variant">$229.99</span>
+<span class="px-space-sm py-0.5 bg-surface-container-high text-on-surface-variant font-code-sm text-code-sm rounded">Configured</span>
+</div>
+</div>
+</div>
+<!-- Workbench Side Telemetry & Dimension Schematics (4 Cols) -->
+<div class="lg:col-span-4 flex flex-col gap-space-md">
+<div class="p-space-md bg-surface-container rounded flex flex-col gap-space-md shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-outline uppercase tracking-wider">THERMAL &amp; CURRENT FOOTPRINT</span>
+<span class="font-code-sm text-code-sm text-primary">LIVE SIM</span>
+</div>
+<!-- Miniature Thermal Diagram SVG -->
+<div class="w-full h-32 bg-surface-container-low rounded p-space-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-code-sm text-code-sm text-on-surface-variant">Estimated Peak Load: 685W</span>
+<span class="font-code-sm text-code-sm text-outline">TDP Max: 78°C</span>
+</div>
+<svg class="w-full h-16 text-primary" fill="none" viewbox="0 0 300 60">
+<path d="M0,50 Q40,48 80,42 T160,25 T220,18 T300,12" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path>
+<path d="M0,50 Q40,48 80,42 T160,25 T220,18 T300,12 L300,60 L0,60 Z" fill="currentColor" fill-opacity="0.1"></path>
+</svg>
+<div class="flex items-center justify-between text-outline font-code-sm text-code-sm">
+<span>0W Idle</span>
+<span>Baseline: 450W</span>
+<span>1000W Cap</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs text-on-surface-variant font-body-sm text-body-sm">
+<div class="flex justify-between">
+<span>Selected Base Power:</span>
+<span class="font-code-sm text-code-sm text-on-surface font-medium">445 W</span>
+</div>
+<div class="flex justify-between">
+<span>CPU Delta Allowance:</span>
+<span class="font-code-sm text-code-sm text-primary font-medium">+120W to +170W</span>
+</div>
+<div class="flex justify-between">
+<span>Motherboard Socket:</span>
+<span class="font-code-sm text-code-sm text-on-surface font-medium">AM5 (LGA 1718)</span>
+</div>
+</div>
+</div>
+<div class="p-space-md bg-surface-container rounded flex flex-col gap-space-sm shadow-sm">
+<span class="font-label-caps text-label-caps text-outline uppercase tracking-wider">HARDWARE MATRIX SPECIFICATIONS</span>
+<div class="grid grid-cols-2 gap-space-sm font-code-sm text-code-sm">
+<div class="p-space-xs bg-surface-container-low rounded">
+<div class="text-outline">PCIe Lanes</div>
+<div class="text-on-surface font-medium">Gen 5 (x16 slot)</div>
+</div>
+<div class="p-space-xs bg-surface-container-low rounded">
+<div class="text-outline">Form Factor</div>
+<div class="text-on-surface font-medium">Standard ATX</div>
+</div>
+<div class="p-space-xs bg-surface-container-low rounded">
+<div class="text-outline">Memory Cap</div>
+<div class="text-on-surface font-medium">192 GB DDR5</div>
+</div>
+<div class="p-space-xs bg-surface-container-low rounded">
+<div class="text-outline">Cooler Clearance</div>
+<div class="text-on-surface font-medium">185 mm Max</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- DARKENED SCRIM OVERLAY (Workbench Dimmer) -->
+<div class="absolute inset-0 bg-surface-container-lowest/80 backdrop-blur-[3px] transition-opacity duration-300 z-30" id="backdrop-scrim"></div>
+<!-- SLIDE-OVER COMPONENT PICKER DRAWER (Pinned Right: 540px) -->
+<aside class="fixed top-16 right-0 bottom-0 w-full sm:w-[540px] bg-surface-container-low shadow-2xl flex flex-col z-40 transition-transform duration-300 ease-out">
+<!-- Drawer Technical Header -->
+<div class="p-space-md bg-surface-container flex flex-col gap-space-xs shrink-0 shadow-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-code-sm text-code-sm text-primary tracking-widest font-semibold uppercase">SYS_DRAWER // CPU_PICKER</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<kbd class="hidden sm:inline-block px-1.5 py-0.5 bg-surface-container-high text-on-surface-variant font-code-sm text-code-sm rounded">ESC</kbd>
+<button class="w-8 h-8 rounded bg-surface-container-high hover:bg-surface-variant text-on-surface flex items-center justify-center transition-colors" id="close-drawer-btn">
+<span class="material-symbols-outlined text-headline-sm">close</span>
+</button>
+</div>
+</div>
+<div class="flex flex-col mt-0.5">
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-semibold tracking-tight">Select Component // Processor (CPU)</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Filtered by active socket AM5 &amp; DDR5 compatibility matrix</p>
+</div>
+<!-- Telemetry Active Filter Banner -->
+<div class="mt-space-xs px-space-sm py-1 bg-surface-container-high rounded flex items-center justify-between text-outline">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-body-sm">check_circle</span>
+<span class="font-code-sm text-code-sm text-on-surface tracking-tight font-medium">COMPATIBILITY FILTER ACTIVE: AM5 LGA1718 ONLY</span>
+</div>
+<span class="font-code-sm text-code-sm text-primary">3 Match</span>
+</div>
+</div>
+<!-- Search & Refinement Controls -->
+<div class="p-space-md bg-surface-container-low flex flex-col gap-space-sm shrink-0 shadow-sm">
+<div class="relative flex items-center w-full">
+<span class="material-symbols-outlined absolute left-space-md text-outline pointer-events-none text-body-md">search</span>
+<input class="w-full h-9 pl-10 pr-space-md bg-surface-container text-on-surface placeholder:text-outline font-body-sm text-body-sm rounded focus:outline-none focus:bg-surface-container-high transition-colors" id="cpu-search-input" placeholder="Search CPUs by model or core count..." type="text" value=""/>
+</div>
+<!-- Filter Chips & Sort Row -->
+<div class="flex items-center gap-space-xs flex-wrap justify-between">
+<div class="flex items-center gap-space-xs flex-wrap">
+<!-- Socket Chip (Locked) -->
+<div class="h-7 px-space-sm bg-primary/10 text-primary font-code-sm text-code-sm rounded flex items-center gap-1 font-medium">
+<span class="material-symbols-outlined text-body-sm">lock</span>
+<span>Socket: AM5</span>
+</div>
+<!-- TDP Filter Chip -->
+<button class="h-7 px-space-sm bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-code-sm text-code-sm rounded flex items-center gap-1 transition-colors">
+<span>TDP: Any</span>
+<span class="material-symbols-outlined text-label-md">arrow_drop_down</span>
+</button>
+<!-- Brand Toggle Chip -->
+<button class="h-7 px-space-sm bg-primary/15 text-primary font-code-sm text-code-sm rounded flex items-center gap-1">
+<span>Brand: AMD</span>
+</button>
+</div>
+<button class="h-7 px-space-sm bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-code-sm text-code-sm rounded flex items-center gap-1 transition-colors">
+<span>Sort: Bench / Price</span>
+<span class="material-symbols-outlined text-label-md">sort</span>
+</button>
+</div>
+<!-- Drawer State Switcher Tabs (Demo Helper) -->
+<div class="flex items-center justify-between pt-1">
+<span class="font-label-caps text-label-caps text-outline uppercase tracking-wider">DRAWER PREVIEW STATE:</span>
+<div class="flex items-center gap-1 bg-surface-container p-0.5 rounded">
+<button class="px-2 py-0.5 text-primary bg-surface-container-high rounded font-code-sm text-code-sm font-medium transition-colors" id="state-btn-results">Results</button>
+<button class="px-2 py-0.5 text-on-surface-variant hover:text-on-surface rounded font-code-sm text-code-sm transition-colors" id="state-btn-skeleton">Shimmer</button>
+<button class="px-2 py-0.5 text-on-surface-variant hover:text-on-surface rounded font-code-sm text-code-sm transition-colors" id="state-btn-empty">Empty</button>
+<button class="px-2 py-0.5 text-on-surface-variant hover:text-on-surface rounded font-code-sm text-code-sm transition-colors" id="state-btn-error">Error</button>
+</div>
+</div>
+</div>
+<!-- Scrollable Component Results Viewport -->
+<div class="flex-1 overflow-y-auto p-space-md flex flex-col gap-space-sm" id="drawer-view-container">
+<!-- STATE 1: ACTIVE RESULTS (Default View) -->
+<div class="flex flex-col gap-space-sm" id="view-results">
+<!-- CARD 1: Selected / Recommended Benchmark Leader -->
+<div class="p-space-md bg-surface-container-high rounded flex flex-col gap-space-sm shadow-md relative overflow-hidden transition-all">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>
+<div class="flex items-start justify-between gap-space-sm pl-1">
+<div class="flex items-center gap-space-md">
+<div class="w-14 h-14 rounded bg-surface-container-lowest overflow-hidden shrink-0 flex items-center justify-center p-1">
+<img class="w-full h-full object-cover rounded" data-alt="Technical macro studio close-up of AMD Ryzen 7 7800X3D CPU processor with dark metallic heat spreader and golden substrate traces against laboratory dark slate lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaKyMzVbBQBCtEJQJX6VMw5J668PmwOra5mn-IILB6G2GWzoO7FUXGhUBXW_t9ldL6f3rfflL1v7JcCaXMgAAfZ5bKxtiatV40xbR2wvF-LgcBE3X30LjFg5EFRQwj-qwpZr5_arLRO42xB2bzYH76sWQpO_H0vsaE_aliNuREKHm3IFA_fYuTGij5QVqPZ61F-Ev52ik9kkHDU6zNL4CNCtDPd56jlGe8pV9WisvM"/>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-code-sm text-code-sm text-primary font-semibold">AMD</span>
+<span class="font-code-sm text-code-sm text-outline">•</span>
+<span class="font-code-sm text-code-sm text-on-surface-variant">Zen 4 (3D V-Cache)</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">AMD Ryzen 7 7800X3D</h3>
+<span class="font-code-sm text-code-sm text-outline">8 Cores // 16 Threads // 4.2 GHz Base (5.0 GHz Boost)</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-headline-sm text-headline-sm text-primary font-semibold tracking-tight">$389.00</span>
+<span class="font-code-sm text-code-sm text-outline">avg catalog</span>
+</div>
+</div>
+<!-- Specs Badges Grid -->
+<div class="flex items-center gap-space-xs flex-wrap pl-1">
+<span class="px-space-xs py-0.5 bg-surface-container rounded font-code-sm text-code-sm text-on-surface">AM5</span>
+<span class="px-space-xs py-0.5 bg-surface-container rounded font-code-sm text-code-sm text-on-surface">DDR5 EXPO</span>
+<span class="px-space-xs py-0.5 bg-surface-container rounded font-code-sm text-code-sm text-on-surface">120W TDP</span>
+<span class="px-space-xs py-0.5 bg-surface-container rounded font-code-sm text-code-sm text-on-surface">650W PSU Min</span>
+<span class="px-space-xs py-0.5 bg-surface-container rounded font-code-sm text-code-sm text-outline">96MB L3</span>
+</div>
+<!-- Compatibility & Action Bar -->
+<div class="flex items-center justify-between pt-space-xs pl-1">
+<div class="flex items-center gap-space-xs text-primary">
+<span class="material-symbols-outlined text-body-sm">check</span>
+<span class="font-code-sm text-code-sm font-medium">100% Compatible with ROG B650E-E</span>
+</div>
+<button class="h-8 px-space-md bg-primary text-on-primary font-body-sm text-body-sm font-semibold rounded flex items-center gap-1 shadow-sm hover:opacity-95 transition-opacity">
+<span class="material-symbols-outlined text-body-md">done</span>
+<span>Active Choice</span>
+</button>
+</div>
+</div>
+<!-- CARD 2: Ryzen 9 7950X High-End Heavy Compute -->
+<div class="p-space-md bg-surface-container rounded hover:bg-surface-container-high transition-colors flex flex-col gap-space-sm shadow-sm">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-md">
+<div class="w-14 h-14 rounded bg-surface-container-lowest overflow-hidden shrink-0 flex items-center justify-center p-1">
+<img class="w-full h-full object-cover rounded" data-alt="Clean top-down technical photo of an AMD Ryzen 9 7950X flagship workstation processor, brushed metal lid with precision laser engraving in minimalist dark engineering room" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMa4jVftBY3lRDr2x94YI6TGDAcngChtsHCUI0jvbfQvuiNR1PKqEaBwWOJZlZZuntPoDyPOZfgpAF2z_YjV0J6hYCwuVSTchFv8cNrJqso0pfgCkqudzqpYagTq7EvDW0YIPYEnjcEluaGqz2A4Mjt7keG5QgOe0ltdIOi1nCjB2wyp6UOLH24G5r1XDdFSy4yR2ZwUjOfQryCJNLBJrtFLeVdyuYggNk1UPQdaJZ"/>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-code-sm text-code-sm text-on-surface-variant font-semibold">AMD</span>
+<span class="font-code-sm text-code-sm text-outline">•</span>
+<span class="font-code-sm text-code-sm text-on-surface-variant">Zen 4 Compute</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">AMD Ryzen 9 7950X</h3>
+<span class="font-code-sm text-code-sm text-outline">16 Cores // 32 Threads // 4.5 GHz Base (5.7 GHz Boost)</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">$549.00</span>
+<span class="font-code-sm text-code-sm text-outline">avg catalog</span>
+</div>
+</div>
+<!-- Specs Badges Grid -->
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="px-space-xs py-0.5 bg-surface-container-low rounded font-code-sm text-code-sm text-on-surface">AM5</span>
+<span class="px-space-xs py-0.5 bg-surface-container-low rounded font-code-sm text-code-sm text-on-surface">DDR5 EXPO</span>
+<span class="px-space-xs py-0.5 bg-surface-container-low rounded font-code-sm text-code-sm text-on-surface">170W TDP</span>
+<span class="px-space-xs py-0.5 bg-surface-container-low rounded font-code-sm text-code-sm text-on-surface">750W PSU Min</span>
+<span class="px-space-xs py-0.5 bg-surface-container-low rounded font-code-sm text-code-sm text-outline">64MB L3</span>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<div class="flex items-center gap-space-xs text-primary">
+<span class="material-symbols-outlined text-body-sm">check</span>
+<span class="font-code-sm text-code-sm font-medium">100% Compatible with ROG B650E-E</span>
+</div>
+<button class="h-8 px-space-md bg-surface-container-high hover:bg-surface-variant text-primary font-body-sm text-body-sm font-medium rounded transition-colors">
+              Select Component
+            </button>
+</div>
+</div>
+<!-- CARD 3: Ryzen 9 7900X3D Hybrid -->
+<div class="p-space-md bg-surface-container rounded hover:bg-surface-container-high transition-colors flex flex-col gap-space-sm shadow-sm">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-md">
+<div class="w-14 h-14 rounded bg-surface-container-lowest overflow-hidden shrink-0 flex items-center justify-center p-1">
+<img class="w-full h-full object-cover rounded" data-alt="Precision technical hardware shot of AMD Ryzen 9 7900X3D microchip resting on anti-static matte black foam surface under focused cyan lab spotlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhvpJ0nnyO_PyrAQH8tmM92oYFLmh8_SEaAu7zuXs6QdBJNMnzhxwzmZab0svuzdfYh8Lsvn3VRxvN7ifYeHjLFYRcOYcgThzufmf2ObAR7AVUfAC0-d-8OX9ofuDtab2yxdz__YEmPrCfKO3xPlfhl-gcorVgn2x7A271ruzF4Ztq685_5fYRqiOM3b5WIPEFJOO2wy7odz2898BaFKZdTBuvmxZ8hd5mdQ9WzBYx"/>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-code-sm text-code-sm text-on-surface-variant font-semibold">AMD</span>
+<span class="font-code-sm text-code-sm text-outline">•</span>
+<span class="font-code-sm text-code-sm text-on-surface-variant">Zen 4 (3D V-Cache)</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">AMD Ryzen 9 7900X3D</h3>
+<span class="font-code-sm text-code-sm text-outline">12 Cores // 24 Threads // 4.4 GHz Base (5.6 GHz Boost)</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">$469.00</span>
+<span class="font-code-sm text-code-sm text-outline">avg catalog</span>
+</div>
+</div>
+<!-- Specs Badges Grid -->
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="px-space-xs py-0.5 bg-surface-container-low rounded font-code-sm text-code-sm text-on-surface">AM5</span>
+<span class="px-space-xs py-0.5 bg-surface-container-low rounded font-code-sm text-code-sm text-on-surface">DDR5 EXPO</span>
+<span class="px-space-xs py-0.5 bg-surface-container-low rounded font-code-sm text-code-sm text-on-surface">120W TDP</span>
+<span class="px-space-xs py-0.5 bg-surface-container-low rounded font-code-sm text-code-sm text-on-surface">650W PSU Min</span>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<div class="flex items-center gap-space-xs text-primary">
+<span class="material-symbols-outlined text-body-sm">check</span>
+<span class="font-code-sm text-code-sm font-medium">100% Compatible with ROG B650E-E</span>
+</div>
+<button class="h-8 px-space-md bg-surface-container-high hover:bg-surface-variant text-primary font-body-sm text-body-sm font-medium rounded transition-colors">
+              Select Component
+            </button>
+</div>
+</div>
+<!-- CARD 4: Filtered Incompatible Component Demonstration -->
+<div class="p-space-md bg-surface-container-lowest/60 rounded flex flex-col gap-space-sm opacity-70">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-md">
+<div class="w-14 h-14 rounded bg-surface-container-low flex items-center justify-center text-outline shrink-0">
+<span class="material-symbols-outlined text-headline-md">block</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-code-sm text-code-sm text-outline uppercase">Intel</span>
+<span class="font-code-sm text-code-sm text-outline">•</span>
+<span class="font-code-sm text-code-sm text-outline">Raptor Lake Refresh</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-outline font-semibold tracking-tight">Intel Core i7-14700K</h3>
+<span class="font-code-sm text-code-sm text-outline">20 Cores // 28 Threads // 253W Max Turbo</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-headline-sm text-headline-sm text-outline font-semibold tracking-tight">$399.00</span>
+<span class="font-code-sm text-code-sm text-outline">avg catalog</span>
+</div>
+</div>
+<!-- Conflict Warning Banner -->
+<div class="px-space-sm py-1 bg-error-container/20 text-error rounded flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-body-md shrink-0">warning</span>
+<span class="font-code-sm text-code-sm">Socket mismatch: Requires LGA1700 motherboard (Active is AM5)</span>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-code-sm text-code-sm text-outline">LGA1700 Architecture</span>
+<button class="h-8 px-space-md bg-surface-container-high text-outline font-body-sm text-body-sm font-medium rounded cursor-not-allowed" disabled="">
+              Incompatible
+            </button>
+</div>
+</div>
+</div>
+<!-- STATE 2: SHIMMER SKELETON (Hidden by default) -->
+<div class="hidden flex-col gap-space-sm" id="view-skeleton">
+<div class="p-space-md bg-surface-container rounded flex flex-col gap-space-md shadow-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-md">
+<div class="w-14 h-14 rounded bg-surface-container-high animate-pulse"></div>
+<div class="flex flex-col gap-space-xs">
+<div class="w-24 h-3 bg-surface-container-high rounded animate-pulse"></div>
+<div class="w-44 h-4 bg-surface-container-high rounded animate-pulse"></div>
+<div class="w-32 h-3 bg-surface-container-high rounded animate-pulse"></div>
+</div>
+</div>
+<div class="w-16 h-5 bg-surface-container-high rounded animate-pulse"></div>
+</div>
+<div class="flex gap-space-xs">
+<div class="w-12 h-4 bg-surface-container-high rounded animate-pulse"></div>
+<div class="w-16 h-4 bg-surface-container-high rounded animate-pulse"></div>
+<div class="w-14 h-4 bg-surface-container-high rounded animate-pulse"></div>
+</div>
+<div class="w-full h-8 bg-surface-container-high rounded animate-pulse"></div>
+</div>
+<div class="p-space-md bg-surface-container rounded flex flex-col gap-space-md shadow-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-md">
+<div class="w-14 h-14 rounded bg-surface-container-high animate-pulse"></div>
+<div class="flex flex-col gap-space-xs">
+<div class="w-20 h-3 bg-surface-container-high rounded animate-pulse"></div>
+<div class="w-40 h-4 bg-surface-container-high rounded animate-pulse"></div>
+<div class="w-28 h-3 bg-surface-container-high rounded animate-pulse"></div>
+</div>
+</div>
+<div class="w-16 h-5 bg-surface-container-high rounded animate-pulse"></div>
+</div>
+<div class="flex gap-space-xs">
+<div class="w-12 h-4 bg-surface-container-high rounded animate-pulse"></div>
+<div class="w-16 h-4 bg-surface-container-high rounded animate-pulse"></div>
+</div>
+<div class="w-full h-8 bg-surface-container-high rounded animate-pulse"></div>
+</div>
+</div>
+<!-- STATE 3: ZERO RESULTS EMPTY (Hidden by default) -->
+<div class="hidden flex-col items-center justify-center p-space-2xl text-center gap-space-md" id="view-empty">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-display">filter_alt_off</span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">No Compatible CPUs Found</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-xs">
+            No active components match socket [AM5] with current search and strict thermal boundaries.
+          </p>
+</div>
+<button class="h-8 px-space-md bg-surface-container-high hover:bg-surface-variant text-primary font-body-sm text-body-sm rounded transition-colors" id="reset-filter-btn">
+          Reset Refinements
+        </button>
+</div>
+<!-- STATE 4: SPEC API ERROR (Hidden by default) -->
+<div class="hidden flex-col items-center justify-center p-space-2xl text-center gap-space-md" id="view-error">
+<div class="w-16 h-16 rounded-full bg-error-container/20 flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-display">sync_problem</span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<h3 class="font-headline-sm text-headline-sm text-error font-semibold">Telemetry Feed Disconnected</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-xs font-code-sm text-code-sm">
+            ERR_HARDWARE_DB_503: Socket constraint verification pipeline timeout.
+          </p>
+</div>
+<button class="h-8 px-space-md bg-surface-container-high hover:bg-surface-variant text-on-surface font-body-sm text-body-sm rounded transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-body-md">refresh</span>
+<span>Retry Handshake</span>
+</button>
+</div>
+</div>
+<!-- Drawer Telemetry Impact Footer -->
+<div class="p-space-md bg-surface-container flex flex-col gap-space-md shrink-0 shadow-lg">
+<div class="flex items-center justify-between text-on-surface-variant">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-body-md">speed</span>
+<span class="font-label-caps text-label-caps text-outline uppercase tracking-wider">LIVE THERMAL / PSU DELTA</span>
+</div>
+<span class="font-code-sm text-code-sm text-primary font-semibold">+120W TDP (325W Headroom Safe)</span>
+</div>
+<!-- Power Budget Progress Bar -->
+<div class="w-full h-1.5 bg-surface-container-lowest rounded-full overflow-hidden flex">
+<div class="h-full bg-outline-variant w-[45%]" title="Configured Hardware Base"></div>
+<div class="h-full bg-primary w-[14%]" title="Selected CPU Delta"></div>
+<div class="h-full bg-transparent flex-1" title="Remaining Safe Headroom"></div>
+</div>
+<!-- Confirmation / Cancel Buttons -->
+<div class="flex items-center justify-between gap-space-md">
+<button class="h-9 px-space-md text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm transition-colors" id="cancel-drawer-btn">
+          Cancel &amp; Retain Empty Slot
+        </button>
+<button class="h-9 px-space-xl bg-primary text-on-primary font-body-sm text-body-sm font-semibold rounded flex items-center gap-space-xs hover:opacity-95 shadow-sm transition-opacity">
+<span class="material-symbols-outlined text-body-md">check</span>
+<span>Confirm Rig Selection</span>
+</button>
+</div>
+</div>
+</aside>
+</div>
+<!-- Simple Vanilla Interactive State & Keybind Handling Script -->
+<script>
+  (function () {
+    const views = {
+      results: document.getElementById('view-results'),
+      skeleton: document.getElementById('view-skeleton'),
+      empty: document.getElementById('view-empty'),
+      error: document.getElementById('view-error')
+    };
+
+    const tabs = {
+      results: document.getElementById('state-btn-results'),
+      skeleton: document.getElementById('state-btn-skeleton'),
+      empty: document.getElementById('state-btn-empty'),
+      error: document.getElementById('state-btn-error')
+    };
+
+    function setActiveState(targetKey) {
+      Object.keys(views).forEach(key => {
+        if (views[key]) {
+          if (key === targetKey) {
+            views[key].classList.remove('hidden');
+            views[key].classList.add('flex');
+          } else {
+            views[key].classList.add('hidden');
+            views[key].classList.remove('flex');
+          }
+        }
+
+        if (tabs[key]) {
+          if (key === targetKey) {
+            tabs[key].className = 'px-2 py-0.5 text-primary bg-surface-container-high rounded font-code-sm text-code-sm font-medium transition-colors';
+          } else {
+            tabs[key].className = 'px-2 py-0.5 text-on-surface-variant hover:text-on-surface rounded font-code-sm text-code-sm transition-colors';
+          }
+        }
+      });
+    }
+
+    if (tabs.results) tabs.results.addEventListener('click', () => setActiveState('results'));
+    if (tabs.skeleton) tabs.skeleton.addEventListener('click', () => setActiveState('skeleton'));
+    if (tabs.empty) tabs.empty.addEventListener('click', () => setActiveState('empty'));
+    if (tabs.error) tabs.error.addEventListener('click', () => setActiveState('error'));
+
+    const resetBtn = document.getElementById('reset-filter-btn');
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        const search = document.getElementById('cpu-search-input');
+        if (search) search.value = '';
+        setActiveState('results');
+      });
+    }
+
+    // Dismissal listeners
+    const scrim = document.getElementById('backdrop-scrim');
+    const closeBtn = document.getElementById('close-drawer-btn');
+    const cancelBtn = document.getElementById('cancel-drawer-btn');
+
+    function notifyClose() {
+      // Micro notification or toggle feedback
+      if (scrim) {
+        scrim.style.opacity = '0.3';
+        setTimeout(() => scrim.style.opacity = '', 200);
+      }
+    }
+
+    if (closeBtn) closeBtn.addEventListener('click', notifyClose);
+    if (cancelBtn) cancelBtn.addEventListener('click', notifyClose);
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        notifyClose();
+      }
+    });
+  })();
+</script></main><footer class="w-full bg-surface-container-lowest"><div class="w-full max-w-[1440px] mx-auto px-margin-lg h-12 flex flex-col sm:flex-row items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm"><span class="w-2 h-2 rounded-full bg-primary shrink-0"></span><span class="font-code-sm text-code-sm text-on-surface-variant">All systems operational</span><span class="font-code-sm text-code-sm text-outline">•</span><span class="font-code-sm text-code-sm text-outline">Hardware DB v2.4</span></div><div class="flex items-center gap-space-lg"><a class="font-body-sm text-body-sm text-outline hover:text-on-surface transition-colors" href="#">Documentation</a><a class="font-body-sm text-body-sm text-outline hover:text-on-surface transition-colors" href="#">Component Guidelines</a><a class="font-body-sm text-body-sm text-outline hover:text-on-surface transition-colors" href="#">Peer Safety</a><a class="font-body-sm text-body-sm text-outline hover:text-on-surface transition-colors" href="#">Terms</a></div></div></footer></body></html>

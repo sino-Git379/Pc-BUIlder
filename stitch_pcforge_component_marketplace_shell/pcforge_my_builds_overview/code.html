@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-tertiary-fixed-variant": "#6d3900", "on-secondary-fixed": "#00201a", "on-tertiary": "#4d2700", "on-error-container": "#ffdad6", "tertiary-container": "#ffa657", "tertiary-fixed": "#ffdcc2", "surface": "#111416", "on-primary-container": "#005547", "on-primary": "#00382e", "tertiary": "#ffcca5", "on-tertiary-container": "#723c00", "primary": "#46efcf", "primary-fixed": "#57fbdb", "on-secondary-container": "#006050", "on-background": "#e1e2e5", "on-secondary": "#00382e", "secondary-fixed": "#42fdd9", "outline-variant": "#3b4a45", "on-primary-fixed-variant": "#005144", "tertiary-fixed-dim": "#ffb77c", "surface-container-high": "#272a2c", "surface-dim": "#111416", "inverse-surface": "#e1e2e5", "inverse-primary": "#006b5b", "primary-fixed-dim": "#2adec0", "outline": "#85948f", "on-primary-fixed": "#00201a", "background": "#111416", "primary-container": "#00d2b4", "surface-container-highest": "#323537", "secondary-container": "#00e3c0", "surface-variant": "#323537", "secondary": "#52ffdc", "on-error": "#690005", "on-tertiary-fixed": "#2e1500", "surface-tint": "#2adec0", "surface-container-low": "#191c1e", "secondary-fixed-dim": "#00dfbd", "surface-container-lowest": "#0c0f11", "error-container": "#93000a", "inverse-on-surface": "#2e3133", "surface-container": "#1d2022", "on-secondary-fixed-variant": "#005143", "on-surface-variant": "#bacac4", "on-surface": "#e1e2e5", "error": "#ffb4ab", "surface-bright": "#37393c" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "gutter": "1rem", "margin-md": "1.5rem", "space-3xl": "3rem", "gutter-lg": "1.5rem", "space-xl": "1.5rem", "margin": "1rem", "space-xs": "0.25rem", "space-2xl": "2rem", "space-md": "0.75rem", "space-sm": "0.5rem", "space-lg": "1rem", "margin-lg": "2.5rem" }, "fontFamily": { "code-md": [ "JetBrains Mono" ], "body-lg": [ "Geist" ], "display": [ "Geist" ], "headline-md": [ "Geist" ], "body-md": [ "Geist" ], "code-sm": [ "JetBrains Mono" ], "headline-lg": [ "Geist" ], "headline-xl": [ "Geist" ], "body-sm": [ "Geist" ], "label-md": [ "Geist" ], "headline-xl-mobile": [ "Geist" ], "label-caps": [ "JetBrains Mono" ], "headline-sm": [ "Geist" ] }, "fontSize": { "code-md": [ "13px", { "lineHeight": "18px", "letterSpacing": "-0.01em", "fontWeight": "500" } ], "body-lg": [ "16px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400" } ], "display": [ "40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "headline-md": [ "20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "500" } ], "body-md": [ "14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" } ], "code-sm": [ "11px", { "lineHeight": "16px", "letterSpacing": "0em", "fontWeight": "500" } ], "headline-lg": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "headline-xl": [ "32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "body-sm": [ "13px", { "lineHeight": "18px", "letterSpacing": "0.005em", "fontWeight": "400" } ], "label-md": [ "12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" } ], "headline-xl-mobile": [ "26px", { "lineHeight": "34px", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "label-caps": [ "10px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "600" } ], "headline-sm": [ "16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" } ] } } } };</script></head><body class="bg-background font-body-md text-on-surface antialiased min-h-screen flex flex-col"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-low/95 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.4)]"><div class="h-16 w-full max-w-[1440px] mx-auto px-margin-lg flex items-center justify-between gap-space-lg"><div class="flex items-center gap-space-lg shrink-0"><div class="flex items-center gap-space-sm"><div class="w-7 h-7 rounded bg-surface-container flex items-center justify-center"><span class="material-symbols-outlined text-primary text-headline-sm">memory</span></div><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight font-semibold">PC<span class="text-primary">Forge</span></span></div><div class="h-4 w-px bg-outline-variant/60 hidden sm:block"></div><nav class="hidden lg:flex items-center gap-space-xs" data-active-classes="bg-surface-container text-primary font-semibold"><a class="px-space-md py-space-xs rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="marketplace" href="#">Marketplace</a><a class="px-space-md py-space-xs rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="pc-builder" href="#">PC Builder</a><a class="px-space-md py-space-xs rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="components" href="#">Components</a><a class="px-space-md py-space-xs rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="messages" href="#">Messages</a></nav></div><div class="flex-1 max-w-xl hidden md:block"><div class="relative flex items-center w-full"><span class="material-symbols-outlined absolute left-space-md text-outline pointer-events-none text-body-lg">search</span><input class="w-full h-9 pl-10 pr-14 bg-surface-container-lowest text-on-surface placeholder:text-outline text-body-sm font-body-sm rounded focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Search CPUs, GPUs, motherboards, listings..." type="text"/><div class="absolute right-space-sm flex items-center"><kbd class="px-space-xs py-0.5 bg-surface-container-high text-on-surface-variant rounded font-code-sm text-code-sm">⌘K</kbd></div></div></div><div class="flex items-center gap-space-md shrink-0"><button class="hidden sm:inline-flex items-center gap-space-xs px-space-md py-space-xs h-9 bg-surface-container text-on-surface hover:bg-surface-container-high hover:text-primary transition-colors rounded font-body-sm text-body-sm" type="button"><span class="material-symbols-outlined text-headline-sm">add</span><span>Post Listing</span></button><a class="relative p-space-xs text-on-surface-variant hover:text-on-surface transition-colors flex items-center justify-center" data-path="messages" href="#"><span class="material-symbols-outlined text-headline-md">mail</span><span class="absolute top-0 right-0 h-4 min-w-[1rem] px-1 bg-primary text-on-primary font-code-sm text-code-sm rounded-full flex items-center justify-center">3</span></a><div class="h-4 w-px bg-outline-variant/60 hidden sm:block"></div><button class="flex items-center gap-space-sm pl-space-xs pr-space-sm py-space-xs bg-surface-container-lowest hover:bg-surface-container-high transition-colors rounded" type="button"><div class="relative shrink-0"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1Xh-W0JzB0PFC_eNd1OHTAvzFGLYe3WHH7TKUBuck9DX_DcgQoXZazqMtErsnPJfffvFTKERWt-9AIUgjUh3WNp7odP-vepApcrSnVik2N7fwAaxxo6YbTR7YRKl-pqU1ND2cSDdO8Oln8QZxpbk6HtZ6blEvR0hvOpilRgbabR20Ch2YCq_Wbkcigkra8xRn8SBK6wfSGr8MUtEijZlfThwsl2WZ9Ck4PYU-aTOZJXDg"/><span class="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-primary ring-2 ring-surface-container-lowest"></span></div><span class="hidden xl:inline font-body-sm text-body-sm text-on-surface font-medium">j.vance</span></button></div></div></header><main class="w-full pt-16 flex-1 bg-background"><div class="flex flex-col w-full">
+<div class="w-full max-w-[1440px] mx-auto px-margin-lg py-space-xl flex flex-col gap-space-2xl">
+<!-- Header & Context Area -->
+<div class="flex flex-col gap-space-lg">
+<div class="flex items-center gap-space-sm font-code-sm text-code-sm text-outline tracking-wider uppercase">
+<span class="text-primary font-bold">04</span>
+<span>//</span>
+<span>User Workspace</span>
+<span>//</span>
+<span class="text-on-surface">Saved Rigs</span>
+</div>
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-xl">
+<div class="flex flex-col gap-space-xs max-w-2xl">
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight font-semibold">My Builds</h1>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            Private workspace for your configured hardware rigs and compatibility manifests. Builds are private to your authenticated account.
+          </p>
+<div class="flex items-center gap-space-xs mt-space-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-primary shrink-0"></span>
+<span class="font-code-sm text-code-sm text-outline">Scope: Displaying builds owned by <span class="text-on-surface font-medium">@j.vance</span>. There is no public community gallery.</span>
+</div>
+</div>
+<!-- Header Actions -->
+<div class="flex flex-wrap items-center gap-space-sm shrink-0">
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-space-sm text-outline pointer-events-none text-body-md">search</span>
+<input class="h-9 pl-9 pr-space-md bg-surface-container-lowest text-on-surface placeholder:text-outline font-body-sm text-body-sm rounded focus:outline-none focus:bg-surface-container-high transition-colors w-48 sm:w-64" id="build-search-input" placeholder="Filter builds by name, spec..." type="text"/>
+</div>
+<button class="h-9 px-space-md bg-surface-container text-on-surface hover:bg-surface-container-high hover:text-primary transition-colors rounded font-body-sm text-body-sm font-medium flex items-center gap-space-xs" onclick="document.getElementById('import-dialog').classList.remove('hidden')" type="button">
+<span class="material-symbols-outlined text-headline-sm">file_upload</span>
+<span>Import Manifest (JSON)</span>
+</button>
+<button class="h-9 px-space-md bg-primary-container text-on-primary hover:bg-primary transition-colors rounded font-body-sm text-body-sm font-semibold flex items-center gap-space-xs shadow-sm" onclick="alert('Initializing new blank hardware specification manifest...');" type="button">
+<span class="material-symbols-outlined text-headline-sm">add</span>
+<span>Create New Build</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Telemetry Metric Summary Strip -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Metric 1 -->
+<div class="p-space-lg bg-surface-container rounded flex flex-col justify-between shadow-sm">
+<div class="flex items-center justify-between text-outline">
+<span class="font-label-caps text-label-caps uppercase text-outline">Active Workspace Rigs</span>
+<span class="material-symbols-outlined text-body-md text-outline">folder_managed</span>
+</div>
+<div class="mt-space-md flex items-baseline gap-space-sm">
+<span class="font-headline-xl text-headline-xl text-on-surface font-semibold">3</span>
+<span class="font-code-sm text-code-sm text-on-surface-variant">Saved Builds</span>
+</div>
+<div class="mt-space-xs flex items-center gap-space-xs font-code-sm text-code-sm text-outline">
+<span>Storage alloc: 3 / 25 manifests</span>
+</div>
+</div>
+<!-- Metric 2 -->
+<div class="p-space-lg bg-surface-container rounded flex flex-col justify-between shadow-sm">
+<div class="flex items-center justify-between text-outline">
+<span class="font-label-caps text-label-caps uppercase text-outline">Compatibility Status</span>
+<span class="material-symbols-outlined text-body-md text-secondary">fact_check</span>
+</div>
+<div class="mt-space-md flex items-baseline gap-space-xs">
+<span class="font-code-md text-code-md text-primary font-semibold">2 Passed</span>
+<span class="font-code-sm text-code-sm text-outline">·</span>
+<span class="font-code-md text-code-md text-tertiary font-semibold">1 Warning</span>
+<span class="font-code-sm text-code-sm text-outline">·</span>
+<span class="font-code-md text-code-md text-outline font-semibold">0 Blockers</span>
+</div>
+<div class="mt-space-xs flex items-center gap-space-xs font-code-sm text-code-sm text-outline">
+<span>Deterministic logic validation</span>
+</div>
+</div>
+<!-- Metric 3 -->
+<div class="p-space-lg bg-surface-container rounded flex flex-col justify-between shadow-sm">
+<div class="flex items-center justify-between text-outline">
+<span class="font-label-caps text-label-caps uppercase text-outline">Estimated Asset Value</span>
+<span class="material-symbols-outlined text-body-md text-outline">account_balance_wallet</span>
+</div>
+<div class="mt-space-md flex items-baseline gap-space-xs">
+<span class="font-headline-lg text-headline-lg text-on-surface font-semibold">$6,420.00</span>
+<span class="font-code-sm text-code-sm text-on-surface-variant">USD</span>
+</div>
+<div class="mt-space-xs flex items-center gap-space-xs font-code-sm text-code-sm text-outline">
+<span>Catalog average index estimate</span>
+</div>
+</div>
+<!-- Metric 4 -->
+<div class="p-space-lg bg-surface-container rounded flex flex-col justify-between shadow-sm">
+<div class="flex items-center justify-between text-outline">
+<span class="font-label-caps text-label-caps uppercase text-outline">Database Sync Engine</span>
+<span class="material-symbols-outlined text-body-md text-primary">sync</span>
+</div>
+<div class="mt-space-md flex items-baseline gap-space-xs">
+<span class="font-code-md text-code-md text-on-surface font-semibold">Hardware DB v2.4</span>
+</div>
+<div class="mt-space-xs flex items-center gap-space-xs font-code-sm text-code-sm text-outline">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span>Last sync: 4 minutes ago</span>
+</div>
+</div>
+</div>
+<!-- Active Builds Display Workspace -->
+<div class="flex flex-col gap-space-xl" id="main-view-container">
+<!-- Grid header tabs & sort controls -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-md bg-surface-container-low p-space-sm rounded">
+<div class="flex items-center gap-space-xs">
+<button class="px-space-md py-space-xs bg-surface-container text-primary font-body-sm text-body-sm font-semibold rounded shadow-sm">
+            All Configurations (3)
+          </button>
+<button class="px-space-md py-space-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors font-body-sm text-body-sm rounded">
+            In-Progress (2)
+          </button>
+<button class="px-space-md py-space-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors font-body-sm text-body-sm rounded">
+            Complete Sets (1)
+          </button>
+</div>
+<div class="flex items-center gap-space-sm pr-space-xs">
+<span class="font-label-caps text-label-caps uppercase text-outline">Sort by</span>
+<div class="relative">
+<select class="bg-surface-container-lowest text-on-surface font-code-sm text-code-sm py-1 pl-2 pr-6 rounded appearance-none focus:outline-none focus:bg-surface-container-high transition-colors">
+<option>Recently Modified</option>
+<option>Subtotal: High to Low</option>
+<option>Subtotal: Low to High</option>
+<option>Validation Status</option>
+</select>
+<span class="material-symbols-outlined text-outline text-body-sm absolute right-1.5 top-1.5 pointer-events-none">expand_more</span>
+</div>
+</div>
+</div>
+<!-- 3-Column Responsive Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-lg" id="builds-grid">
+<!-- CARD 1 -->
+<div class="build-card bg-surface-container rounded p-space-lg flex flex-col justify-between shadow-sm hover:bg-surface-container-high transition-all">
+<div class="flex flex-col gap-space-md">
+<!-- Top Badges & Meta -->
+<div class="flex items-center justify-between gap-space-sm">
+<div class="inline-flex items-center gap-1 px-2 py-0.5 bg-surface-container-lowest text-on-surface-variant rounded font-code-sm text-code-sm">
+<span class="material-symbols-outlined text-code-sm text-outline">lock</span>
+<span>Private</span>
+</div>
+<div class="inline-flex items-center gap-1 px-2 py-0.5 bg-surface-container-lowest text-tertiary-fixed rounded font-code-sm text-code-sm">
+<span class="material-symbols-outlined text-code-sm text-tertiary">warning</span>
+<span>1 Advisory Warning</span>
+</div>
+</div>
+<!-- Title & Advisory Details -->
+<div class="flex flex-col gap-1">
+<h2 class="font-headline-md text-headline-md text-on-surface font-semibold tracking-tight">Deep Learning &amp; CAD Rig v3</h2>
+<div class="flex items-center gap-space-xs font-code-sm text-code-sm text-outline">
+<span class="text-tertiary">Notice:</span>
+<span class="text-on-surface-variant">Chassis slot missing · clearance unverified</span>
+</div>
+</div>
+<!-- Specs Progress -->
+<div class="flex flex-col gap-space-xs bg-surface-container-lowest p-space-md rounded">
+<div class="flex items-center justify-between font-code-sm text-code-sm">
+<span class="text-outline">Manifest Completion</span>
+<span class="text-on-surface font-medium">7 of 8 Slots Assigned</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-high rounded overflow-hidden flex">
+<div class="h-full bg-primary" style="width: 87.5%;"></div>
+</div>
+</div>
+<!-- Specs Tags Preview -->
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-1 bg-surface-container-lowest text-on-surface font-code-sm text-code-sm rounded">Ryzen 7 7800X3D</span>
+<span class="px-2 py-1 bg-surface-container-lowest text-on-surface font-code-sm text-code-sm rounded">RTX 4080 Super</span>
+<span class="px-2 py-1 bg-surface-container-lowest text-on-surface font-code-sm text-code-sm rounded">64GB DDR5</span>
+<span class="px-2 py-1 bg-surface-container-lowest text-on-surface font-code-sm text-code-sm rounded">1000W Gold</span>
+</div>
+</div>
+<!-- Bottom Action Area -->
+<div class="mt-space-xl pt-space-md bg-surface-container-low -mx-space-lg -mb-space-lg p-space-lg rounded-b flex flex-col gap-space-md">
+<div class="flex items-baseline justify-between">
+<span class="font-label-caps text-label-caps text-outline uppercase">Estimated Subtotal</span>
+<div class="text-right">
+<span class="font-code-md text-code-md text-on-surface font-semibold">$2,640.00</span>
+<span class="font-code-sm text-code-sm text-outline"> USD (Catalog Avg)</span>
+</div>
+</div>
+<div class="flex items-center justify-between gap-space-sm pt-space-xs">
+<span class="font-code-sm text-code-sm text-outline">Updated 2h ago (Feb 18)</span>
+<div class="flex items-center gap-space-xs">
+<!-- Dropdown Trigger -->
+<div class="relative">
+<button class="h-8 w-8 flex items-center justify-center bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded transition-colors" onclick="toggleCardMenu('menu-1')" type="button">
+<span class="material-symbols-outlined text-body-md">more_horiz</span>
+</button>
+<div class="hidden absolute right-0 bottom-full mb-1 w-44 bg-surface-container-highest rounded shadow-xl py-1 z-30 font-body-sm text-body-sm" id="menu-1">
+<button class="w-full text-left px-3 py-1.5 text-on-surface hover:bg-surface-container-high hover:text-primary transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-body-md">content_copy</span> Duplicate
+                    </button>
+<button class="w-full text-left px-3 py-1.5 text-on-surface hover:bg-surface-container-high hover:text-primary transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-body-md">edit</span> Rename
+                    </button>
+<button class="w-full text-left px-3 py-1.5 text-on-surface hover:bg-surface-container-high hover:text-primary transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-body-md">download</span> Export JSON
+                    </button>
+<button class="w-full text-left px-3 py-1.5 text-error hover:bg-surface-container-high transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-body-md">delete</span> Delete Rig
+                    </button>
+</div>
+</div>
+<a class="h-8 px-space-md bg-primary-container text-on-primary hover:bg-primary transition-colors rounded font-body-sm text-body-sm font-semibold flex items-center gap-1 shadow-sm" href="#">
+<span>Continue Building</span>
+<span class="material-symbols-outlined text-body-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- CARD 2 -->
+<div class="build-card bg-surface-container rounded p-space-lg flex flex-col justify-between shadow-sm hover:bg-surface-container-high transition-all">
+<div class="flex flex-col gap-space-md">
+<!-- Top Badges & Meta -->
+<div class="flex items-center justify-between gap-space-sm">
+<div class="inline-flex items-center gap-1 px-2 py-0.5 bg-surface-container-lowest text-secondary-fixed-dim rounded font-code-sm text-code-sm">
+<span class="material-symbols-outlined text-code-sm text-primary">public</span>
+<span>Public Link Active</span>
+</div>
+<div class="inline-flex items-center gap-1 px-2 py-0.5 bg-surface-container-lowest text-primary rounded font-code-sm text-code-sm">
+<span class="material-symbols-outlined text-code-sm text-primary">check_circle</span>
+<span>100% Rules Passed</span>
+</div>
+</div>
+<!-- Title & Advisory Details -->
+<div class="flex flex-col gap-1">
+<h2 class="font-headline-md text-headline-md text-on-surface font-semibold tracking-tight">Compact ITX Lan Box // Living Room</h2>
+<div class="flex items-center gap-space-xs font-code-sm text-code-sm text-outline">
+<span class="text-primary">Status:</span>
+<span class="text-on-surface-variant">All 8 slot clearance constraints verified</span>
+</div>
+</div>
+<!-- Specs Progress -->
+<div class="flex flex-col gap-space-xs bg-surface-container-lowest p-space-md rounded">
+<div class="flex items-center justify-between font-code-sm text-code-sm">
+<span class="text-outline">Manifest Completion</span>
+<span class="text-primary font-medium">8 of 8 Slots Validated</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-high rounded overflow-hidden flex">
+<div class="h-full bg-primary" style="width: 100%;"></div>
+</div>
+</div>
+<!-- Specs Tags Preview -->
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-1 bg-surface-container-lowest text-on-surface font-code-sm text-code-sm rounded">Ryzen 5 7600X</span>
+<span class="px-2 py-1 bg-surface-container-lowest text-on-surface font-code-sm text-code-sm rounded">RTX 4070 Dual</span>
+<span class="px-2 py-1 bg-surface-container-lowest text-on-surface font-code-sm text-code-sm rounded">B650I ITX</span>
+<span class="px-2 py-1 bg-surface-container-lowest text-on-surface font-code-sm text-code-sm rounded">SFX 750W Gold</span>
+</div>
+</div>
+<!-- Bottom Action Area -->
+<div class="mt-space-xl pt-space-md bg-surface-container-low -mx-space-lg -mb-space-lg p-space-lg rounded-b flex flex-col gap-space-md">
+<div class="flex items-baseline justify-between">
+<span class="font-label-caps text-label-caps text-outline uppercase">Estimated Subtotal</span>
+<div class="text-right">
+<span class="font-code-md text-code-md text-on-surface font-semibold">$1,890.00</span>
+<span class="font-code-sm text-code-sm text-outline"> USD (Catalog Avg)</span>
+</div>
+</div>
+<div class="flex items-center justify-between gap-space-sm pt-space-xs">
+<span class="font-code-sm text-code-sm text-outline">Updated 3 days ago</span>
+<div class="flex items-center gap-space-xs">
+<!-- Dropdown Trigger -->
+<div class="relative">
+<button class="h-8 w-8 flex items-center justify-center bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded transition-colors" onclick="toggleCardMenu('menu-2')" type="button">
+<span class="material-symbols-outlined text-body-md">more_horiz</span>
+</button>
+<div class="hidden absolute right-0 bottom-full mb-1 w-44 bg-surface-container-highest rounded shadow-xl py-1 z-30 font-body-sm text-body-sm" id="menu-2">
+<button class="w-full text-left px-3 py-1.5 text-on-surface hover:bg-surface-container-high hover:text-primary transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-body-md">content_copy</span> Duplicate
+                    </button>
+<button class="w-full text-left px-3 py-1.5 text-on-surface hover:bg-surface-container-high hover:text-primary transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-body-md">edit</span> Rename
+                    </button>
+<button class="w-full text-left px-3 py-1.5 text-on-surface hover:bg-surface-container-high hover:text-primary transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-body-md">download</span> Export JSON
+                    </button>
+<button class="w-full text-left px-3 py-1.5 text-error hover:bg-surface-container-high transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-body-md">delete</span> Delete Rig
+                    </button>
+</div>
+</div>
+<a class="h-8 px-space-md bg-surface-container text-on-surface hover:bg-surface-container-high hover:text-primary transition-colors rounded font-body-sm text-body-sm font-medium flex items-center gap-1" href="#">
+<span>Continue Building</span>
+<span class="material-symbols-outlined text-body-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- CARD 3 -->
+<div class="build-card bg-surface-container rounded p-space-lg flex flex-col justify-between shadow-sm hover:bg-surface-container-high transition-all">
+<div class="flex flex-col gap-space-md">
+<!-- Top Badges & Meta -->
+<div class="flex items-center justify-between gap-space-sm">
+<div class="inline-flex items-center gap-1 px-2 py-0.5 bg-surface-container-lowest text-on-surface-variant rounded font-code-sm text-code-sm">
+<span class="material-symbols-outlined text-code-sm text-outline">lock</span>
+<span>Private</span>
+</div>
+<div class="inline-flex items-center gap-1 px-2 py-0.5 bg-surface-container-lowest text-primary rounded font-code-sm text-code-sm">
+<span class="material-symbols-outlined text-code-sm text-primary">check_circle</span>
+<span>100% Rules Passed</span>
+</div>
+</div>
+<!-- Title & Advisory Details -->
+<div class="flex flex-col gap-1">
+<h2 class="font-headline-md text-headline-md text-on-surface font-semibold tracking-tight">Pro Audio Studio &amp; DAW Workstation</h2>
+<div class="flex items-center gap-space-xs font-code-sm text-code-sm text-outline">
+<span class="text-primary">Status:</span>
+<span class="text-on-surface-variant">Low-acoustic profile / zero conflicts</span>
+</div>
+</div>
+<!-- Specs Progress -->
+<div class="flex flex-col gap-space-xs bg-surface-container-lowest p-space-md rounded">
+<div class="flex items-center justify-between font-code-sm text-code-sm">
+<span class="text-outline">Manifest Completion</span>
+<span class="text-on-surface font-medium">6 of 8 Slots Assigned</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-high rounded overflow-hidden flex">
+<div class="h-full bg-primary" style="width: 75%;"></div>
+</div>
+</div>
+<!-- Specs Tags Preview -->
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-1 bg-surface-container-lowest text-on-surface font-code-sm text-code-sm rounded">Core i7-14700K</span>
+<span class="px-2 py-1 bg-surface-container-lowest text-on-surface font-code-sm text-code-sm rounded">64GB DDR5</span>
+<span class="px-2 py-1 bg-surface-container-lowest text-on-surface font-code-sm text-code-sm rounded">850W Silent</span>
+<span class="px-2 py-1 bg-surface-container-lowest text-on-surface font-code-sm text-code-sm rounded">4TB NVMe PCIe 4</span>
+</div>
+</div>
+<!-- Bottom Action Area -->
+<div class="mt-space-xl pt-space-md bg-surface-container-low -mx-space-lg -mb-space-lg p-space-lg rounded-b flex flex-col gap-space-md">
+<div class="flex items-baseline justify-between">
+<span class="font-label-caps text-label-caps text-outline uppercase">Estimated Subtotal</span>
+<div class="text-right">
+<span class="font-code-md text-code-md text-on-surface font-semibold">$1,890.00</span>
+<span class="font-code-sm text-code-sm text-outline"> USD (Catalog Avg)</span>
+</div>
+</div>
+<div class="flex items-center justify-between gap-space-sm pt-space-xs">
+<span class="font-code-sm text-code-sm text-outline">Updated 1 week ago</span>
+<div class="flex items-center gap-space-xs">
+<!-- Dropdown Trigger -->
+<div class="relative">
+<button class="h-8 w-8 flex items-center justify-center bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded transition-colors" onclick="toggleCardMenu('menu-3')" type="button">
+<span class="material-symbols-outlined text-body-md">more_horiz</span>
+</button>
+<div class="hidden absolute right-0 bottom-full mb-1 w-44 bg-surface-container-highest rounded shadow-xl py-1 z-30 font-body-sm text-body-sm" id="menu-3">
+<button class="w-full text-left px-3 py-1.5 text-on-surface hover:bg-surface-container-high hover:text-primary transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-body-md">content_copy</span> Duplicate
+                    </button>
+<button class="w-full text-left px-3 py-1.5 text-on-surface hover:bg-surface-container-high hover:text-primary transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-body-md">edit</span> Rename
+                    </button>
+<button class="w-full text-left px-3 py-1.5 text-on-surface hover:bg-surface-container-high hover:text-primary transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-body-md">download</span> Export JSON
+                    </button>
+<button class="w-full text-left px-3 py-1.5 text-error hover:bg-surface-container-high transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-body-md">delete</span> Delete Rig
+                    </button>
+</div>
+</div>
+<a class="h-8 px-space-md bg-surface-container text-on-surface hover:bg-surface-container-high hover:text-primary transition-colors rounded font-body-sm text-body-sm font-medium flex items-center gap-1" href="#">
+<span>Continue Building</span>
+<span class="material-symbols-outlined text-body-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- CARD 4 (Empty / Creation Slot) -->
+<button class="min-h-[360px] bg-surface-container-low hover:bg-surface-container rounded p-space-xl flex flex-col items-center justify-center text-center gap-space-md group transition-all" onclick="alert('Creating fresh build configuration blueprint...');" type="button">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-primary group-hover:bg-primary-container group-hover:text-on-primary transition-colors shadow-sm">
+<span class="material-symbols-outlined text-headline-lg">add</span>
+</div>
+<div class="flex flex-col gap-space-xs max-w-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold group-hover:text-primary transition-colors">Start Fresh Rig Blueprint</span>
+<span class="font-body-sm text-body-sm text-outline leading-relaxed">
+              Initialize an empty parts list with automatic socket and clearance validation.
+            </span>
+</div>
+<span class="mt-space-sm font-code-sm text-code-sm text-primary tracking-wide uppercase font-medium">
+            [SYS_INIT_NEW_MANIFEST]
+          </span>
+</button>
+</div>
+</div>
+<!-- System States / Testbench Strip -->
+<div class="flex flex-col gap-space-md pt-space-lg bg-surface-container-low p-space-lg rounded shadow-sm">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-xs font-code-sm text-code-sm text-outline">
+<span class="material-symbols-outlined text-body-md text-primary">science</span>
+<span class="font-bold text-on-surface">SYSTEM TESTBENCH // STATE SIMULATOR</span>
+<span>(Interactive review switcher)</span>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs">
+<button class="state-btn active-state px-space-sm py-1 bg-surface-container text-primary font-code-sm text-code-sm rounded shadow-sm" data-target="default" onclick="setWorkspaceState('default')" type="button">
+            Default Grid (3 builds)
+          </button>
+<button class="state-btn px-space-sm py-1 bg-surface-container-lowest text-outline hover:text-on-surface font-code-sm text-code-sm rounded" data-target="empty" onclick="setWorkspaceState('empty')" type="button">
+            Empty Workspace (0 builds)
+          </button>
+<button class="state-btn px-space-sm py-1 bg-surface-container-lowest text-outline hover:text-on-surface font-code-sm text-code-sm rounded" data-target="signed_out" onclick="setWorkspaceState('signed_out')" type="button">
+            Sign-in Required Gate
+          </button>
+<button class="state-btn px-space-sm py-1 bg-surface-container-lowest text-outline hover:text-on-surface font-code-sm text-code-sm rounded" data-target="error" onclick="setWorkspaceState('error')" type="button">
+            API Fetch Error
+          </button>
+</div>
+</div>
+<!-- Simulated Dynamic State Container -->
+<div class="hidden" id="simulated-state-container">
+<!-- Rendered via JS functions below -->
+</div>
+</div>
+<!-- JSON Import Dialog / Slide Modal (Initially hidden) -->
+<div class="hidden fixed inset-0 z-50 flex items-center justify-center p-margin-md bg-surface-dim/80 backdrop-blur-sm" id="import-dialog">
+<div class="w-full max-w-lg bg-surface-container-high rounded p-space-xl shadow-2xl flex flex-col gap-space-lg">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs font-code-sm text-code-sm text-primary">
+<span class="material-symbols-outlined text-body-md">data_object</span>
+<span>IMPORT_MANIFEST.JSON</span>
+</div>
+<button class="text-outline hover:text-on-surface p-1 rounded" onclick="document.getElementById('import-dialog').classList.add('hidden')" type="button">
+<span class="material-symbols-outlined text-body-md">close</span>
+</button>
+</div>
+<div class="flex flex-col gap-space-xs">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Load Hardware Manifest</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Paste structured JSON export containing slot indices, component part numbers, and catalog IDs.
+          </p>
+</div>
+<div class="relative">
+<textarea class="w-full p-space-sm bg-surface-container-lowest text-on-surface placeholder:text-outline font-code-sm text-code-sm rounded focus:outline-none focus:ring-1 focus:ring-primary font-mono" placeholder='{ "rig_name": "New Config", "components": { "cpu": "AMD-7800X3D", "gpu": "RTX-4080S" } }' rows="6"></textarea>
+</div>
+<div class="flex items-center justify-end gap-space-sm">
+<button class="px-space-md py-space-xs bg-surface-container text-on-surface hover:bg-surface-container-highest rounded font-body-sm text-body-sm" onclick="document.getElementById('import-dialog').classList.add('hidden')" type="button">
+            Cancel
+          </button>
+<button class="px-space-md py-space-xs bg-primary-container text-on-primary hover:bg-primary font-body-sm text-body-sm font-semibold rounded shadow-sm" onclick="alert('Manifest validated and parsed.'); document.getElementById('import-dialog').classList.add('hidden')" type="button">
+            Parse &amp; Mount Rig
+          </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Simple menu dropdown toggle helper
+  function toggleCardMenu(menuId) {
+    const el = document.getElementById(menuId);
+    if (!el) return;
+    const isHidden = el.classList.contains('hidden');
+    // Hide all open menus first
+    document.querySelectorAll('[id^="menu-"]').forEach(m => m.classList.add('hidden'));
+    if (isHidden) {
+      el.classList.remove('hidden');
+    }
+  }
+
+  // Close menus when clicking outside
+  document.addEventListener('click', function(event) {
+    if (!event.target.closest('.build-card')) {
+      document.querySelectorAll('[id^="menu-"]').forEach(m => m.classList.add('hidden'));
+    }
+  });
+
+  // Client-side quick filter simulation
+  const searchInput = document.getElementById('build-search-input');
+  if (searchInput) {
+    searchInput.addEventListener('input', function(e) {
+      const q = e.target.value.toLowerCase();
+      const cards = document.querySelectorAll('.build-card');
+      cards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        if (text.includes(q)) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  }
+
+  // Interactive System States Simulator
+  function setWorkspaceState(state) {
+    const mainView = document.getElementById('main-view-container');
+    const simContainer = document.getElementById('simulated-state-container');
+    
+    // Update button states
+    document.querySelectorAll('.state-btn').forEach(btn => {
+      if (btn.getAttribute('data-target') === state) {
+        btn.classList.add('bg-surface-container', 'text-primary', 'shadow-sm');
+        btn.classList.remove('bg-surface-container-lowest', 'text-outline');
+      } else {
+        btn.classList.remove('bg-surface-container', 'text-primary', 'shadow-sm');
+        btn.classList.add('bg-surface-container-lowest', 'text-outline');
+      }
+    });
+
+    if (state === 'default') {
+      mainView.classList.remove('hidden');
+      simContainer.classList.add('hidden');
+      simContainer.innerHTML = '';
+      return;
+    }
+
+    mainView.classList.add('hidden');
+    simContainer.classList.remove('hidden');
+
+    if (state === 'empty') {
+      simContainer.innerHTML = `
+        <div class="p-space-3xl flex flex-col items-center justify-center text-center bg-surface-container rounded gap-space-lg">
+          <div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center text-outline">
+            <span class="material-symbols-outlined text-display">devices</span>
+          </div>
+          <div class="flex flex-col gap-space-xs max-w-md">
+            <h3 class="font-headline-md text-headline-md text-on-surface font-semibold">No builds created yet</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant">
+              Start your first rig configuration to automatically check component compatibility and calculate catalog-average subtotals.
+            </p>
+          </div>
+          <div class="flex items-center gap-space-sm">
+            <button onclick="setWorkspaceState('default')" class="h-9 px-space-lg bg-primary-container text-on-primary hover:bg-primary transition-colors font-body-sm text-body-sm font-semibold rounded flex items-center gap-space-xs shadow-sm">
+              <span class="material-symbols-outlined text-headline-sm">add</span>
+              <span>Create First Build</span>
+            </button>
+            <button onclick="document.getElementById('import-dialog').classList.remove('hidden')" class="h-9 px-space-md bg-surface-container-high text-on-surface hover:text-primary transition-colors font-body-sm text-body-sm rounded">
+              Import Manifest (JSON)
+            </button>
+          </div>
+          <span class="font-code-sm text-code-sm text-outline tracking-wider">[SYS_INFO: WORKSPACE_EMPTY_OK]</span>
+        </div>
+      `;
+    } else if (state === 'signed_out') {
+      simContainer.innerHTML = `
+        <div class="p-space-3xl flex flex-col items-center justify-center text-center bg-surface-container rounded gap-space-lg">
+          <div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center text-tertiary">
+            <span class="material-symbols-outlined text-display">lock</span>
+          </div>
+          <div class="flex flex-col gap-space-xs max-w-md">
+            <div class="inline-flex items-center justify-center gap-1 font-code-sm text-code-sm text-tertiary font-bold tracking-widest uppercase">
+              [AUTH_REQUIRED: SESSION_EXPIRED]
+            </div>
+            <h3 class="font-headline-md text-headline-md text-on-surface font-semibold">Sign-in Required Gate</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant">
+              Authentication Required: Sign in with your GitHub or hardware WebAuthn passkey to sync and manage your rig manifests.
+            </p>
+          </div>
+          <div class="flex items-center gap-space-sm">
+            <button onclick="alert('Redirecting to Passkey Auth...');" class="h-9 px-space-lg bg-primary-container text-on-primary hover:bg-primary transition-colors font-body-sm text-body-sm font-semibold rounded flex items-center gap-space-xs shadow-sm">
+              <span class="material-symbols-outlined text-headline-sm">key</span>
+              <span>Authenticate Session</span>
+            </button>
+            <button onclick="setWorkspaceState('default')" class="h-9 px-space-md bg-surface-container-high text-on-surface hover:text-primary transition-colors font-body-sm text-body-sm rounded">
+              Return to Preview
+            </button>
+          </div>
+        </div>
+      `;
+    } else if (state === 'error') {
+      simContainer.innerHTML = `
+        <div class="p-space-3xl flex flex-col items-center justify-center text-center bg-surface-container rounded gap-space-lg">
+          <div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center text-error">
+            <span class="material-symbols-outlined text-display">sync_problem</span>
+          </div>
+          <div class="flex flex-col gap-space-xs max-w-md">
+            <div class="inline-flex items-center justify-center gap-1 font-code-sm text-code-sm text-error font-bold tracking-widest uppercase">
+              [ERR_503: TELEMETRY_FEED_UNAVAILABLE]
+            </div>
+            <h3 class="font-headline-md text-headline-md text-on-surface font-semibold">Hardware DB Sync Interrupted</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant">
+              Unable to reach the rules engine endpoint at hardware-db.v2.4. Local manifests remain securely cached in browser storage.
+            </p>
+          </div>
+          <button onclick="setWorkspaceState('default')" class="h-9 px-space-lg bg-surface-container-high text-on-surface hover:bg-surface-container-highest transition-colors font-body-sm text-body-sm rounded flex items-center gap-space-xs">
+            <span class="material-symbols-outlined text-body-md">refresh</span>
+            <span>Retry Reconnection</span>
+          </button>
+        </div>
+      `;
+    }
+  }
+</script></main><footer class="w-full bg-surface-container-lowest"><div class="w-full max-w-[1440px] mx-auto px-margin-lg h-12 flex flex-col sm:flex-row items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm"><span class="w-2 h-2 rounded-full bg-primary shrink-0"></span><span class="font-code-sm text-code-sm text-on-surface-variant">All systems operational</span><span class="font-code-sm text-code-sm text-outline">•</span><span class="font-code-sm text-code-sm text-outline">Hardware DB v2.4</span></div><div class="flex items-center gap-space-lg"><a class="font-body-sm text-body-sm text-outline hover:text-on-surface transition-colors" href="#">Documentation</a><a class="font-body-sm text-body-sm text-outline hover:text-on-surface transition-colors" href="#">Component Guidelines</a><a class="font-body-sm text-body-sm text-outline hover:text-on-surface transition-colors" href="#">Peer Safety</a><a class="font-body-sm text-body-sm text-outline hover:text-on-surface transition-colors" href="#">Terms</a></div></div></footer></body></html>

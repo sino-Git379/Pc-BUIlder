@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-secondary-fixed-variant":"#005142","inverse-primary":"#b6c4ff","on-error-container":"#93000a","surface":"#f8f9ff","outline":"#737688","secondary-fixed":"#55fcd8","on-error":"#ffffff","on-background":"#0b1c30","secondary-container":"#55fcd8","inverse-on-surface":"#eaf1ff","background":"#f8f9ff","outline-variant":"#c3c5d9","on-primary-fixed-variant":"#003baf","on-surface":"#0b1c30","primary":"#0046cc","surface-container-high":"#dce9ff","on-secondary-container":"#00725f","tertiary":"#681cd9","surface-tint":"#004fe4","on-primary-container":"#ecedff","primary-fixed-dim":"#b6c4ff","secondary":"#006b59","secondary-fixed-dim":"#27dfbc","error-container":"#ffdad6","surface-container":"#e5eeff","surface-container-highest":"#d3e4fe","primary-fixed":"#dce1ff","surface-bright":"#f8f9ff","tertiary-container":"#8241f3","on-tertiary-fixed-variant":"#5a00c6","surface-dim":"#cbdbf5","on-primary":"#ffffff","inverse-surface":"#213145","tertiary-fixed":"#eaddff","on-secondary-fixed":"#002019","on-primary-fixed":"#00164e","surface-container-low":"#eff4ff","error":"#ba1a1a","on-tertiary":"#ffffff","on-surface-variant":"#434656","tertiary-fixed-dim":"#d2bbff","surface-variant":"#d3e4fe","on-secondary":"#ffffff","surface-container-lowest":"#ffffff","primary-container":"#0d5cff","on-tertiary-fixed":"#25005a","on-tertiary-container":"#f5ebff"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"margin-mobile":"1rem","space-xs":"0.25rem","space-md":"1rem",gutter:"1.5rem",margin:"2rem","space-lg":"1.5rem","space-xl":"2.5rem","space-sm":"0.5rem","gutter-mobile":"0.75rem"},fontFamily:{"headline-md":["Plus Jakarta Sans"],"headline-lg-mobile":["Plus Jakarta Sans"],"headline-xl-mobile":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"label-lg":["JetBrains Mono"],"label-md":["JetBrains Mono"],"headline-xl":["Plus Jakarta Sans"],"label-sm":["JetBrains Mono"]},fontSize:{"headline-md":["22px",{lineHeight:"30px",fontWeight:"600"}],"headline-lg-mobile":["26px",{lineHeight:"34px",fontWeight:"700"}],"headline-xl-mobile":["32px",{lineHeight:"40px",fontWeight:"800"}],"headline-lg":["32px",{lineHeight:"40px",fontWeight:"700"}],"body-lg":["16px",{lineHeight:"26px",fontWeight:"400"}],"headline-sm":["18px",{lineHeight:"26px",fontWeight:"600"}],"body-sm":["13px",{lineHeight:"18px",fontWeight:"400"}],"body-md":["14px",{lineHeight:"22px",fontWeight:"400"}],"label-lg":["14px",{lineHeight:"20px",fontWeight:"500"}],"label-md":["12px",{lineHeight:"16px",fontWeight:"500"}],"headline-xl":["44px",{lineHeight:"52px",fontWeight:"800"}],"label-sm":["10px",{lineHeight:"14px",fontWeight:"600"}]}}}}</script></head><body class="bg-background font-body-md text-on-surface antialiased selection:bg-secondary-fixed selection:text-on-secondary-fixed"><header class="sticky top-0 w-full z-50 bg-surface-container-lowest/80 backdrop-blur-xl border-b border-outline-variant/30 shadow-[0_1px_8px_rgba(0,0,0,0.03)]"><div class="h-16 max-w-[1440px] mx-auto px-margin flex items-center justify-between gap-space-lg"><div class="flex items-center gap-space-xl"><a class="flex items-center gap-space-sm group focus:outline-none" data-path="marketplace" href="#"><img alt="RigForge Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1VFAAjk2PDWyewvGi_Xq6JZz7cnwdv4JIHNXcDZVwrSex_FTEZQ2le9Xblyb2kuuUSSS7rp607C6ZAW32Zsz-mHS5tE8LeSsLycwrwDknqh_dAQagPycWp8v6yF3oLUNHa4BMnhiBNxSHNViwfFd2xe4f6qX6uCbfcXaKCDI_qEKmvFhnhnY_oFkFqncC0BuPhL0uVGEloMqx8nb5Yc-8hZq_c11kdK1lGI-YAlxb0kIQ"/><span class="font-headline-sm text-headline-sm font-bold tracking-tight text-on-surface group-hover:text-primary transition-colors">RigForge</span></a><nav class="hidden xl:flex items-center gap-space-xs" data-active-classes="text-primary font-semibold bg-surface-container-low"><a class="px-space-md py-space-sm rounded-lg font-body-md text-body-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all pr-12" data-path="marketplace" href="#">Marketplace</a><div class="relative flex items-center"><a class="px-space-md py-space-sm rounded-lg font-body-md text-body-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all pr-12" data-path="pc-builder" href="#">PC Builder</a><span class="absolute right-space-sm pointer-events-none font-label-sm text-label-sm uppercase tracking-wider px-1.5 py-0.5 rounded bg-secondary-fixed text-on-secondary-fixed font-bold leading-none">BETA</span></div><div class="relative flex items-center"><a class="px-space-md py-space-sm rounded-lg font-body-md text-body-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all pr-10" data-path="messages" href="#">Messages</a><span class="absolute right-space-sm pointer-events-none flex h-4 min-w-[16px] px-1 items-center justify-center rounded-full bg-error text-on-error font-label-sm text-label-sm leading-none font-bold">2</span></div></nav></div><div class="flex-1 max-w-xl hidden md:flex items-center"><div class="relative w-full group"><span class="material-symbols-outlined absolute left-space-md top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary text-[20px] transition-colors pointer-events-none">search</span><input class="w-full pl-10 pr-12 py-space-sm bg-surface-container-low hover:bg-surface-container focus:bg-surface-container-lowest text-on-surface placeholder:text-outline font-body-md text-body-md rounded-lg border border-transparent focus:border-outline-variant/60 focus:outline-none transition-all" placeholder="Search GPUs, CPUs, Motherboards..." type="text"/><kbd class="absolute right-space-md top-1/2 -translate-y-1/2 px-1.5 py-0.5 rounded font-label-sm text-label-sm text-on-surface-variant bg-surface-container-high pointer-events-none select-none">/</kbd></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs"><button aria-label="Toggle color mode" class="p-space-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors flex items-center justify-center" type="button"><span class="material-symbols-outlined text-[20px]">light_mode</span></button><button class="flex items-center gap-space-xs px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors font-label-md text-label-md" type="button"><span class="material-symbols-outlined text-[18px] text-outline">language</span><span>EN / USD</span><span class="material-symbols-outlined text-[16px] text-outline">expand_more</span></button></div><div class="h-6 w-px bg-outline-variant/40 hidden sm:block"></div><div class="flex items-center gap-space-sm pl-space-xs"><div class="relative"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-2 ring-surface-container-lowest" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3X1JJBXBV6i5eG4pkipzQQlEtded1gUPKtj2ZPP8jQnGKhhAhlzIzy4efh87-6mt5LaQD6NKhkPp1PiWi78sq7R1UZ9QTKAK7harkxbz9N65iPpLcQmQLYQKdnEKiAaEAg7IXFSPlIlokFy9iGKrYjGU2zpAf_9Ng3BRnijHeLW5HNRNBa_8AC9Bip87A46N07fj0s4k2h61NpEOKymxVI6CQeAF77C9RLIfNO-ck"/><span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-secondary ring-2 ring-surface-container-lowest"></span></div><button class="hidden sm:flex items-center gap-space-xs font-body-md text-body-md font-semibold text-on-surface hover:text-primary transition-colors" type="button"><span>Alex K.</span><span class="material-symbols-outlined text-[16px] text-outline">expand_more</span></button></div></div></div></header><main class="w-full pt-16 bg-background"><div class="flex flex-col w-full">
+<div class="max-w-[1440px] w-full mx-auto px-margin-mobile md:px-margin pb-space-xl">
+<!-- Workspace Subheader: Status & Telemetry Breadcrumb -->
+<div class="flex flex-wrap items-center justify-between gap-space-md py-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-bold tracking-wide uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+          Live Secure Messenger
+        </div>
+<span class="text-outline font-label-md text-label-md">/</span>
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">Inbox</span>
+<span class="px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed-variant font-label-sm text-label-sm font-semibold">2 Unread</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-container-low text-on-surface-variant font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px] text-secondary">verified_user</span>
+<span>RigForge Buyer Escrow Active</span>
+</div>
+<button class="p-2 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface-variant transition-colors" title="Message Settings">
+<span class="material-symbols-outlined text-[20px]">tune</span>
+</button>
+</div>
+</div>
+<!-- 2-Column Responsive Chat Shell -->
+<div class="w-full grid grid-cols-1 xl:grid-cols-12 gap-gutter h-[calc(100vh-12rem)] min-h-[640px]">
+<!-- LEFT COLUMN: Conversation Directory (4 cols) -->
+<aside class="xl:col-span-4 flex flex-col bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden h-full">
+<!-- Search & Control Header -->
+<div class="p-space-md flex flex-col gap-space-sm bg-surface-container-lowest">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span>
+<input class="w-full pl-9 pr-8 py-2 bg-surface-container-low text-on-surface placeholder:text-outline font-body-md text-body-md rounded-lg focus:outline-none focus:bg-surface-container-lowest transition-all" id="conversation-search" placeholder="Search conversations, parts, sellers..." type="text"/>
+<button class="absolute right-2.5 top-1/2 -translate-y-1/2 text-outline hover:text-on-surface text-[14px]">
+<span class="material-symbols-outlined text-[16px]">filter_list</span>
+</button>
+</div>
+<!-- Channel Filter Tabs -->
+<div class="flex items-center gap-1.5 overflow-x-auto pb-1" id="chat-filter-group">
+<button class="filter-tab active px-3 py-1 rounded-full font-label-md text-label-md font-semibold bg-primary text-on-primary shadow-sm whitespace-nowrap transition-colors" data-filter="all">All (8)</button>
+<button class="filter-tab px-3 py-1 rounded-full font-label-md text-label-md font-medium bg-surface-container-low text-on-surface-variant hover:text-on-surface whitespace-nowrap transition-colors" data-filter="sellers">Sellers</button>
+<button class="filter-tab px-3 py-1 rounded-full font-label-md text-label-md font-medium bg-surface-container-low text-on-surface-variant hover:text-on-surface whitespace-nowrap transition-colors" data-filter="buyers">Buyers</button>
+<button class="filter-tab px-3 py-1 rounded-full font-label-md text-label-md font-medium bg-surface-container-low text-on-surface-variant hover:text-on-surface whitespace-nowrap transition-colors" data-filter="support">Support</button>
+</div>
+</div>
+<!-- Conversation Scroll Area -->
+<div class="flex-1 overflow-y-auto divide-y-0 px-2 space-y-1" id="chat-list">
+<!-- ITEM 1: Active Selection (Apex Custom PCs) -->
+<article class="chat-card active group relative p-3 rounded-lg bg-surface-container-high cursor-pointer transition-all hover:bg-surface-container-high" data-chat-id="apex">
+<div class="flex items-start gap-3">
+<div class="relative shrink-0">
+<img class="w-11 h-11 rounded-full object-cover bg-surface-container-low" data-alt="Professional custom PC system builder brand logo with modern geometric cooling fan motif in electric cyan and slate on clean white background studio shot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTRjh4p_IPtjrp-8g3i7eRYIcisDoaqTMBWPheC1R_yJqSEwy5gPGldcudnB8X-CQF96f-5uM6VfVzxzZYs3yEKxgLNJHhytQWRnBNI0uHVOztkqIFJyKgOKQpWlJV6zQvX-1W7SkcE0pbd-FBka8FLeBTS65xTlcOBLmuX9urc4hEYLMgt5yK3RemfsRobvMAurOg74AF23UwnjgcnH0vs01tPGYL5PR7IZtBpNru"/>
+<span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-secondary-fixed ring-2 ring-surface-container-lowest"></span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between gap-1">
+<div class="flex items-center gap-1 truncate">
+<span class="font-headline-sm text-body-md font-bold text-on-surface truncate">Apex Custom PCs</span>
+<span class="material-symbols-outlined text-primary text-[15px]" style="font-variation-settings: 'FILL' 1;" title="Verified Merchant">verified</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary font-bold shrink-0">2m ago</span>
+</div>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="px-1.5 py-0.5 rounded font-label-sm text-label-sm bg-primary-fixed text-on-primary-fixed-variant font-medium">RTX 4080 Super</span>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">$999.00</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate mt-1">
+                  Yes, clearance is 358mm so it leaves ~28mm next to standard 360 side rads!
+                </p>
+</div>
+</div>
+</article>
+<!-- ITEM 2: Elena Rostova -->
+<article class="chat-card group relative p-3 rounded-lg bg-surface-container-lowest hover:bg-surface-container-low cursor-pointer transition-all" data-chat-id="elena">
+<div class="flex items-start gap-3">
+<div class="relative shrink-0">
+<img class="w-11 h-11 rounded-full object-cover bg-surface-container-low" data-alt="Portrait photo of a young female hardware enthusiast with soft warm studio lighting wearing minimalist dark turtleneck with sleek PC setup in background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYUflDQi8rMh48B34iW-IBwedLBcYM8zn913yKJRybrU31bjvDsvre6IcUDJgWP8ntAHc-4wwbJPhJCW50NyGBlzshBQDInWKEGV9N_Kw3BUgVHLsqk2ZveL1pI4O5-S1MWJXQUA_2fKoXvtKo6WCvi1k6gcKk_k_tBSRa_WX_fQSFsozSFVtr7JmBI0oVTeCF9SrK6ODt7yBDukcXgFtt0cGkrGilrUBQNhbj2MPf"/>
+<span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-secondary-fixed ring-2 ring-surface-container-lowest"></span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between gap-1">
+<div class="flex items-center gap-1 truncate">
+<span class="font-headline-sm text-body-md font-bold text-on-surface truncate">Elena Rostova</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline shrink-0">14m ago</span>
+</div>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="px-1.5 py-0.5 rounded font-label-sm text-label-sm bg-surface-container text-on-surface-variant font-medium">Ryzen 7 7800X3D</span>
+<span class="font-label-sm text-label-sm text-outline font-semibold">Offer Sent</span>
+</div>
+<div class="flex items-center justify-between gap-2 mt-1">
+<p class="font-body-sm text-body-sm text-on-surface truncate">
+                    Would you accept $340 if I pick it up locally in Seattle today?
+                  </p>
+<span class="w-4 h-4 rounded-full bg-primary text-on-primary font-label-sm text-[10px] flex items-center justify-center font-bold shrink-0">1</span>
+</div>
+</div>
+</div>
+</article>
+<!-- ITEM 3: Tech Support Compatibility -->
+<article class="chat-card group relative p-3 rounded-lg bg-surface-container-lowest hover:bg-surface-container-low cursor-pointer transition-all" data-chat-id="support">
+<div class="flex items-start gap-3">
+<div class="relative shrink-0">
+<div class="w-11 h-11 rounded-full bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[22px]">smart_toy</span>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between gap-1">
+<div class="flex items-center gap-1 truncate">
+<span class="font-headline-sm text-body-md font-bold text-on-surface truncate">RigForge Support</span>
+<span class="px-1 rounded bg-secondary-fixed text-on-secondary-fixed font-label-sm text-[9px] font-bold">BOT</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline shrink-0">1h ago</span>
+</div>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="px-1.5 py-0.5 rounded font-label-sm text-label-sm bg-surface-container text-on-surface-variant font-medium">Build Compatibility</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate mt-1">
+                  Telemetry check: 850W PSU has plenty of transient load headroom for your 4080 config.
+                </p>
+</div>
+</div>
+</article>
+<!-- ITEM 4: Marcus Chen -->
+<article class="chat-card group relative p-3 rounded-lg bg-surface-container-lowest hover:bg-surface-container-low cursor-pointer transition-all" data-chat-id="marcus">
+<div class="flex items-start gap-3">
+<div class="relative shrink-0">
+<img class="w-11 h-11 rounded-full object-cover bg-surface-container-low" data-alt="Portrait photo of a male technologist smiling in modern clean warehouse laboratory with testing benches and graphics card boxes in background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJ3h19A4Wdu3vXn4dnfA5dhHafyPfRneSGYDIkqGh9JRmxsvI3qC5iZtixcu1nbHyEHTbrQ38yMHLi5Xyo6_KmplT-dhjBjcs54MUD1p5O-TfzHvF5tjG9KoPrFwo-F-vY37tOGmXRe7I7gpWLNNj502PSIhYyFQgdtMvzfj24JiAsx29K1CGCjRg5DxVeHUvlmarpUf_oTWMxqNe4uKgiUosgWYWJ4ZwWtcfZ5sOG"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between gap-1">
+<div class="flex items-center gap-1 truncate">
+<span class="font-headline-sm text-body-md font-bold text-on-surface truncate">Marcus Chen</span>
+<span class="material-symbols-outlined text-secondary text-[15px]" title="Escrow Verified">verified</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline shrink-0">3h ago</span>
+</div>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="px-1.5 py-0.5 rounded font-label-sm text-label-sm bg-surface-container text-on-surface-variant font-medium">Corsair Dominator 64GB</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant font-body-sm text-body-sm truncate mt-1">
+<span class="material-symbols-outlined text-[15px] text-primary">done_all</span>
+<span>Invoice #RF-8921 paid. Tracking label generated!</span>
+</div>
+</div>
+</div>
+</article>
+<!-- ITEM 5: Silicon Horizon Stores -->
+<article class="chat-card group relative p-3 rounded-lg bg-surface-container-lowest hover:bg-surface-container-low cursor-pointer transition-all" data-chat-id="silicon">
+<div class="flex items-start gap-3">
+<div class="relative shrink-0">
+<img class="w-11 h-11 rounded-full object-cover bg-surface-container-low" data-alt="Sleek tech company crest icon featuring minimalist microprocessor circuit lines in deep navy and cobalt blue with clean white studio framing" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVHHMAZ-vGI3lcEETDQ5xvGkxqx7AtHNvuQBKnlQWItt8tfQfp5I4ia2Zc-OVJ1_qX0dbcvhVw1RujY6Rggo0MINWxFFgeslPGU6N4RfsjIZdxKDNLnr1k8yreCXXqP1DMjzwuuxvTcMNzCAqfqX4fDs_RI0pZP2OncUuKJAlYXY3aIHXgLHxvSu-o-uDH-GyTEwP4o_YlZ9VCC2ybIVFVFyJAYVVu_EzK5WRLeY7K"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between gap-1">
+<div class="flex items-center gap-1 truncate">
+<span class="font-headline-sm text-body-md font-bold text-on-surface truncate">Silicon Horizon</span>
+<span class="material-symbols-outlined text-primary text-[15px]">verified</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline shrink-0">Yesterday</span>
+</div>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="px-1.5 py-0.5 rounded font-label-sm text-label-sm bg-surface-container text-on-surface-variant font-medium">Lian Li O11 Vision</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate mt-1">
+                  Includes the optional chrome vertical GPU bracket and riser cable.
+                </p>
+</div>
+</div>
+</article>
+</div>
+</aside>
+<!-- RIGHT COLUMN: Active Chat Thread Workspace (8 cols) -->
+<section class="xl:col-span-8 flex flex-col bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden h-full">
+<!-- Conversation Partner Header & Linked Listing Deal Widget -->
+<div class="flex flex-col bg-surface-container-lowest">
+<!-- Top Contact Bar -->
+<div class="px-space-md py-space-sm flex items-center justify-between gap-space-md">
+<div class="flex items-center gap-3 min-w-0">
+<div class="relative shrink-0">
+<img class="w-10 h-10 rounded-full object-cover bg-surface-container-low" data-alt="Close up brand icon of Apex Custom PCs hardware engineering workshop with vibrant turquoise lighting accent and pristine industrial design" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBE7ME2x-9hRpvnAFc5Kt_GH1I-pGRCSFxNu0oWm_fdnTEjM1SeCbWmB_Uj2UE4cF0f0LFzNMzgHpgZEMobFi_xRU8_F5xafrfM0LyCz5XBbvOutyci2dOUSh5Qf5Yv8d-WyRYWC0fICuZZpSJ0jh--TXz01kcg7hdznZurl6O_SUTOQ1l87lKXdbXQsY_t4RI5MROxoqEVl7hL8ZpCUl1-M4hGatb4p3mKqSwk_oRk"/>
+<span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-secondary-fixed ring-2 ring-surface-container-lowest"></span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-1.5">
+<h2 class="font-headline-sm text-headline-sm font-bold text-on-surface truncate">Apex Custom PCs</h2>
+<span class="material-symbols-outlined text-primary text-[17px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="hidden md:inline px-1.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-semibold">Tier 1 Merchant</span>
+</div>
+<div class="flex items-center gap-2 font-body-sm text-body-sm text-on-surface-variant">
+<span class="flex items-center gap-1 text-secondary font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                    Active now
+                  </span>
+<span>•</span>
+<span>Replies in &lt; 15 mins</span>
+<span class="hidden sm:inline">•</span>
+<span class="hidden sm:inline font-label-sm text-label-sm text-outline">99.4% Positives (342 Sales)</span>
+</div>
+</div>
+</div>
+<!-- Call & Action Controls -->
+<div class="flex items-center gap-1 shrink-0">
+<button class="p-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors" title="Voice Channel">
+<span class="material-symbols-outlined text-[20px]">call</span>
+</button>
+<button class="p-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors" title="Search inside chat">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</button>
+<button class="p-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors" title="More options">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Pinned PC Part Marketplace Deal Banner -->
+<div class="px-space-md py-2.5 bg-surface-container-low flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-3 min-w-0">
+<img class="w-12 h-12 rounded-lg object-cover bg-surface-container-lowest shrink-0" data-alt="High performance ASUS ROG Strix GeForce RTX 4080 Super graphics card with illuminated triple axial-tech fans on sleek metallic test bench background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwEczsIXbosMozQPhOjh8JfuuaCGheAv40_Mo_jGXMXPsJ0ArBpsRrrlhzm_-bQeEYxgmN6mKljsgyLNBp6sS0JfHOmxUzl5AG81peLawwXTKeYFH5DIWePtxjdXSbPn82mcuhPs1CHOpDQKrF5TllFW3bH_tYbj9_e3UfaPvZJO9R5QG6JapniZJSa3oZbKOQmBHLaPK5soK8XejoHbFNytUtkPrg8qglsnSR9UVu"/>
+<div class="min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-body-md font-bold text-on-surface truncate">GeForce RTX 4080 Super 16GB ROG Strix OC</span>
+<span class="px-1.5 py-0.5 rounded font-label-sm text-label-sm bg-secondary-fixed text-on-secondary-fixed font-bold">IN STOCK</span>
+</div>
+<div class="flex items-center gap-3 font-label-md text-label-md">
+<span class="font-bold text-primary font-headline-sm text-headline-sm leading-none">$999.00</span>
+<span class="text-outline line-through">$1,149.00</span>
+<span class="text-on-surface-variant font-body-sm text-body-sm">• Condition: Factory Sealed</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-lowest hover:bg-surface-container text-on-surface font-label-md text-label-md font-semibold transition-colors flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-outline">open_in_new</span>
+<span>View Listing</span>
+</button>
+<button class="px-3.5 py-1.5 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-semibold shadow-sm transition-all flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">local_offer</span>
+<span>Make Offer</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Chat Stream Workspace -->
+<div class="flex-1 overflow-y-auto p-space-md space-y-4 bg-surface-bright" id="messages-container">
+<!-- Date Divider -->
+<div class="flex items-center justify-center my-2">
+<span class="px-3 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-medium">
+              Today, May 14
+            </span>
+</div>
+<!-- Incoming Message: Seller Initial Contact -->
+<div class="flex items-end gap-2.5 max-w-[80%] sm:max-w-[70%]">
+<img class="w-7 h-7 rounded-full object-cover shrink-0 mb-1" data-alt="Avatar icon of Apex Custom PCs customer support technician" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQQEBdI3NISpUpkG80cIBNG9lXMMCVWGez3K5eDmwc1npUaEqzbJxWTfvYKtx3AKvYQ2Cec7rD69ryumbEs9Gp198no4smziM3EYX5zz-nhBvrownVJwkNC2oPrtN8XqaLp_iyuqnD5VhNpAiuFouA3_IZTBmP_ypcJ3fK-TZ47Io8d7XOvlCHc2tBCG1y9oij6Jmj7ZHsfH11_BR-n-qJQKBfyn2_Exhzw1GDleYe"/>
+<div class="flex flex-col gap-1 items-start">
+<span class="font-label-sm text-label-sm text-outline pl-2">Apex Custom PCs • 10:14 AM</span>
+<div class="px-4 py-3 rounded-3xl rounded-bl-sm bg-surface-container text-on-surface shadow-sm">
+<p class="font-body-md text-body-md leading-relaxed">
+                  Hey Alex! Thanks for reaching out about the ROG Strix 4080 Super. Yes, this is brand new with the outer anti-static seal completely intact. Includes full transferable manufacturer warranty.
+                </p>
+</div>
+</div>
+</div>
+<!-- Outgoing Message: User Case Clearance Inquiry -->
+<div class="flex items-end gap-2.5 max-w-[80%] sm:max-w-[70%] ml-auto flex-row-reverse">
+<div class="flex flex-col gap-1 items-end">
+<span class="font-label-sm text-label-sm text-outline pr-2">You • 10:17 AM</span>
+<div class="px-4 py-3 rounded-3xl rounded-br-sm bg-primary-container text-on-primary shadow-sm">
+<p class="font-body-md text-body-md leading-relaxed">
+                  Awesome! I'm planning to drop this into a Lian Li O11 Dynamic EVO RGB. Do you know if I'll run into issues with the 12V-2x6 power cable clearance against the side glass panel, or do you recommend a 90-degree adapter?
+                </p>
+</div>
+<div class="flex items-center gap-1 pr-2 text-outline font-label-sm text-label-sm">
+<span>Delivered</span>
+<span class="material-symbols-outlined text-[14px] text-primary">done_all</span>
+</div>
+</div>
+</div>
+<!-- Incoming Message with Image / Benchmark Attachment -->
+<div class="flex items-end gap-2.5 max-w-[85%] sm:max-w-[75%]">
+<img class="w-7 h-7 rounded-full object-cover shrink-0 mb-1" data-alt="Avatar icon of Apex Custom PCs technician" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5M9RsK0C3ZWi_InMccoz4PlKA5nePB3nCO8lI54leIHbleGjnAAGKSb4fOsc7LSkYsl1x6odASTZlmPegjP5bMWCT3WPUF4CYkRPWhjo_l3T_foM-_JFVg0MipiwO3rclAxVs7Fm_RG_xRqxDefWnGV0Z1zNHT7CDaJdeG30yvF0QtrXFRZUa8I7kqPaL-_V4sJokvig70M-6mogz2pNmcraEqNo-zazZGLX9S-o6"/>
+<div class="flex flex-col gap-1 items-start">
+<span class="font-label-sm text-label-sm text-outline pl-2">Apex Custom PCs • 10:20 AM</span>
+<div class="p-3 rounded-3xl rounded-bl-sm bg-surface-container text-on-surface shadow-sm space-y-2.5 max-w-full">
+<p class="font-body-md text-body-md leading-relaxed">
+                  Great question. The Strix is 150mm wide. In standard horizontal mounting, you have about 32mm before touching the glass, so standard sleeved cables will bend safely, but a native 90° CableMod angled wire gives a much cleaner look.
+                </p>
+<!-- Attachment Card -->
+<div class="rounded-2xl overflow-hidden bg-surface-container-low p-2">
+<div class="relative rounded-xl overflow-hidden group">
+<img class="w-full h-48 object-cover transition-transform group-hover:scale-105 duration-300" data-alt="Detailed real hardware photo of custom Lian Li chassis build showing clearance fit of Asus ROG Strix graphics card with clear side glass panel and illuminated digital caliper measurement overlay reading 358mm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8CfignTMxdaLXMmulVcL6d333VjoJxSfjIK5AWjnzsJngQWbJkfh2vmgJQe59PQ7Vk4DxbydK9vAuQIlQ6aVqsciPWlvH8ucc_CrzdsNC8jepjpUk9O16n8JvhOX2rlCeHwiYOOlWp5xC708biHeXSL1Y8j245uaqqwcHEEZPfW1UQqfi3p6gFYo8G1XQoEtyYC0Lm_roMLIrpMFb7rocdNyLuc-aFqg05pUvaLKH"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-2.5">
+<div class="flex items-center justify-between w-full text-white">
+<span class="font-label-sm text-label-sm font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">photo_camera</span>
+                          strix_clearance_test_o11evo.png (2.4 MB)
+                        </span>
+<button class="p-1 rounded-full bg-white/20 hover:bg-white/40 transition-colors">
+<span class="material-symbols-outlined text-[16px]">download</span>
+</button>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-2 px-1 text-on-surface-variant font-label-sm text-label-sm">
+<span class="flex items-center gap-1 text-secondary font-semibold">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                      Clearance Verified (Apex Tech Bench #4)
+                    </span>
+<span>3DMark TimeSpy: 28,410 pts</span>
+</div>
+</div>
+<p class="font-body-md text-body-md leading-relaxed">
+                  Here is the clearance photo from our test bench build earlier this week with the exact same case.
+                </p>
+</div>
+</div>
+</div>
+<!-- Outgoing Message: Bundle negotiation -->
+<div class="flex items-end gap-2.5 max-w-[80%] sm:max-w-[70%] ml-auto flex-row-reverse">
+<div class="flex flex-col gap-1 items-end">
+<span class="font-label-sm text-label-sm text-outline pr-2">You • 10:22 AM</span>
+<div class="px-4 py-3 rounded-3xl rounded-br-sm bg-primary-container text-on-primary shadow-sm">
+<p class="font-body-md text-body-md leading-relaxed">
+                  That picture is super helpful, thank you! If I bundle this with the Corsair RM1000e PSU you have listed on your storefront, could you do $1,110 flat with RigForge Escrow and expedited shipping to Portland?
+                </p>
+</div>
+<div class="flex items-center gap-1 pr-2 text-outline font-label-sm text-label-sm">
+<span>Read 10:23 AM</span>
+<span class="material-symbols-outlined text-[14px] text-primary">done_all</span>
+</div>
+</div>
+</div>
+<!-- Incoming Message: Seller agreement & custom offer creation -->
+<div class="flex items-end gap-2.5 max-w-[80%] sm:max-w-[70%]">
+<img class="w-7 h-7 rounded-full object-cover shrink-0 mb-1" data-alt="Avatar icon of Apex Custom PCs technician" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDto4BCQdsu6EIwqpTwA2RRNxQP3PrSMW6VK9rQFd5WC7rGrAPtTtsIaq4JSUyCF4gBRiKnAHe8qCVPMv2ejgvOqZHkpKgCoXzNH9ByjmyZR0-IGHbkljU21A5ywOeku1bHHL5ZoKlZtz3z04XxSV0IoxjB12crQEndJlnOSzuwUgptuIKsELVqMIMQxKKTyoCZ-ABumJ5EdZtElZSd7vbZVDSLiX9VVWyulrKBrKyC"/>
+<div class="flex flex-col gap-1 items-start">
+<span class="font-label-sm text-label-sm text-outline pl-2">Apex Custom PCs • Just now</span>
+<div class="px-4 py-3 rounded-3xl rounded-bl-sm bg-surface-container text-on-surface shadow-sm space-y-3">
+<p class="font-body-md text-body-md leading-relaxed">
+                  Deal. I can do $1,110 shipped with 2-day FedEx Ground included. I just created a private bundle invoice card right here for escrow protection:
+                </p>
+<!-- Private Escrow Deal Snippet Card -->
+<div class="p-3 rounded-2xl bg-surface-container-lowest shadow-sm flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+                      Escrow Bundle Offer #APX-441
+                    </span>
+<span class="font-label-sm text-label-sm text-outline">Expires in 24h</span>
+</div>
+<div class="flex items-center justify-between text-on-surface">
+<div class="text-body-sm font-medium">
+<div>1x ASUS ROG Strix RTX 4080 Super</div>
+<div>1x Corsair RM1000e ATX 3.0 Gold</div>
+</div>
+<div class="text-right">
+<div class="font-headline-sm text-headline-sm font-bold text-primary">$1,110.00</div>
+<div class="font-label-sm text-label-sm text-secondary font-semibold">Free Express Shipping</div>
+</div>
+</div>
+<button class="w-full mt-1 py-2 rounded-xl bg-secondary-fixed hover:bg-secondary text-on-secondary-fixed hover:text-on-secondary font-label-md text-label-md font-bold transition-all shadow-sm flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span>Review &amp; Lock Escrow Payment</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Modern Floating/Docked Input Bar (Telegram-Style Pill UI) -->
+<div class="p-space-md bg-surface-container-lowest">
+<form class="relative flex items-center gap-2" id="chat-input-form">
+<!-- Attachment Button (+) -->
+<button class="w-10 h-10 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface flex items-center justify-center transition-colors shrink-0 shadow-sm" title="Add images, benchmark logs, or specs" type="button">
+<span class="material-symbols-outlined text-[22px]">add</span>
+</button>
+<!-- Telegram-Style Fully Rounded Pill Input Container -->
+<div class="flex-1 flex items-center bg-surface-container-low rounded-full px-4 py-1.5 focus-within:bg-surface-container-lowest shadow-sm transition-all">
+<input autocomplete="off" class="w-full bg-transparent text-on-surface placeholder:text-outline font-body-md text-body-md focus:outline-none py-1" id="message-text-input" placeholder="Write a message or negotiate deal..." type="text"/>
+<!-- Quick Actions Inside Pill -->
+<div class="flex items-center gap-1 text-outline">
+<button class="p-1 rounded-full hover:text-on-surface transition-colors" title="Insert Component Tag" type="button">
+<span class="material-symbols-outlined text-[20px]">memory</span>
+</button>
+<button class="p-1 rounded-full hover:text-on-surface transition-colors" title="Emoji" type="button">
+<span class="material-symbols-outlined text-[20px]">sentiment_satisfied</span>
+</button>
+</div>
+</div>
+<!-- Voice Message Button -->
+<button class="w-10 h-10 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface flex items-center justify-center transition-colors shrink-0 shadow-sm" title="Record Voice Memo" type="button">
+<span class="material-symbols-outlined text-[20px]">mic</span>
+</button>
+<!-- Vibrant Brand Blue Send Button (#0d5cff) -->
+<button class="w-10 h-10 rounded-full bg-primary-container hover:bg-primary text-on-primary flex items-center justify-center transition-all shadow-md shrink-0 hover:scale-105 active:scale-95" title="Send message" type="submit">
+<span class="material-symbols-outlined text-[20px] -rotate-45 ml-0.5">send</span>
+</button>
+</form>
+<!-- Input Footer Microcopy & Trust Indicator -->
+<div class="flex items-center justify-between px-2 pt-2 text-outline font-label-sm text-label-sm">
+<span class="flex items-center gap-1 text-on-surface-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+              RigForge End-to-End Encrypted Hardware Negotiation
+            </span>
+<span class="hidden sm:inline">Press <kbd class="px-1 py-0.5 rounded bg-surface-container text-on-surface font-label-sm">Enter</kbd> to send</span>
+</div>
+</div>
+</section>
+</div>
+</div>
+<!-- Micro-interactions Script -->
+<script>
+    (function initRigForgeChat() {
+      // 1. Highlight Navigation "Messages" as Active Tab per instructions
+      const navLinks = document.querySelectorAll('header nav a, header nav div');
+      navLinks.forEach(el => {
+        const link = el.tagName === 'A' ? el : el.querySelector('a');
+        if (link) {
+          const path = link.getAttribute('data-path');
+          if (path === 'messages') {
+            link.classList.remove('text-on-surface-variant');
+            link.classList.add('text-primary', 'font-semibold', 'bg-surface-container-low');
+          } else if (path === 'marketplace' || path === 'pc-builder') {
+            link.classList.remove('text-primary', 'font-semibold', 'bg-surface-container-low');
+            link.classList.add('text-on-surface-variant');
+          }
+        }
+      });
+
+      // 2. Chat Channel Filters Toggle
+      const filterButtons = document.querySelectorAll('#chat-filter-group .filter-tab');
+      filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterButtons.forEach(b => {
+            b.classList.remove('active', 'bg-primary', 'text-on-primary', 'font-semibold');
+            b.classList.add('bg-surface-container-low', 'text-on-surface-variant', 'font-medium');
+          });
+          btn.classList.add('active', 'bg-primary', 'text-on-primary', 'font-semibold');
+          btn.classList.remove('bg-surface-container-low', 'text-on-surface-variant', 'font-medium');
+        });
+      });
+
+      // 3. Chat Card Selection
+      const chatCards = document.querySelectorAll('.chat-card');
+      chatCards.forEach(card => {
+        card.addEventListener('click', () => {
+          chatCards.forEach(c => {
+            c.classList.remove('active', 'bg-surface-container-high');
+            c.classList.add('bg-surface-container-lowest');
+          });
+          card.classList.add('active', 'bg-surface-container-high');
+          card.classList.remove('bg-surface-container-lowest');
+        });
+      });
+
+      // 4. Send Message Interaction
+      const chatForm = document.getElementById('chat-input-form');
+      const textInput = document.getElementById('message-text-input');
+      const stream = document.getElementById('messages-container');
+
+      if (chatForm && textInput && stream) {
+        chatForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const text = textInput.value.trim();
+          if (!text) return;
+
+          // Append Outgoing Bubble
+          const bubbleWrap = document.createElement('div');
+          bubbleWrap.className = 'flex items-end gap-2.5 max-w-[80%] sm:max-w-[70%] ml-auto flex-row-reverse animate-fadeIn';
+          bubbleWrap.innerHTML = `
+            <div class="flex flex-col gap-1 items-end">
+              <span class="font-label-sm text-label-sm text-outline pr-2">You • Just now</span>
+              <div class="px-4 py-3 rounded-3xl rounded-br-sm bg-primary-container text-on-primary shadow-sm">
+                <p class="font-body-md text-body-md leading-relaxed">\${escapeHtml(text)}</p>
+              </div>
+              <div class="flex items-center gap-1 pr-2 text-outline font-label-sm text-label-sm">
+                <span>Sending</span>
+                <span class="material-symbols-outlined text-[14px]">check</span>
+              </div>
+            </div>
+          `;
+          stream.appendChild(bubbleWrap);
+          textInput.value = '';
+          stream.scrollTop = stream.scrollHeight;
+
+          // Simulate delivery tick update
+          setTimeout(() => {
+            const statusText = bubbleWrap.querySelector('.font-label-sm span');
+            const icon = bubbleWrap.querySelector('.material-symbols-outlined');
+            if (statusText) statusText.textContent = 'Delivered';
+            if (icon) {
+              icon.textContent = 'done_all';
+              icon.classList.add('text-primary');
+            }
+          }, 800);
+        });
+      }
+
+      function escapeHtml(str) {
+        return str.replace(/&/g, '&amp;')
+                  .replace(/</g, '&lt;')
+                  .replace(/>/g, '&gt;')
+                  .replace(/"/g, '&quot;')
+                  .replace(/'/g, '&#039;');
+      }
+    })();
+  </script>
+</div></main><footer class="w-full bg-surface-container-lowest border-t border-outline-variant/20 mt-space-xl py-space-xl"><div class="max-w-[1440px] mx-auto px-margin flex flex-col sm:flex-row items-center justify-between gap-space-md"><div class="flex items-center gap-space-sm"><span class="font-headline-sm text-headline-sm font-bold text-on-surface">RigForge</span><span class="font-body-sm text-body-sm text-on-surface-variant">© 2025 RigForge Inc. Precision PC Building.</span></div><div class="flex items-center gap-space-lg font-body-sm text-body-sm text-on-surface-variant"><a class="hover:text-on-surface transition-colors" data-path="marketplace" href="#">Marketplace</a><a class="hover:text-on-surface transition-colors" data-path="pc-builder" href="#">PC Builder</a><a class="hover:text-on-surface transition-colors" data-path="messages" href="#">Messages</a></div></div></footer></body></html>

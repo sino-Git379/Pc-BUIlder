@@ -1,0 +1,140 @@
+:root {
+  color-scheme: light;
+  --c-background: 250 246 238;
+  --c-surface: 250 246 238;
+  --c-surface-dim: 238 231 218;
+  --c-surface-bright: 253 251 247;
+  --c-surface-container-lowest: 255 253 249;
+  --c-surface-container-low: 243 237 226;
+  --c-surface-container: 236 229 216;
+  --c-surface-container-high: 227 218 203;
+  --c-surface-container-highest: 217 207 190;
+  --c-surface-variant: 227 218 203;
+  --c-on-background: 43 38 35;
+  --c-on-surface: 43 38 35;
+  --c-on-surface-variant: 104 95 85;
+  --c-outline: 148 137 125;
+  --c-outline-variant: 207 197 182;
+  --c-primary: 45 122 109;
+  --c-on-primary: 255 253 249;
+  --c-primary-container: 206 233 227;
+  --c-on-primary-container: 22 68 60;
+  --c-primary-fixed: 184 224 216;
+  --c-primary-fixed-dim: 37 104 93;
+  --c-on-primary-fixed: 18 56 49;
+  --c-on-primary-fixed-variant: 34 94 84;
+  --c-secondary: 58 130 117;
+  --c-on-secondary: 255 255 255;
+  --c-secondary-container: 210 235 229;
+  --c-on-secondary-container: 27 72 64;
+  --c-secondary-fixed: 48 112 100;
+  --c-secondary-fixed-dim: 42 100 89;
+  --c-on-secondary-fixed: 18 56 49;
+  --c-on-secondary-fixed-variant: 34 94 84;
+  --c-tertiary: 180 105 48;
+  --c-on-tertiary: 255 255 255;
+  --c-tertiary-container: 246 221 198;
+  --c-on-tertiary-container: 92 48 14;
+  --c-tertiary-fixed: 242 212 184;
+  --c-tertiary-fixed-dim: 216 156 108;
+  --c-on-tertiary-fixed: 64 32 6;
+  --c-on-tertiary-fixed-variant: 110 58 18;
+  --c-error: 186 45 45;
+  --c-on-error: 255 255 255;
+  --c-error-container: 250 218 216;
+  --c-on-error-container: 110 20 20;
+  --c-inverse-surface: 46 49 54;
+  --c-inverse-on-surface: 242 237 228;
+  --c-inverse-primary: 112 188 175;
+  --c-surface-tint: 45 122 109;
+}
+
+html.dark {
+  color-scheme: dark;
+  --c-background: 30 33 38;
+  --c-surface: 30 33 38;
+  --c-surface-dim: 26 28 33;
+  --c-surface-bright: 56 61 70;
+  --c-surface-container-lowest: 24 27 31;
+  --c-surface-container-low: 37 40 46;
+  --c-surface-container: 43 47 54;
+  --c-surface-container-high: 52 57 65;
+  --c-surface-container-highest: 62 67 77;
+  --c-surface-variant: 58 63 72;
+  --c-on-background: 232 229 223;
+  --c-on-surface: 232 229 223;
+  --c-on-surface-variant: 168 164 158;
+  --c-outline: 124 121 116;
+  --c-outline-variant: 72 77 86;
+  --c-primary: 102 184 170;
+  --c-on-primary: 20 38 34;
+  --c-primary-container: 42 96 87;
+  --c-on-primary-container: 208 238 232;
+  --c-primary-fixed: 122 198 185;
+  --c-primary-fixed-dim: 86 166 152;
+  --c-on-primary-fixed: 16 34 30;
+  --c-on-primary-fixed-variant: 34 82 74;
+  --c-secondary: 114 190 176;
+  --c-on-secondary: 20 38 34;
+  --c-secondary-container: 45 100 90;
+  --c-on-secondary-container: 210 238 232;
+  --c-secondary-fixed: 122 198 185;
+  --c-secondary-fixed-dim: 86 166 152;
+  --c-on-secondary-fixed: 16 34 30;
+  --c-on-secondary-fixed-variant: 34 82 74;
+  --c-tertiary: 224 168 120;
+  --c-on-tertiary: 56 32 12;
+  --c-tertiary-container: 112 68 32;
+  --c-on-tertiary-container: 248 222 198;
+  --c-tertiary-fixed: 240 206 176;
+  --c-tertiary-fixed-dim: 216 164 118;
+  --c-on-tertiary-fixed: 46 22 4;
+  --c-on-tertiary-fixed-variant: 96 54 20;
+  --c-error: 235 122 118;
+  --c-on-error: 68 14 14;
+  --c-error-container: 112 32 32;
+  --c-on-error-container: 252 218 216;
+  --c-inverse-surface: 232 229 223;
+  --c-inverse-on-surface: 37 40 46;
+  --c-inverse-primary: 45 122 109;
+  --c-surface-tint: 102 184 170;
+}
+
+@layer base {
+  html, body {
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+  body {
+    overscroll-behavior: none;
+  }
+  main > :first-child {
+    margin-top: 0 !important;
+  }
+  main > :last-child {
+    margin-bottom: 0 !important;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--c-outline-variant) / 0.6);
+  border-radius: 9999px;
+}
+
+@keyframes cartBounce {
+  0%, 100% { transform: scale(1); }
+  35% { transform: scale(1.28); }
+  65% { transform: scale(0.92); }
+}
+
+.animate-cart-bounce {
+  animation: cartBounce 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}

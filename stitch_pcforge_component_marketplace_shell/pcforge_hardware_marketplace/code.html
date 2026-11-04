@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-tertiary-fixed-variant": "#6d3900", "on-secondary-fixed": "#00201a", "on-tertiary": "#4d2700", "on-error-container": "#ffdad6", "tertiary-container": "#ffa657", "tertiary-fixed": "#ffdcc2", "surface": "#111416", "on-primary-container": "#005547", "on-primary": "#00382e", "tertiary": "#ffcca5", "on-tertiary-container": "#723c00", "primary": "#46efcf", "primary-fixed": "#57fbdb", "on-secondary-container": "#006050", "on-background": "#e1e2e5", "on-secondary": "#00382e", "secondary-fixed": "#42fdd9", "outline-variant": "#3b4a45", "on-primary-fixed-variant": "#005144", "tertiary-fixed-dim": "#ffb77c", "surface-container-high": "#272a2c", "surface-dim": "#111416", "inverse-surface": "#e1e2e5", "inverse-primary": "#006b5b", "primary-fixed-dim": "#2adec0", "outline": "#85948f", "on-primary-fixed": "#00201a", "background": "#111416", "primary-container": "#00d2b4", "surface-container-highest": "#323537", "secondary-container": "#00e3c0", "surface-variant": "#323537", "secondary": "#52ffdc", "on-error": "#690005", "on-tertiary-fixed": "#2e1500", "surface-tint": "#2adec0", "surface-container-low": "#191c1e", "secondary-fixed-dim": "#00dfbd", "surface-container-lowest": "#0c0f11", "error-container": "#93000a", "inverse-on-surface": "#2e3133", "surface-container": "#1d2022", "on-secondary-fixed-variant": "#005143", "on-surface-variant": "#bacac4", "on-surface": "#e1e2e5", "error": "#ffb4ab", "surface-bright": "#37393c" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "gutter": "1rem", "margin-md": "1.5rem", "space-3xl": "3rem", "gutter-lg": "1.5rem", "space-xl": "1.5rem", "margin": "1rem", "space-xs": "0.25rem", "space-2xl": "2rem", "space-md": "0.75rem", "space-sm": "0.5rem", "space-lg": "1rem", "margin-lg": "2.5rem" }, "fontFamily": { "code-md": [ "JetBrains Mono" ], "body-lg": [ "Geist" ], "display": [ "Geist" ], "headline-md": [ "Geist" ], "body-md": [ "Geist" ], "code-sm": [ "JetBrains Mono" ], "headline-lg": [ "Geist" ], "headline-xl": [ "Geist" ], "body-sm": [ "Geist" ], "label-md": [ "Geist" ], "headline-xl-mobile": [ "Geist" ], "label-caps": [ "JetBrains Mono" ], "headline-sm": [ "Geist" ] }, "fontSize": { "code-md": [ "13px", { "lineHeight": "18px", "letterSpacing": "-0.01em", "fontWeight": "500" } ], "body-lg": [ "16px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400" } ], "display": [ "40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "headline-md": [ "20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "500" } ], "body-md": [ "14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" } ], "code-sm": [ "11px", { "lineHeight": "16px", "letterSpacing": "0em", "fontWeight": "500" } ], "headline-lg": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "headline-xl": [ "32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "body-sm": [ "13px", { "lineHeight": "18px", "letterSpacing": "0.005em", "fontWeight": "400" } ], "label-md": [ "12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" } ], "headline-xl-mobile": [ "26px", { "lineHeight": "34px", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "label-caps": [ "10px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "600" } ], "headline-sm": [ "16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" } ] } } } };</script></head><body class="bg-background font-body-md text-on-surface antialiased min-h-screen flex flex-col"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-low/95 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.4)]"><div class="h-16 w-full max-w-[1440px] mx-auto px-margin-lg flex items-center justify-between gap-space-lg"><div class="flex items-center gap-space-lg shrink-0"><div class="flex items-center gap-space-sm"><div class="w-7 h-7 rounded bg-surface-container flex items-center justify-center"><span class="material-symbols-outlined text-primary text-headline-sm">memory</span></div><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight font-semibold">PC<span class="text-primary">Forge</span></span></div><div class="h-4 w-px bg-outline-variant/60 hidden sm:block"></div><nav class="hidden lg:flex items-center gap-space-xs" data-active-classes="bg-surface-container text-primary font-semibold"><a class="px-space-md py-space-xs rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="marketplace" href="#">Marketplace</a><a class="px-space-md py-space-xs rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="pc-builder" href="#">PC Builder</a><a class="px-space-md py-space-xs rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="components" href="#">Components</a><a class="px-space-md py-space-xs rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="messages" href="#">Messages</a></nav></div><div class="flex-1 max-w-xl hidden md:block"><div class="relative flex items-center w-full"><span class="material-symbols-outlined absolute left-space-md text-outline pointer-events-none text-body-lg">search</span><input class="w-full h-9 pl-10 pr-14 bg-surface-container-lowest text-on-surface placeholder:text-outline text-body-sm font-body-sm rounded focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Search CPUs, GPUs, motherboards, listings..." type="text"/><div class="absolute right-space-sm flex items-center"><kbd class="px-space-xs py-0.5 bg-surface-container-high text-on-surface-variant rounded font-code-sm text-code-sm">⌘K</kbd></div></div></div><div class="flex items-center gap-space-md shrink-0"><button class="hidden sm:inline-flex items-center gap-space-xs px-space-md py-space-xs h-9 bg-surface-container text-on-surface hover:bg-surface-container-high hover:text-primary transition-colors rounded font-body-sm text-body-sm" type="button"><span class="material-symbols-outlined text-headline-sm">add</span><span>Post Listing</span></button><a class="relative p-space-xs text-on-surface-variant hover:text-on-surface transition-colors flex items-center justify-center" data-path="messages" href="#"><span class="material-symbols-outlined text-headline-md">mail</span><span class="absolute top-0 right-0 h-4 min-w-[1rem] px-1 bg-primary text-on-primary font-code-sm text-code-sm rounded-full flex items-center justify-center">3</span></a><div class="h-4 w-px bg-outline-variant/60 hidden sm:block"></div><button class="flex items-center gap-space-sm pl-space-xs pr-space-sm py-space-xs bg-surface-container-lowest hover:bg-surface-container-high transition-colors rounded" type="button"><div class="relative shrink-0"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1Xh-W0JzB0PFC_eNd1OHTAvzFGLYe3WHH7TKUBuck9DX_DcgQoXZazqMtErsnPJfffvFTKERWt-9AIUgjUh3WNp7odP-vepApcrSnVik2N7fwAaxxo6YbTR7YRKl-pqU1ND2cSDdO8Oln8QZxpbk6HtZ6blEvR0hvOpilRgbabR20Ch2YCq_Wbkcigkra8xRn8SBK6wfSGr8MUtEijZlfThwsl2WZ9Ck4PYU-aTOZJXDg"/><span class="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-primary ring-2 ring-surface-container-lowest"></span></div><span class="hidden xl:inline font-body-sm text-body-sm text-on-surface font-medium">j.vance</span></button></div></div></header><main class="w-full pt-16 flex-1 bg-background"><div class="flex flex-col w-full">
+<!-- Top Telemetry & Banner Notice -->
+<div class="w-full bg-surface-container-lowest py-space-xs px-margin-lg">
+<div class="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-md">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container font-label-caps text-label-caps text-primary tracking-wider uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span> SYS_VERIFIED_P2P
+        </span>
+<span class="font-code-sm text-code-sm text-on-surface-variant truncate">
+          Direct hardware exchange • Zero platform tax • Automated rig socket &amp; clearance validation
+        </span>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="font-code-sm text-code-sm text-outline hidden sm:inline">INDEX_SYNC: 42s ago</span>
+<span class="font-code-sm text-code-sm text-outline">•</span>
+<a class="font-code-sm text-code-sm text-primary hover:underline flex items-center gap-1" href="#guest-banner">
+          Auth Mode: Demo Active <span class="material-symbols-outlined text-xs">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Main Marketplace Workspace -->
+<div class="w-full max-w-[1440px] mx-auto px-margin-lg py-space-xl space-y-space-xl">
+<!-- Intro Header & Operational Metrics -->
+<header class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-lg">
+<div class="space-y-space-xs max-w-3xl">
+<div class="flex items-center gap-space-sm font-label-caps text-label-caps text-primary tracking-widest uppercase">
+<span>01 // P2P HARDWARE EXCHANGE</span>
+<span class="text-outline-variant">/</span>
+<span class="text-outline">CATALOG_REVISION_8.4</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight font-semibold">
+          Hardware Marketplace
+        </h1>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+          Verified community listings for workstation and enthusiast hardware components. Direct peer seller messaging and hardware clearance verification without intermediary transaction fees.
+        </p>
+</div>
+<!-- Quick Metrics Pills -->
+<div class="flex flex-wrap items-center gap-space-sm shrink-0">
+<div class="flex items-center gap-space-sm px-space-md py-space-xs bg-surface-container rounded shadow-sm">
+<span class="material-symbols-outlined text-primary text-body-md">inventory_2</span>
+<div>
+<div class="font-code-sm text-code-sm text-outline uppercase tracking-wider">Active Inventory</div>
+<div class="font-code-md text-code-md text-on-surface font-semibold">142 Listings</div>
+</div>
+</div>
+<div class="flex items-center gap-space-sm px-space-md py-space-xs bg-surface-container rounded shadow-sm">
+<span class="material-symbols-outlined text-primary text-body-md">percent</span>
+<div>
+<div class="font-code-sm text-code-sm text-outline uppercase tracking-wider">Fee Structure</div>
+<div class="font-code-md text-code-md text-on-surface font-semibold">0.00% Platform Fee</div>
+</div>
+</div>
+<div class="flex items-center gap-space-sm px-space-md py-space-xs bg-surface-container rounded shadow-sm">
+<span class="material-symbols-outlined text-primary text-body-md">tune</span>
+<div>
+<div class="font-code-sm text-code-sm text-outline uppercase tracking-wider">Indexed Standards</div>
+<div class="font-code-md text-code-md text-on-surface font-semibold">AM5 / PCIe 5.0</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Interactive Workspace State Control Tabs (Demonstration Toolbar) -->
+<div class="bg-surface-container-low p-space-sm rounded flex flex-col md:flex-row items-center justify-between gap-space-sm shadow-sm">
+<div class="flex items-center gap-space-xs w-full md:w-auto overflow-x-auto">
+<span class="font-label-caps text-label-caps text-outline uppercase px-space-xs tracking-wider shrink-0">
+          UI TESTBENCH:
+        </span>
+<button class="state-tab px-space-md py-1 rounded font-code-sm text-code-sm font-medium bg-primary text-on-primary transition-colors shrink-0" id="btn-state-catalog" onclick="switchState('catalog')">
+          Active Catalog (Default)
+        </button>
+<button class="state-tab px-space-md py-1 rounded font-code-sm text-code-sm font-medium bg-surface-container text-on-surface-variant hover:text-on-surface transition-colors shrink-0" id="btn-state-loading" onclick="switchState('loading')">
+          Loading Skeleton State
+        </button>
+<button class="state-tab px-space-md py-1 rounded font-code-sm text-code-sm font-medium bg-surface-container text-on-surface-variant hover:text-on-surface transition-colors shrink-0" id="btn-state-empty" onclick="switchState('empty')">
+          Zero Results Empty State
+        </button>
+</div>
+<div class="flex items-center gap-space-sm self-end md:self-auto shrink-0">
+<span class="font-code-sm text-code-sm text-outline">GUEST ACCESS:</span>
+<button class="px-space-sm py-1 rounded font-code-sm text-code-sm bg-surface-container-high text-on-surface hover:text-primary transition-colors flex items-center gap-1" id="btn-guest-toggle" onclick="toggleGuestBanner()">
+<span class="material-symbols-outlined text-xs">visibility</span>
+<span id="guest-btn-label">Toggle Guest Banner</span>
+</button>
+</div>
+</div>
+<!-- Signed-Out Guest Banner Notice -->
+<section class="bg-surface-container-low rounded p-space-md shadow-sm" id="guest-banner">
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-md">
+<div class="flex items-start sm:items-center gap-space-md">
+<div class="w-10 h-10 rounded bg-surface-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-headline-sm">account_circle</span>
+</div>
+<div>
+<div class="flex items-center gap-space-sm">
+<span class="font-headline-sm text-headline-sm text-on-surface">Browsing in Guest Mode</span>
+<span class="px-1.5 py-0.5 bg-surface-container-highest text-on-surface-variant rounded font-label-caps text-label-caps uppercase">Unauthenticated</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+              Sign in with GitHub or hardware WebAuthn passkey to send direct messages to verified owners or save parts to your PC Builder workspace.
+            </p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm shrink-0 w-full sm:w-auto justify-end">
+<button class="px-space-md py-space-xs rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-body-sm transition-colors">
+            Escrow Verification Docs
+          </button>
+<button class="px-space-md py-space-xs rounded bg-primary text-on-primary font-body-sm text-body-sm font-semibold hover:bg-primary-fixed transition-colors">
+            Authenticate Session
+          </button>
+</div>
+</div>
+</section>
+<!-- Global Filters, Search & Taxonomy Row -->
+<div class="space-y-space-md">
+<!-- Search and Categories -->
+<div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-space-md">
+<!-- Category Filter Pills -->
+<div class="flex items-center gap-1.5 overflow-x-auto pb-1 lg:pb-0 scrollbar-none">
+<button class="cat-pill px-space-md py-1.5 rounded font-body-sm text-body-sm font-medium bg-primary text-on-primary shrink-0 transition-colors">
+            All Hardware (142)
+          </button>
+<button class="cat-pill px-space-md py-1.5 rounded font-body-sm text-body-sm font-medium bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high shrink-0 transition-colors">
+            Processors (CPU)
+          </button>
+<button class="cat-pill px-space-md py-1.5 rounded font-body-sm text-body-sm font-medium bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high shrink-0 transition-colors">
+            Graphics Cards (GPU)
+          </button>
+<button class="cat-pill px-space-md py-1.5 rounded font-body-sm text-body-sm font-medium bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high shrink-0 transition-colors">
+            Motherboards
+          </button>
+<button class="cat-pill px-space-md py-1.5 rounded font-body-sm text-body-sm font-medium bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high shrink-0 transition-colors">
+            Memory (RAM)
+          </button>
+<button class="cat-pill px-space-md py-1.5 rounded font-body-sm text-body-sm font-medium bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high shrink-0 transition-colors">
+            Power Supplies (PSU)
+          </button>
+<button class="cat-pill px-space-md py-1.5 rounded font-body-sm text-body-sm font-medium bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high shrink-0 transition-colors">
+            Storage (NVMe)
+          </button>
+</div>
+<!-- In-Grid Spec Search Input -->
+<div class="relative min-w-[280px] lg:w-96">
+<span class="material-symbols-outlined absolute left-space-md top-2.5 text-outline text-body-lg pointer-events-none">search</span>
+<input class="w-full h-10 pl-10 pr-16 bg-surface-container-low text-on-surface placeholder:text-outline font-body-sm text-body-sm rounded focus:outline-none focus:ring-1 focus:ring-primary shadow-sm" id="hardware-search-input" placeholder="Filter specs: 'AM5', 'GDDR6X', 'CL30'..." type="text" value=""/>
+<div class="absolute right-space-sm top-2 flex items-center">
+<kbd class="px-space-xs py-0.5 bg-surface-container-high text-on-surface-variant rounded font-code-sm text-code-sm">ESC</kbd>
+</div>
+</div>
+</div>
+<!-- Secondary Filter Strip & Metric Sorters -->
+<div class="bg-surface-container-low rounded p-space-md flex flex-wrap items-center justify-between gap-space-md shadow-sm">
+<div class="flex flex-wrap items-center gap-space-md">
+<!-- Condition Dropdown Mock -->
+<div class="flex items-center gap-space-xs">
+<span class="font-code-sm text-code-sm text-outline uppercase">CONDITION:</span>
+<div class="relative">
+<select class="appearance-none bg-surface-container text-on-surface font-body-sm text-body-sm px-space-md py-1.5 pr-8 rounded focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer shadow-sm">
+<option>All Verified Grades</option>
+<option>Factory Sealed (New)</option>
+<option selected="">Used - Like New</option>
+<option>Used - Good</option>
+<option>Open Box Tested</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-2 text-outline pointer-events-none text-body-sm">expand_more</span>
+</div>
+</div>
+<!-- Sort Order Dropdown -->
+<div class="flex items-center gap-space-xs">
+<span class="font-code-sm text-code-sm text-outline uppercase">SORT:</span>
+<div class="relative">
+<select class="appearance-none bg-surface-container text-on-surface font-body-sm text-body-sm px-space-md py-1.5 pr-8 rounded focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer shadow-sm">
+<option selected="">Newest Listed</option>
+<option>Price: Lowest First</option>
+<option>Price: Highest First</option>
+<option>Spec Delta (Best Value %)</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-2 text-outline pointer-events-none text-body-sm">expand_more</span>
+</div>
+</div>
+<!-- Price Ceiling Range Indicator -->
+<div class="flex items-center gap-space-sm bg-surface-container px-space-md py-1 rounded shadow-sm">
+<span class="font-code-sm text-code-sm text-outline uppercase">MAX ASKING:</span>
+<span class="font-code-md text-code-md font-semibold text-primary">$800.00</span>
+<span class="material-symbols-outlined text-outline text-body-sm cursor-pointer hover:text-on-surface">tune</span>
+</div>
+</div>
+<!-- Active Filter Tags & Layout View Switcher -->
+<div class="flex items-center gap-space-md">
+<div class="hidden sm:flex items-center gap-1.5">
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-surface-container font-code-sm text-code-sm text-on-surface-variant">
+              Condition: Like New
+              <button class="hover:text-primary"><span class="material-symbols-outlined text-xs">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-surface-container font-code-sm text-code-sm text-on-surface-variant">
+              Max: $800
+              <button class="hover:text-primary"><span class="material-symbols-outlined text-xs">close</span></button>
+</span>
+<button class="font-code-sm text-code-sm text-primary hover:underline ml-1">Reset</button>
+</div>
+<!-- Layout Density / View Buttons -->
+<div class="flex items-center bg-surface-container rounded p-0.5">
+<button class="p-1 rounded bg-surface-container-high text-primary" title="Grid View">
+<span class="material-symbols-outlined text-body-md">grid_view</span>
+</button>
+<button class="p-1 rounded text-outline hover:text-on-surface transition-colors" title="Dense Table View">
+<span class="material-symbols-outlined text-body-md">view_agenda</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- MAIN VIEW CONTAINER: CATALOG VIEW (DEFAULT) -->
+<section class="space-y-space-lg" id="view-catalog">
+<!-- Section Bar -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-label-caps text-label-caps text-outline uppercase tracking-wider">SHOWING 6 VERIFIED SPECIMENS</span>
+</div>
+<div class="font-code-sm text-code-sm text-outline">
+          EXCHANGE VOL: 24h / <span class="text-on-surface font-medium">$18,420 USD</span>
+</div>
+</div>
+<!-- 3-Column Asymmetric Component Discovery Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-lg">
+<!-- CARD 1: RTX 4080 Super (Founders Edition) -->
+<article class="bg-surface-container-low rounded overflow-hidden flex flex-col group hover:bg-surface-container transition-colors shadow-sm">
+<!-- Image Area with Technical Overlays -->
+<div class="relative h-56 w-full bg-surface-container-lowest overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Dark dramatic macro industrial product photograph of an NVIDIA RTX 4080 Super Founders Edition graphics card resting on matte black titanium stand with geometric cooling fins and subtle ambient reflections" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQWT-yUhvuDKCNTwwfWvM2Lzb84soR_24q7l25i2PonG8ps-l5X5D6177DZWMG5L6gsCN6BD53RFrFd_oeEdW182IWYpDA08kJ7qB1azTLNWeNc6KJ6KeKrP-dO-PJSkZIKtim-prI8LHzEDMDEaAil3OoVPKs39yzOyYRx9niqvWhu--OnpnNYLb9mnqsP5Hl7dN7cbj9ZAkX2lWp3bFPqVVs6I8G30tTDMP7zIHg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-black/40"></div>
+<!-- Top Tag Strip -->
+<div class="absolute top-space-sm left-space-sm right-space-sm flex items-center justify-between">
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest/90 backdrop-blur-sm font-label-caps text-label-caps text-on-surface font-semibold tracking-wider uppercase">
+                GRAPHICS CARD (GPU)
+              </span>
+<span class="px-2 py-0.5 rounded bg-tertiary-container/20 text-tertiary font-label-caps text-label-caps uppercase font-semibold">
+                Used - Like New
+              </span>
+</div>
+<!-- Seller Rep Badge -->
+<div class="absolute bottom-space-sm left-space-sm flex items-center gap-1.5 px-2 py-1 rounded bg-surface-container-lowest/90 backdrop-blur-sm">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-code-sm text-code-sm text-on-surface font-medium">@apex_rigs</span>
+<span class="material-symbols-outlined text-primary text-xs">verified</span>
+</div>
+<div class="absolute bottom-space-sm right-space-sm px-2 py-0.5 rounded bg-surface-container-lowest/90 font-code-sm text-code-sm text-outline">
+              SF Bay Area, CA
+            </div>
+</div>
+<!-- Card Content Body -->
+<div class="p-space-md flex-1 flex flex-col justify-between space-y-space-md">
+<div>
+<div class="flex items-start justify-between gap-space-sm">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors">
+                    NVIDIA GeForce RTX 4080 Super
+                  </h3>
+<div class="font-code-sm text-code-sm text-on-surface-variant mt-0.5">Founders Edition • Dual Axial Flow</div>
+</div>
+</div>
+<!-- Spec Badges Grid -->
+<div class="grid grid-cols-3 gap-1.5 mt-space-md">
+<div class="bg-surface-container p-space-xs rounded text-center">
+<div class="font-label-caps text-label-caps text-outline uppercase">VRAM</div>
+<div class="font-code-sm text-code-sm text-on-surface font-medium">16GB GDDR6X</div>
+</div>
+<div class="bg-surface-container p-space-xs rounded text-center">
+<div class="font-label-caps text-label-caps text-outline uppercase">POWER TDP</div>
+<div class="font-code-sm text-code-sm text-on-surface font-medium">320W Rated</div>
+</div>
+<div class="bg-surface-container p-space-xs rounded text-center">
+<div class="font-label-caps text-label-caps text-outline uppercase">BUS INTERFACE</div>
+<div class="font-code-sm text-code-sm text-on-surface font-medium">PCIe 4.0 x16</div>
+</div>
+</div>
+</div>
+<!-- Price & Actions Strip -->
+<div class="pt-space-sm space-y-space-sm">
+<div class="flex items-baseline justify-between">
+<div>
+<div class="font-label-caps text-label-caps text-outline uppercase">ASKING PRICE</div>
+<div class="font-headline-lg text-headline-lg font-bold text-primary">$870.00</div>
+</div>
+<div class="text-right">
+<div class="font-label-caps text-label-caps text-outline uppercase">CATALOG BENCHMARK</div>
+<div class="font-code-sm text-code-sm text-on-surface-variant line-through">$999.00 MSRP</div>
+<span class="font-code-sm text-code-sm text-primary">-$129.00 Delta</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-space-sm pt-space-xs">
+<button class="w-full py-2 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-body-sm transition-colors flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-sm text-primary">biotech</span>
+<span>+ Rig Check</span>
+</button>
+<button class="w-full py-2 rounded bg-primary text-on-primary font-body-sm text-body-sm font-semibold hover:bg-primary-fixed transition-colors flex items-center justify-center gap-1">
+<span>View Details</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+<!-- CARD 2: AMD Ryzen 9 7950X -->
+<article class="bg-surface-container-low rounded overflow-hidden flex flex-col group hover:bg-surface-container transition-colors shadow-sm">
+<div class="relative h-56 w-full bg-surface-container-lowest overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="High-detail macro product shot of an AMD Ryzen 9 processor clamped into an AM5 LGA 1718 motherboard socket with metallic laser-etched heatspreader and industrial capacitor surroundings" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5A_wRICIRjcLysNQtlhGbNyaP95hTUKgEP2gC-2xEJoHhMvVHxYvIDVlRyDpdvrecx79ov-w7wVY_J-G5-X5hI35oetVhvcS-f6DOIpE_Loynxjz0--cqOYcf1cgkh76bc8VZz6Un57xZFyZwOswytUE7IPUHvtNvuh-T3VgHVIzjkeLKWA5apPqV3QIiM967p4M-IlWJAiS1MRw-wCr5EcNI05HmNmbycAJ7p59w"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-black/40"></div>
+<div class="absolute top-space-sm left-space-sm right-space-sm flex items-center justify-between">
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest/90 backdrop-blur-sm font-label-caps text-label-caps text-on-surface font-semibold tracking-wider uppercase">
+                PROCESSOR (CPU)
+              </span>
+<span class="px-2 py-0.5 rounded bg-primary/20 text-primary font-label-caps text-label-caps uppercase font-semibold">
+                Factory Sealed
+              </span>
+</div>
+<div class="absolute bottom-space-sm left-space-sm flex items-center gap-1.5 px-2 py-1 rounded bg-surface-container-lowest/90 backdrop-blur-sm">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-code-sm text-code-sm text-on-surface font-medium">@silicon_vault</span>
+<span class="material-symbols-outlined text-primary text-xs">verified</span>
+</div>
+<div class="absolute bottom-space-sm right-space-sm px-2 py-0.5 rounded bg-surface-container-lowest/90 font-code-sm text-code-sm text-outline">
+              Austin, TX
+            </div>
+</div>
+<div class="p-space-md flex-1 flex flex-col justify-between space-y-space-md">
+<div>
+<div class="flex items-start justify-between gap-space-sm">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors">
+                    AMD Ryzen 9 7950X
+                  </h3>
+<div class="font-code-sm text-code-sm text-on-surface-variant mt-0.5">16-Core / 32-Thread • 5.7 GHz Boost</div>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-1.5 mt-space-md">
+<div class="bg-surface-container p-space-xs rounded text-center">
+<div class="font-label-caps text-label-caps text-outline uppercase">SOCKET</div>
+<div class="font-code-sm text-code-sm text-on-surface font-medium">AM5 LGA1718</div>
+</div>
+<div class="bg-surface-container p-space-xs rounded text-center">
+<div class="font-label-caps text-label-caps text-outline uppercase">THERMAL TDP</div>
+<div class="font-code-sm text-code-sm text-on-surface font-medium">170W Baseline</div>
+</div>
+<div class="bg-surface-container p-space-xs rounded text-center">
+<div class="font-label-caps text-label-caps text-outline uppercase">L3 CACHE</div>
+<div class="font-code-sm text-code-sm text-on-surface font-medium">64MB Combined</div>
+</div>
+</div>
+</div>
+<div class="pt-space-sm space-y-space-sm">
+<div class="flex items-baseline justify-between">
+<div>
+<div class="font-label-caps text-label-caps text-outline uppercase">ASKING PRICE</div>
+<div class="font-headline-lg text-headline-lg font-bold text-primary">$440.00</div>
+</div>
+<div class="text-right">
+<div class="font-label-caps text-label-caps text-outline uppercase">CATALOG BENCHMARK</div>
+<div class="font-code-sm text-code-sm text-on-surface-variant line-through">$549.00 Ret.</div>
+<span class="font-code-sm text-code-sm text-primary">-$109.00 Delta</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-space-sm pt-space-xs">
+<button class="w-full py-2 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-body-sm transition-colors flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-sm text-primary">biotech</span>
+<span>+ Rig Check</span>
+</button>
+<button class="w-full py-2 rounded bg-primary text-on-primary font-body-sm text-body-sm font-semibold hover:bg-primary-fixed transition-colors flex items-center justify-center gap-1">
+<span>View Details</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+<!-- CARD 3: Corsair Vengeance DDR5 -->
+<article class="bg-surface-container-low rounded overflow-hidden flex flex-col group hover:bg-surface-container transition-colors shadow-sm">
+<div class="relative h-56 w-full bg-surface-container-lowest overflow-hidden">
+<img alt="Corsair Vengeance DDR5 Memory Modules" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEnYaeBivivxPkH3d8wwnCkSYLTCsgdnlBPlh_-qNQBchUFW-TPOZ3eHgA4WSQN8gbiyDWf50puwZmOGYBaj1fsih8qjXwL0ogLQ12SXYW7bBEpgSGCtt0IYM-9QI_quMF4wN4gF7Nb0rXGdnomKRSEqtFkqyk3eh3E60sey-S9aQVWyCYsMe2c5uEaUekzVkUXgOsSH69cSXtOqNVPKccFEVH1-6NptI9EnQbSKqM"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-black/40"></div>
+<div class="absolute top-space-sm left-space-sm right-space-sm flex items-center justify-between">
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest/90 backdrop-blur-sm font-label-caps text-label-caps text-on-surface font-semibold tracking-wider uppercase">
+                MEMORY (RAM)
+              </span>
+<span class="px-2 py-0.5 rounded bg-tertiary-container/20 text-tertiary font-label-caps text-label-caps uppercase font-semibold">
+                Used - Like New
+              </span>
+</div>
+<div class="absolute bottom-space-sm left-space-sm flex items-center gap-1.5 px-2 py-1 rounded bg-surface-container-lowest/90 backdrop-blur-sm">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-code-sm text-code-sm text-on-surface font-medium">@kestrel_builds</span>
+<span class="material-symbols-outlined text-primary text-xs">verified</span>
+</div>
+<div class="absolute bottom-space-sm right-space-sm px-2 py-0.5 rounded bg-surface-container-lowest/90 font-code-sm text-code-sm text-outline">
+              Seattle, WA
+            </div>
+</div>
+<div class="p-space-md flex-1 flex flex-col justify-between space-y-space-md">
+<div>
+<div class="flex items-start justify-between gap-space-sm">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors">
+                    Corsair Vengeance DDR5 64GB
+                  </h3>
+<div class="font-code-sm text-code-sm text-on-surface-variant mt-0.5">2x32GB Kit • 6000MHz CL30-36-36-76</div>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-1.5 mt-space-md">
+<div class="bg-surface-container p-space-xs rounded text-center">
+<div class="font-label-caps text-label-caps text-outline uppercase">PROFILE</div>
+<div class="font-code-sm text-code-sm text-on-surface font-medium">AMD EXPO</div>
+</div>
+<div class="bg-surface-container p-space-xs rounded text-center">
+<div class="font-label-caps text-label-caps text-outline uppercase">LATENCY</div>
+<div class="font-code-sm text-code-sm text-on-surface font-medium">CL30 Fast</div>
+</div>
+<div class="bg-surface-container p-space-xs rounded text-center">
+<div class="font-label-caps text-label-caps text-outline uppercase">HEIGHT</div>
+<div class="font-code-sm text-code-sm text-on-surface font-medium">35mm Low</div>
+</div>
+</div>
+</div>
+<div class="pt-space-sm space-y-space-sm">
+<div class="flex items-baseline justify-between">
+<div>
+<div class="font-label-caps text-label-caps text-outline uppercase">ASKING PRICE</div>
+<div class="font-headline-lg text-headline-lg font-bold text-primary">$185.00</div>
+</div>
+<div class="text-right">
+<div class="font-label-caps text-label-caps text-outline uppercase">CATALOG BENCHMARK</div>
+<div class="font-code-sm text-code-sm text-on-surface-variant line-through">$219.00 New</div>
+<span class="font-code-sm text-code-sm text-primary">-$34.00 Delta</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-space-sm pt-space-xs">
+<button class="w-full py-2 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-body-sm transition-colors flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-sm text-primary">biotech</span>
+<span>+ Rig Check</span>
+</button>
+<button class="w-full py-2 rounded bg-primary text-on-primary font-body-sm text-body-sm font-semibold hover:bg-primary-fixed transition-colors flex items-center justify-center gap-1">
+<span>View Details</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+<!-- CARD 4: ASUS ROG Strix X670E-E -->
+<article class="bg-surface-container-low rounded overflow-hidden flex flex-col group hover:bg-surface-container transition-colors shadow-sm">
+<div class="relative h-56 w-full bg-surface-container-lowest overflow-hidden">
+<img alt="ASUS ROG Strix X670E-E Gaming Motherboard" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZQZYtXPQij6mv0G0lhRVcu2qpP7w3eLtj_pwz5svxL60_00Rd0bY2nUY4erta4rGMT4S9rd3RamzjdjWAONb8ppir-6cCWy7jTBoDEoAdFIkRV0pw9BoO9lVvc8Qbhn5fqz26VW1t510XzQgwSyH1GyX0DJnwNtp3Suxnu3L0s84q9zYbAkFz8v2aLFN23OX6i1WwhguZo5XtVL925XZ4EnQt1oe35LzMSZBwWoJy"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-black/40"></div>
+<div class="absolute top-space-sm left-space-sm right-space-sm flex items-center justify-between">
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest/90 backdrop-blur-sm font-label-caps text-label-caps text-on-surface font-semibold tracking-wider uppercase">
+                MOTHERBOARD (AM5)
+              </span>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-label-caps text-label-caps uppercase font-semibold">
+                Used - Good
+              </span>
+</div>
+<div class="absolute bottom-space-sm left-space-sm flex items-center gap-1.5 px-2 py-1 rounded bg-surface-container-lowest/90 backdrop-blur-sm">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-code-sm text-code-sm text-on-surface font-medium">@nordic_compute</span>
+<span class="material-symbols-outlined text-primary text-xs">verified</span>
+</div>
+<div class="absolute bottom-space-sm right-space-sm px-2 py-0.5 rounded bg-surface-container-lowest/90 font-code-sm text-code-sm text-outline">
+              Denver, CO
+            </div>
+</div>
+<div class="p-space-md flex-1 flex flex-col justify-between space-y-space-md">
+<div>
+<div class="flex items-start justify-between gap-space-sm">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors">
+                    ASUS ROG Strix X670E-E
+                  </h3>
+<div class="font-code-sm text-code-sm text-on-surface-variant mt-0.5">Gaming WiFi • 18+2 Power Stages • PCIe 5.0</div>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-1.5 mt-space-md">
+<div class="bg-surface-container p-space-xs rounded text-center">
+<div class="font-label-caps text-label-caps text-outline uppercase">FORM</div>
+<div class="font-code-sm text-code-sm text-on-surface font-medium">ATX Form</div>
+</div>
+<div class="bg-surface-container p-space-xs rounded text-center">
+<div class="font-label-caps text-label-caps text-outline uppercase">SLOTS</div>
+<div class="font-code-sm text-code-sm text-on-surface font-medium">PCIe 5.0 x16</div>
+</div>
+<div class="bg-surface-container p-space-xs rounded text-center">
+<div class="font-label-caps text-label-caps text-outline uppercase">NVME M.2</div>
+<div class="font-code-sm text-code-sm text-on-surface font-medium">4x Gen5/Gen4</div>
+</div>
+</div>
+</div>
+<div class="pt-space-sm space-y-space-sm">
+<div class="flex items-baseline justify-between">
+<div>
+<div class="font-label-caps text-label-caps text-outline uppercase">ASKING PRICE</div>
+<div class="font-headline-lg text-headline-lg font-bold text-primary">$395.00</div>
+</div>
+<div class="text-right">
+<div class="font-label-caps text-label-caps text-outline uppercase">CATALOG BENCHMARK</div>
+<div class="font-code-sm text-code-sm text-on-surface-variant line-through">$489.00 MSRP</div>
+<span class="font-code-sm text-code-sm text-primary">-$94.00 Delta</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-space-sm pt-space-xs">
+<button class="w-full py-2 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-body-sm transition-colors flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-sm text-primary">biotech</span>
+<span>+ Rig Check</span>
+</button>
+<button class="w-full py-2 rounded bg-primary text-on-primary font-body-sm text-body-sm font-semibold hover:bg-primary-fixed transition-colors flex items-center justify-center gap-1">
+<span>View Details</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+<!-- CARD 5: Seasonic Vertex GX-1000 ATX 3.0 -->
+<article class="bg-surface-container-low rounded overflow-hidden flex flex-col group hover:bg-surface-container transition-colors shadow-sm">
+<div class="relative h-56 w-full bg-surface-container-lowest overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Product photograph of high performance black modular ATX 3.0 PC power supply unit with 12VHPWR cables and hexagonal ventilation mesh" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwtv-K1IZwOy5fz0ZJe-_hzDyGfdv7LGcjghoCeJmesU3bMgET14Jxag8sqz7_hmEbafV579N1IwKuE9CpkinlIqng325_dFSf-0bkG5nGdRQcaLY6Jh7JpRMA_DIIvE1H1idM14kH7dboNg3IhpjBoPHr79YEggoQsdUW4gbrmbxL_sKiZB9XWRX_Lrws3YaZoCm2Khp1PgL-BnAs1SCEZloWZmouEYUyzAzlqmli"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-black/40"></div>
+<div class="absolute top-space-sm left-space-sm right-space-sm flex items-center justify-between">
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest/90 backdrop-blur-sm font-label-caps text-label-caps text-on-surface font-semibold tracking-wider uppercase">
+                POWER SUPPLY (PSU)
+              </span>
+<span class="px-2 py-0.5 rounded bg-primary/20 text-primary font-label-caps text-label-caps uppercase font-semibold">
+                Factory Sealed
+              </span>
+</div>
+<div class="absolute bottom-space-sm left-space-sm flex items-center gap-1.5 px-2 py-1 rounded bg-surface-container-lowest/90 backdrop-blur-sm">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-code-sm text-code-sm text-on-surface font-medium">@modular_flux</span>
+<span class="material-symbols-outlined text-primary text-xs">verified</span>
+</div>
+<div class="absolute bottom-space-sm right-space-sm px-2 py-0.5 rounded bg-surface-container-lowest/90 font-code-sm text-code-sm text-outline">
+              Portland, OR
+            </div>
+</div>
+<div class="p-space-md flex-1 flex flex-col justify-between space-y-space-md">
+<div>
+<div class="flex items-start justify-between gap-space-sm">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors">
+                    Seasonic Vertex GX-1000
+                  </h3>
+<div class="font-code-sm text-code-sm text-on-surface-variant mt-0.5">1000W 80+ Gold • ATX 3.0 &amp; PCIe 5.0 Ready</div>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-1.5 mt-space-md">
+<div class="bg-surface-container p-space-xs rounded text-center">
+<div class="font-label-caps text-label-caps text-outline uppercase">OUTPUT</div>
+<div class="font-code-sm text-code-sm text-on-surface font-medium">1000 Watts</div>
+</div>
+<div class="bg-surface-container p-space-xs rounded text-center">
+<div class="font-label-caps text-label-caps text-outline uppercase">CERT</div>
+<div class="font-code-sm text-code-sm text-on-surface font-medium">80+ Gold</div>
+</div>
+<div class="bg-surface-container p-space-xs rounded text-center">
+<div class="font-label-caps text-label-caps text-outline uppercase">NATIVE</div>
+<div class="font-code-sm text-code-sm text-on-surface font-medium">12VHPWR 600W</div>
+</div>
+</div>
+</div>
+<div class="pt-space-sm space-y-space-sm">
+<div class="flex items-baseline justify-between">
+<div>
+<div class="font-label-caps text-label-caps text-outline uppercase">ASKING PRICE</div>
+<div class="font-headline-lg text-headline-lg font-bold text-primary">$175.00</div>
+</div>
+<div class="text-right">
+<div class="font-label-caps text-label-caps text-outline uppercase">CATALOG BENCHMARK</div>
+<div class="font-code-sm text-code-sm text-on-surface-variant line-through">$239.00 MSRP</div>
+<span class="font-code-sm text-code-sm text-primary">-$64.00 Delta</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-space-sm pt-space-xs">
+<button class="w-full py-2 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-body-sm transition-colors flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-sm text-primary">biotech</span>
+<span>+ Rig Check</span>
+</button>
+<button class="w-full py-2 rounded bg-primary text-on-primary font-body-sm text-body-sm font-semibold hover:bg-primary-fixed transition-colors flex items-center justify-center gap-1">
+<span>View Details</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+<!-- CARD 6: Samsung 990 PRO 4TB PCIe 4.0 NVMe -->
+<article class="bg-surface-container-low rounded overflow-hidden flex flex-col group hover:bg-surface-container transition-colors shadow-sm">
+<div class="relative h-56 w-full bg-surface-container-lowest overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Technical product shot of Samsung NVMe M.2 SSD storage drive with integrated dark aluminum thermal heatsink on dark reflective laboratory table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKbK7DV0aG_rqrzEeUViNHz-AmPHkeLGJ5_FiBImFIC_iETRJO_-dj80lzftSM6TQ36cghGwYNBA3O96STRbqxa4OYtZuRl0MNcf9xRRIk-gqsfCRCQkDTiH3ipEnv5-Q-lgvYBqcss7R7afF1qoj62jJXefFbqNnp5UQOAqX0iyJPtWOboL4vEx2MWRDZP73T4nVp8_jaPw1wryjfzoimRA9L0D8mDmn2C1vLnZNU"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-black/40"></div>
+<div class="absolute top-space-sm left-space-sm right-space-sm flex items-center justify-between">
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest/90 backdrop-blur-sm font-label-caps text-label-caps text-on-surface font-semibold tracking-wider uppercase">
+                STORAGE (NVME M.2)
+              </span>
+<span class="px-2 py-0.5 rounded bg-tertiary-container/20 text-tertiary font-label-caps text-label-caps uppercase font-semibold">
+                Used - Like New
+              </span>
+</div>
+<div class="absolute bottom-space-sm left-space-sm flex items-center gap-1.5 px-2 py-1 rounded bg-surface-container-lowest/90 backdrop-blur-sm">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-code-sm text-code-sm text-on-surface font-medium">@tensor_host</span>
+<span class="material-symbols-outlined text-primary text-xs">verified</span>
+</div>
+<div class="absolute bottom-space-sm right-space-sm px-2 py-0.5 rounded bg-surface-container-lowest/90 font-code-sm text-code-sm text-outline">
+              Chicago, IL
+            </div>
+</div>
+<div class="p-space-md flex-1 flex flex-col justify-between space-y-space-md">
+<div>
+<div class="flex items-start justify-between gap-space-sm">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors">
+                    Samsung 990 PRO 4TB Heatsink
+                  </h3>
+<div class="font-code-sm text-code-sm text-on-surface-variant mt-0.5">PCIe 4.0 x4 M.2 2280 • 7450 MB/s Read</div>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-1.5 mt-space-md">
+<div class="bg-surface-container p-space-xs rounded text-center">
+<div class="font-label-caps text-label-caps text-outline uppercase">CAPACITY</div>
+<div class="font-code-sm text-code-sm text-on-surface font-medium">4000 GB</div>
+</div>
+<div class="bg-surface-container p-space-xs rounded text-center">
+<div class="font-label-caps text-label-caps text-outline uppercase">HEALTH TBW</div>
+<div class="font-code-sm text-code-sm text-on-surface font-medium">99% (8TBW)</div>
+</div>
+<div class="bg-surface-container p-space-xs rounded text-center">
+<div class="font-label-caps text-label-caps text-outline uppercase">COOLING</div>
+<div class="font-code-sm text-code-sm text-on-surface font-medium">Factory Fins</div>
+</div>
+</div>
+</div>
+<div class="pt-space-sm space-y-space-sm">
+<div class="flex items-baseline justify-between">
+<div>
+<div class="font-label-caps text-label-caps text-outline uppercase">ASKING PRICE</div>
+<div class="font-headline-lg text-headline-lg font-bold text-primary">$280.00</div>
+</div>
+<div class="text-right">
+<div class="font-label-caps text-label-caps text-outline uppercase">CATALOG BENCHMARK</div>
+<div class="font-code-sm text-code-sm text-on-surface-variant line-through">$349.00 MSRP</div>
+<span class="font-code-sm text-code-sm text-primary">-$69.00 Delta</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-space-sm pt-space-xs">
+<button class="w-full py-2 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-body-sm transition-colors flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-sm text-primary">biotech</span>
+<span>+ Rig Check</span>
+</button>
+<button class="w-full py-2 rounded bg-primary text-on-primary font-body-sm text-body-sm font-semibold hover:bg-primary-fixed transition-colors flex items-center justify-center gap-1">
+<span>View Details</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+</div>
+<!-- Pagination / Telemetry Footer -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-space-md pt-space-md">
+<div class="font-code-sm text-code-sm text-outline">
+          Page 1 of 24 • Showing items 1–6 of 142 listings indexed
+        </div>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-md py-1.5 rounded bg-surface-container-low text-outline cursor-not-allowed font-code-sm text-code-sm" disabled="">PREV</button>
+<button class="px-space-md py-1.5 rounded bg-primary text-on-primary font-code-sm text-code-sm font-semibold">1</button>
+<button class="px-space-md py-1.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-code-sm text-code-sm">2</button>
+<button class="px-space-md py-1.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-code-sm text-code-sm">3</button>
+<span class="px-space-xs text-outline font-code-sm text-code-sm">...</span>
+<button class="px-space-md py-1.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-code-sm text-code-sm">24</button>
+<button class="px-space-md py-1.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-code-sm text-code-sm">NEXT</button>
+</div>
+</div>
+</section>
+<!-- AUXILIARY STATE 1: LOADING SKELETON STATE (Hidden by default, shown via testbench) -->
+<section class="hidden space-y-space-lg" id="view-loading">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="w-2 h-2 rounded-full bg-outline animate-ping"></span>
+<span class="font-label-caps text-label-caps text-outline uppercase tracking-wider">AWAITING DB STREAM (6 MOCK REGISTERS)</span>
+</div>
+<div class="font-code-sm text-code-sm text-outline animate-pulse">POLLING HARDWARE_DB_P2P...</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-lg">
+<!-- Skeleton Card 1 -->
+<div class="bg-surface-container-low rounded overflow-hidden p-space-md space-y-space-md animate-pulse">
+<div class="h-48 w-full bg-surface-container rounded"></div>
+<div class="space-y-space-xs">
+<div class="h-4 bg-surface-container rounded w-3/4"></div>
+<div class="h-3 bg-surface-container rounded w-1/2"></div>
+</div>
+<div class="grid grid-cols-3 gap-1.5">
+<div class="h-10 bg-surface-container rounded"></div>
+<div class="h-10 bg-surface-container rounded"></div>
+<div class="h-10 bg-surface-container rounded"></div>
+</div>
+<div class="pt-space-sm flex items-center justify-between">
+<div class="h-6 bg-surface-container rounded w-24"></div>
+<div class="h-6 bg-surface-container rounded w-20"></div>
+</div>
+<div class="grid grid-cols-2 gap-space-sm pt-space-xs">
+<div class="h-9 bg-surface-container rounded"></div>
+<div class="h-9 bg-surface-container rounded"></div>
+</div>
+</div>
+<!-- Skeleton Card 2 -->
+<div class="bg-surface-container-low rounded overflow-hidden p-space-md space-y-space-md animate-pulse">
+<div class="h-48 w-full bg-surface-container rounded"></div>
+<div class="space-y-space-xs">
+<div class="h-4 bg-surface-container rounded w-2/3"></div>
+<div class="h-3 bg-surface-container rounded w-1/3"></div>
+</div>
+<div class="grid grid-cols-3 gap-1.5">
+<div class="h-10 bg-surface-container rounded"></div>
+<div class="h-10 bg-surface-container rounded"></div>
+<div class="h-10 bg-surface-container rounded"></div>
+</div>
+<div class="pt-space-sm flex items-center justify-between">
+<div class="h-6 bg-surface-container rounded w-24"></div>
+<div class="h-6 bg-surface-container rounded w-20"></div>
+</div>
+<div class="grid grid-cols-2 gap-space-sm pt-space-xs">
+<div class="h-9 bg-surface-container rounded"></div>
+<div class="h-9 bg-surface-container rounded"></div>
+</div>
+</div>
+<!-- Skeleton Card 3 -->
+<div class="bg-surface-container-low rounded overflow-hidden p-space-md space-y-space-md animate-pulse">
+<div class="h-48 w-full bg-surface-container rounded"></div>
+<div class="space-y-space-xs">
+<div class="h-4 bg-surface-container rounded w-4/5"></div>
+<div class="h-3 bg-surface-container rounded w-2/5"></div>
+</div>
+<div class="grid grid-cols-3 gap-1.5">
+<div class="h-10 bg-surface-container rounded"></div>
+<div class="h-10 bg-surface-container rounded"></div>
+<div class="h-10 bg-surface-container rounded"></div>
+</div>
+<div class="pt-space-sm flex items-center justify-between">
+<div class="h-6 bg-surface-container rounded w-24"></div>
+<div class="h-6 bg-surface-container rounded w-20"></div>
+</div>
+<div class="grid grid-cols-2 gap-space-sm pt-space-xs">
+<div class="h-9 bg-surface-container rounded"></div>
+<div class="h-9 bg-surface-container rounded"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- AUXILIARY STATE 2: ZERO RESULTS EMPTY STATE (Hidden by default, shown via testbench) -->
+<section class="hidden" id="view-empty">
+<div class="bg-surface-container-low rounded p-space-3xl flex flex-col items-center justify-center text-center max-w-2xl mx-auto space-y-space-lg shadow-sm">
+<div class="w-16 h-16 rounded bg-surface-container flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-display text-outline">search_off</span>
+</div>
+<div class="space-y-space-xs">
+<div class="font-label-caps text-label-caps text-primary uppercase tracking-widest">[ERR_QUERY_EMPTY_RESULT]</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">No listings match specified criteria</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md mx-auto">
+            Zero active hardware listings found for <span class="font-code-md text-code-md text-on-surface font-semibold">"Threadripper 7980X"</span> under condition <span class="font-code-md text-code-md text-on-surface font-semibold">"Factory Sealed"</span>.
+          </p>
+</div>
+<!-- Telemetry Diagnostic Box -->
+<div class="w-full bg-surface-container p-space-md rounded text-left font-code-sm text-code-sm text-outline space-y-1">
+<div class="text-on-surface-variant font-medium">QUERY_DIAGNOSTICS:</div>
+<div>• FILTER_SOCKET: sTR5 (0 available)</div>
+<div>• PRICE_RANGE: ANY</div>
+<div>• HISTORIC_LAST_SEEN: 14 days ago ($4,150.00)</div>
+</div>
+<div class="flex flex-wrap items-center justify-center gap-space-md pt-space-xs">
+<button class="px-space-lg py-2.5 rounded bg-primary text-on-primary font-body-sm text-body-sm font-semibold hover:bg-primary-fixed transition-colors" onclick="switchState('catalog')">
+            Clear Active Filters
+          </button>
+<button class="px-space-lg py-2.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-body-sm transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">notifications</span>
+<span>Create Hardware Wanted Alert</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Market Integrity & Safety Guarantee Cadence Box -->
+<section class="bg-surface-container-low rounded p-space-lg shadow-sm">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+<div class="flex items-start gap-space-md">
+<div class="w-10 h-10 rounded bg-surface-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-headline-sm">verified_user</span>
+</div>
+<div class="space-y-space-xs">
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Cryptographic Escrow</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Funds stay locked in decentralized multi-sig escrow until hardware arrives, posts BIOS benchmark, and matches serial registration.
+            </p>
+</div>
+</div>
+<div class="flex items-start gap-space-md">
+<div class="w-10 h-10 rounded bg-surface-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-headline-sm">memory</span>
+</div>
+<div class="space-y-space-xs">
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Auto-Compatibility Engine</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Every marketplace listing cross-checks your active PCForge rigs for socket pinout, VRM clearance, and PSU 12V rail headroom.
+            </p>
+</div>
+</div>
+<div class="flex items-start gap-space-md">
+<div class="w-10 h-10 rounded bg-surface-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-headline-sm">forum</span>
+</div>
+<div class="space-y-space-xs">
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Direct Engineer Chat</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Exchange timestamped FurMark, Cinebench R23, or MemTest86 diagnostic logs directly with enthusiast builders before acquiring parts.
+            </p>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Interactive Testbench Script -->
+<script>
+    function switchState(stateName) {
+      const catalogView = document.getElementById('view-catalog');
+      const loadingView = document.getElementById('view-loading');
+      const emptyView = document.getElementById('view-empty');
+
+      const btnCatalog = document.getElementById('btn-state-catalog');
+      const btnLoading = document.getElementById('btn-state-loading');
+      const btnEmpty = document.getElementById('btn-state-empty');
+
+      // Reset tabs styling
+      [btnCatalog, btnLoading, btnEmpty].forEach(btn => {
+        btn.classList.remove('bg-primary', 'text-on-primary');
+        btn.classList.add('bg-surface-container', 'text-on-surface-variant');
+      });
+
+      // Hide all containers
+      catalogView.classList.add('hidden');
+      loadingView.classList.add('hidden');
+      emptyView.classList.add('hidden');
+
+      if (stateName === 'catalog') {
+        catalogView.classList.remove('hidden');
+        btnCatalog.classList.remove('bg-surface-container', 'text-on-surface-variant');
+        btnCatalog.classList.add('bg-primary', 'text-on-primary');
+      } else if (stateName === 'loading') {
+        loadingView.classList.remove('hidden');
+        btnLoading.classList.remove('bg-surface-container', 'text-on-surface-variant');
+        btnLoading.classList.add('bg-primary', 'text-on-primary');
+      } else if (stateName === 'empty') {
+        emptyView.classList.remove('hidden');
+        btnEmpty.classList.remove('bg-surface-container', 'text-on-surface-variant');
+        btnEmpty.classList.add('bg-primary', 'text-on-primary');
+      }
+    }
+
+    function toggleGuestBanner() {
+      const banner = document.getElementById('guest-banner');
+      const label = document.getElementById('guest-btn-label');
+      if (banner.classList.contains('hidden')) {
+        banner.classList.remove('hidden');
+        label.innerText = 'Hide Guest Banner';
+      } else {
+        banner.classList.add('hidden');
+        label.innerText = 'Show Guest Banner';
+      }
+    }
+
+    // Category button toggle interaction
+    document.querySelectorAll('.cat-pill').forEach(pill => {
+      pill.addEventListener('click', function() {
+        document.querySelectorAll('.cat-pill').forEach(p => {
+          p.classList.remove('bg-primary', 'text-on-primary');
+          p.classList.add('bg-surface-container', 'text-on-surface-variant');
+        });
+        this.classList.remove('bg-surface-container', 'text-on-surface-variant');
+        this.classList.add('bg-primary', 'text-on-primary');
+      });
+    });
+  </script>
+</div></main><footer class="w-full bg-surface-container-lowest"><div class="w-full max-w-[1440px] mx-auto px-margin-lg h-12 flex flex-col sm:flex-row items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm"><span class="w-2 h-2 rounded-full bg-primary shrink-0"></span><span class="font-code-sm text-code-sm text-on-surface-variant">All systems operational</span><span class="font-code-sm text-code-sm text-outline">•</span><span class="font-code-sm text-code-sm text-outline">Hardware DB v2.4</span></div><div class="flex items-center gap-space-lg"><a class="font-body-sm text-body-sm text-outline hover:text-on-surface transition-colors" href="#">Documentation</a><a class="font-body-sm text-body-sm text-outline hover:text-on-surface transition-colors" href="#">Component Guidelines</a><a class="font-body-sm text-body-sm text-outline hover:text-on-surface transition-colors" href="#">Peer Safety</a><a class="font-body-sm text-body-sm text-outline hover:text-on-surface transition-colors" href="#">Terms</a></div></div></footer></body></html>
