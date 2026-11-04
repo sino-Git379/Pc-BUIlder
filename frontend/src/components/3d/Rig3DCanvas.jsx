@@ -9,10 +9,15 @@ let sharedDracoLoader = null;
 let sharedGltfLoader = null;
 const modelCache = new Map();
 
+export const getStaticAssetUrl = (path) => {
+  const clean = path.startsWith('/') ? path.slice(1) : path;
+  return import.meta.env.DEV ? `/${clean}` : `/static/${clean}`;
+};
+
 function getGltfLoader() {
   if (!sharedGltfLoader) {
     sharedDracoLoader = new DRACOLoader();
-    sharedDracoLoader.setDecoderPath('/draco/');
+    sharedDracoLoader.setDecoderPath(getStaticAssetUrl('draco/'));
     sharedDracoLoader.setDecoderConfig({ type: 'js' });
     sharedGltfLoader = new GLTFLoader();
     sharedGltfLoader.setDRACOLoader(sharedDracoLoader);
@@ -1055,7 +1060,7 @@ export default function Rig3DCanvas({
     // Case 1: Pre-built GLB models from maga76/drf_exam3 ('gaming', 'office', 'sci-fi')
     if (modelPreset !== 'custom') {
       setLoadingModel(true);
-      const glbPath = `/models/${modelPreset}.glb`;
+      const glbPath = getStaticAssetUrl(`models/${modelPreset}.glb`);
 
       const loader = getGltfLoader();
       loader.load(
