@@ -17,6 +17,22 @@ function formatTime(dateVal, fallback = 'Now') {
   }
 }
 
+function normalizeMediaUrl(url) {
+  if (!url || typeof url !== 'string') return null;
+  if (url.startsWith('data:') || url.startsWith('blob:')) return url;
+  if (url.startsWith('http://student3.softclub.tj')) {
+    return 'https://' + url.slice('http://'.length);
+  }
+  if (
+    typeof window !== 'undefined' &&
+    window.location.protocol === 'https:' &&
+    url.startsWith(`http://${window.location.host}`)
+  ) {
+    return 'https://' + url.slice('http://'.length);
+  }
+  return url;
+}
+
 const DEMO_CONVERSATIONS = [
   {
     id: 'demo-viktor',
@@ -197,8 +213,11 @@ function LiveMessengerContent() {
         (Array.isArray(r?.messages) && r.messages[r.messages.length - 1]) ||
         null;
       const hasVoice = Boolean(lastMsg?.voice_file || lastMsg?.voice_url);
+      const hasImage = Boolean(lastMsg?.image || lastMsg?.image_url);
       const lastPreview = hasVoice
         ? `🎤 Voice note (${lastMsg?.voice_duration || '0:05'})`
+        : hasImage
+        ? `📷 Photo${lastMsg?.attachment_name ? `: ${lastMsg.attachment_name}` : ''}`
         : (lastMsg?.text || 'Chat channel initialized');
 
       return {
@@ -473,17 +492,33 @@ function LiveMessengerContent() {
           setMessagesByRoom((prev) => ({
             ...prev,
             [selectedRoomId]: msgsList.map((m) => {
-              const voiceUrl = m?.voice_url || m?.voice_file || null;
+              const voiceUrl = normalizeMediaUrl(m?.voice_url || m?.voice_file || null);
+              const imageUrl = normalizeMediaUrl(m?.image_url || m?.image || null);
               const hasVoice = Boolean(voiceUrl);
+              const hasImage = Boolean(imageUrl);
               const isVoicePlaceholder =
                 m?.text === 'Voice Message' ||
                 (typeof m?.text === 'string' && m.text.startsWith('[Voice Message'));
+              const isAttachmentPlaceholder =
+                typeof m?.text === 'string' &&
+                (m.text.startsWith('[Attachment:') || m.text.startsWith('Shared photo:'));
               return {
                 id: m?.id || `m-${Date.now()}-${Math.random()}`,
                 sender: m?.sender_username || m?.sender || 'User',
                 sender_id: m?.sender,
                 isMe: user && (m?.sender === user.id || m?.sender_username === user.username),
-                text: hasVoice && isVoicePlaceholder ? '' : (m?.text || ''),
+                text:
+                  (hasVoice && isVoicePlaceholder) || (hasImage && isAttachmentPlaceholder)
+                    ? ''
+                    : (m?.text || ''),
+                attachment: hasImage
+                  ? {
+                      image: imageUrl,
+                      fileName: m?.attachment_name || 'Photo',
+                      meta: 'Image Attachment',
+                      isDocument: false,
+                    }
+                  : null,
                 voiceNote: hasVoice
                   ? {
                       url: voiceUrl,
@@ -534,20 +569,37 @@ function LiveMessengerContent() {
         try {
           const data = JSON.parse(event.data);
           if (data?.type === 'pong') return;
-          if (data?.message || data?.voice_url) {
-            const hasVoice = Boolean(data.voice_url);
+          if (data?.message || data?.voice_url || data?.image_url) {
+            const voiceUrl = normalizeMediaUrl(data.voice_url);
+            const imageUrl = normalizeMediaUrl(data.image_url);
+            const hasVoice = Boolean(voiceUrl);
+            const hasImage = Boolean(imageUrl);
             const isVoicePlaceholder =
               data.message === 'Voice Message' ||
               (typeof data.message === 'string' && data.message.startsWith('[Voice Message'));
+            const isAttachmentPlaceholder =
+              typeof data.message === 'string' &&
+              (data.message.startsWith('[Attachment:') || data.message.startsWith('Shared photo:'));
             const incomingMsg = {
               id: data.message_id || `ws-${Date.now()}`,
               sender: data.sender || 'User',
               sender_id: data.sender_id,
               isMe: user && (data.sender_id === user.id || data.sender === user.username),
-              text: hasVoice && isVoicePlaceholder ? '' : (data.message || ''),
+              text:
+                (hasVoice && isVoicePlaceholder) || (hasImage && isAttachmentPlaceholder)
+                  ? ''
+                  : (data.message || ''),
+              attachment: hasImage
+                ? {
+                    image: imageUrl,
+                    fileName: data.attachment_name || 'Photo',
+                    meta: 'Image Attachment',
+                    isDocument: false,
+                  }
+                : null,
               voiceNote: hasVoice
                 ? {
-                    url: data.voice_url,
+                    url: voiceUrl,
                     duration: data.voice_duration || '0:05',
                   }
                 : null,
@@ -561,6 +613,7 @@ function LiveMessengerContent() {
                 (m) =>
                   m?.optimistic &&
                   ((incomingMsg.voiceNote && m?.voiceNote) ||
+                    (incomingMsg.attachment && m?.attachment) ||
                     (m?.text && m.text === incomingMsg.text))
               );
               if (optimisticIdx > -1) {
@@ -568,7 +621,7 @@ function LiveMessengerContent() {
                 copy[optimisticIdx] = incomingMsg;
                 return { ...prev, [selectedRoomId]: copy };
               }
-              if (existing.some((m) => m?.id === incomingMsg.id)) return prev;
+              if (existing.some((m) => String(m?.id) === String(incomingMsg.id))) return prev;
               return { ...prev, [selectedRoomId]: [...existing, incomingMsg] };
             });
           }
@@ -761,16 +814,18 @@ function LiveMessengerContent() {
     if (!roomId) return;
 
     const reader = new FileReader();
-    reader.onload = (uploadEvent) => {
+    reader.onload = async (uploadEvent) => {
       const dataUrl = uploadEvent.target.result;
       const isImg = file.type.startsWith('image/');
-      const sizeKb = Math.round(file.size / 1024);
+      const sizeKb = Math.max(1, Math.round(file.size / 1024));
+      const optimisticId = `file-${Date.now()}`;
 
       const fileMsg = {
-        id: `file-${Date.now()}`,
+        id: optimisticId,
+        optimistic: !activeConversation.isDemo,
         sender: user?.username || 'You',
         isMe: true,
-        text: isImg ? `Shared photo: ${file.name}` : `Shared document: ${file.name}`,
+        text: isImg ? '' : `Shared document: ${file.name}`,
         attachment: {
           image: isImg ? dataUrl : null,
           fileName: file.name,
@@ -778,30 +833,75 @@ function LiveMessengerContent() {
           isDocument: !isImg,
         },
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        status: 'read',
+        status: activeConversation.isDemo ? 'read' : 'sending',
       };
 
       setMessagesByRoom((prev) => ({
         ...prev,
         [roomId]: [...(prev[roomId] || []), fileMsg],
       }));
+      setTimeout(scrollToBottom, 60);
 
-      // Also transmit notification over WS if connected
-      if (chatWsRef.current && chatWsRef.current.readyState === WebSocket.OPEN) {
+      if (activeConversation.isDemo) {
+        return;
+      }
+
+      let sentViaRest = false;
+      if (access) {
+        try {
+          const formData = new FormData();
+          if (isImg) {
+            formData.append('image', file, file.name);
+            formData.append('attachment_name', file.name);
+            formData.append('text', '');
+          } else {
+            formData.append('image', file, file.name);
+            formData.append('attachment_name', file.name);
+            formData.append('text', `Shared document: ${file.name} (${sizeKb} KB)`);
+          }
+
+          const res = await apiFetch(`/api/chat/rooms/${roomId}/messages/`, {
+            method: 'POST',
+            body: formData,
+          });
+          if (res.ok) {
+            sentViaRest = true;
+            const saved = await res.json();
+            const serverImgUrl = normalizeMediaUrl(saved.image_url || saved.image);
+            setMessagesByRoom((prev) => ({
+              ...prev,
+              [roomId]: (Array.isArray(prev[roomId]) ? prev[roomId] : []).map((m) =>
+                m.id === optimisticId
+                  ? {
+                      ...m,
+                      id: saved.id || m.id,
+                      optimistic: false,
+                      status: 'read',
+                      attachment: {
+                        ...m.attachment,
+                        image: isImg ? (serverImgUrl || dataUrl) : null,
+                      },
+                    }
+                  : m
+              ),
+            }));
+          }
+        } catch (_) {}
+      }
+
+      // Fallback over WebSocket if REST failed
+      if (!sentViaRest && chatWsRef.current && chatWsRef.current.readyState === WebSocket.OPEN) {
         chatWsRef.current.send(
           JSON.stringify({
-            message: `[Attachment: ${file.name} (${sizeKb} KB)]`,
+            message: isImg ? '' : `Shared document: ${file.name} (${sizeKb} KB)`,
+            image_base64: isImg ? dataUrl : null,
+            attachment_name: file.name,
           })
         );
       }
-      setTimeout(scrollToBottom, 60);
     };
 
-    if (file.type.startsWith('image/')) {
-      reader.readAsDataURL(file);
-    } else {
-      reader.readAsDataURL(file);
-    }
+    reader.readAsDataURL(file);
 
     // Reset input so user can pick same file again
     e.target.value = '';
@@ -906,27 +1006,10 @@ function LiveMessengerContent() {
           }
 
           // Real backend room:
-          // 1. Convert to base64 for real-time WebSocket broadcast
-          const reader = new FileReader();
-          reader.onloadend = async () => {
-            const base64Audio = reader.result;
-
-            let sentViaWs = false;
-            if (chatWsRef.current && chatWsRef.current.readyState === WebSocket.OPEN) {
-              try {
-                chatWsRef.current.send(
-                  JSON.stringify({
-                    message: '',
-                    voice_base64: base64Audio,
-                    voice_duration: durationFormatted,
-                  })
-                );
-                sentViaWs = true;
-              } catch (_) {}
-            }
-
-            // 2. Also send via multipart FormData via REST endpoint if not WebSocket or to ensure backend storage
-            if (!sentViaWs && access) {
+          // 1. Upload multipart FormData via REST endpoint first (also broadcasts via Channels to recipient)
+          const sendVoice = async () => {
+            let sentViaRest = false;
+            if (access) {
               try {
                 const formData = new FormData();
                 formData.append('voice_file', audioBlob, 'voice_message.webm');
@@ -938,18 +1021,20 @@ function LiveMessengerContent() {
                   body: formData,
                 });
                 if (res.ok) {
+                  sentViaRest = true;
                   const saved = await res.json();
+                  const serverVoiceUrl = normalizeMediaUrl(saved.voice_url || saved.voice_file);
                   setMessagesByRoom((prev) => ({
                     ...prev,
                     [roomId]: (Array.isArray(prev[roomId]) ? prev[roomId] : []).map((m) =>
                       m.id === optimisticId
                         ? {
                             ...m,
-                            id: saved.id,
+                            id: saved.id || m.id,
                             optimistic: false,
                             status: 'read',
                             voiceNote: {
-                              url: saved.voice_url || localAudioUrl,
+                              url: serverVoiceUrl || localAudioUrl,
                               duration: saved.voice_duration || durationFormatted,
                             },
                           }
@@ -959,8 +1044,25 @@ function LiveMessengerContent() {
                 }
               } catch (_) {}
             }
+
+            // 2. Fallback to base64 over WebSocket if REST failed
+            if (!sentViaRest && chatWsRef.current && chatWsRef.current.readyState === WebSocket.OPEN) {
+              const reader = new FileReader();
+              reader.onloadend = () => {
+                try {
+                  chatWsRef.current.send(
+                    JSON.stringify({
+                      message: '',
+                      voice_base64: reader.result,
+                      voice_duration: durationFormatted,
+                    })
+                  );
+                } catch (_) {}
+              };
+              reader.readAsDataURL(audioBlob);
+            }
           };
-          reader.readAsDataURL(audioBlob);
+          sendVoice();
         }
 
         // Stop all audio tracks

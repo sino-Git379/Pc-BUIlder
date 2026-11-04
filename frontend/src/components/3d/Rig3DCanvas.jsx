@@ -33,11 +33,13 @@ export const LIGHTING_MODES = [
 ];
 
 export const CAMERA_PRESETS = [
-  { id: 'iso', name: 'Изометрия 45°', pos: [5.3, 2.1, 4.7], target: [0, 0.05, 0] },
-  { id: 'glass', name: 'Вид сбоку', pos: [5.9, 0.15, 0.05], target: [0, 0.1, 0] },
-  { id: 'front', name: 'Вид спереди', pos: [2.1, 0.2, 6.1], target: [0, 0, 0] },
-  { id: 'top', name: 'Вид сверху', pos: [2.8, 6.3, 0.1], target: [0, 0, 0] },
+  { id: 'iso', name: 'Изометрия 45°', pos: [4.2, 1.8, 4.2], target: [0, 0, 0] },
+  { id: 'glass', name: 'Вид сбоку', pos: [5.4, 0.1, 0.05], target: [0, 0, 0] },
+  { id: 'front', name: 'Вид спереди', pos: [1.6, 0.2, 5.4], target: [0, 0, 0] },
+  { id: 'top', name: 'Вид сверху', pos: [2.0, 5.8, 0.1], target: [0, 0, 0] },
 ];
+
+const BASE_RIG_SCALE = 0.56;
 
 const SLOT_BASE_POSITIONS = {
   case: new THREE.Vector3(0, 0, 0),
@@ -825,7 +827,7 @@ export default function Rig3DCanvas({
     sceneRef.current = scene;
 
     // 2. Camera
-    const camera = new THREE.PerspectiveCamera(38, width / height, 0.1, 100);
+    const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 100);
     const initialPreset = CAMERA_PRESETS.find((p) => p.id === cameraPreset) || CAMERA_PRESETS[0];
     camera.position.set(...initialPreset.pos);
     cameraRef.current = camera;
@@ -845,16 +847,30 @@ export default function Rig3DCanvas({
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     rendererRef.current = renderer;
 
-    // 4. OrbitControls (smooth damping, zoom, rotate)
+    // 4. OrbitControls (smooth damping, zoom, rotate, pan)
     const controls = new OrbitControls(camera, canvas);
     controls.enableDamping = true;
     controls.dampingFactor = 0.08;
-    controls.enablePan = !compact;
-    controls.minDistance = 2.8;
-    controls.maxDistance = 16;
-    controls.maxPolarAngle = Math.PI / 2 + 0.08;
+    controls.enableZoom = true;
+    controls.zoomSpeed = 1.2;
+    controls.enableRotate = true;
+    controls.rotateSpeed = 0.85;
+    controls.enablePan = true;
+    controls.panSpeed = 0.85;
+    controls.screenSpacePanning = true;
+    controls.minDistance = 2.2;
+    controls.maxDistance = 16.0;
+    controls.maxPolarAngle = Math.PI / 2 + 0.15;
     controls.target.set(...initialPreset.target);
+    controls.update();
     controlsRef.current = controls;
+
+    // Cancel preset camera interpolation immediately when user interacts with mouse/wheel/touch
+    const cancelCameraLerp = () => {
+      cameraTargetPosRef.current = null;
+      cameraTargetLookRef.current = null;
+    };
+    controls.addEventListener('start', cancelCameraLerp);
 
     // 5. Studio Three-Point + Internal ARGB Lighting
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.85);
@@ -880,20 +896,36 @@ export default function Rig3DCanvas({
     internalLight.name = 'internal_argb_light';
     scene.add(internalLight);
 
-    // Subtle Studio Floor Grid
-    const grid = new THREE.GridHelper(16, 32, 0x00f0ff, 0x1e293b);
-    grid.position.y = -2.42;
+    // Subtle Studio Floor Grid aligned beneath scaled chassis feet
+    const grid = new THREE.GridHelper(14, 28, 0x00f0ff, 0x1e293b);
+    grid.position.y = -1.42;
     grid.material.opacity = 0.35;
     grid.material.transparent = true;
     scene.add(grid);
 
-    // Root Rig Group
+    // Root Rig Group (scaled to fit comfortably in viewport with margin)
     const rootRig = new THREE.Group();
     rootRig.name = 'rig_root_assembly';
+    rootRig.scale.setScalar(BASE_RIG_SCALE);
+    rootRig.position.set(0, -0.05, 0);
     scene.add(rootRig);
     rootRigGroupRef.current = rootRig;
 
-    // 6. Pointer Hover & Click Raycasting
+    // 6. Pointer Hover & Click Raycasting (ignoring drag gestures so rotating never triggers click)
+    let pointerDownX = 0;
+    let pointerDownY = 0;
+
+    const handlePointerDown = (e) => {
+      cancelCameraLerp();
+      pointerDownX = e.clientX;
+      pointerDownY = e.clientY;
+    };
+
+    const handleWheel = (e) => {
+      cancelCameraLerp();
+      e.stopPropagation();
+    };
+
     const handlePointerMove = (e) => {
       const rect = canvas.getBoundingClientRect();
       if (!rect.width || !rect.height) return;
@@ -906,7 +938,16 @@ export default function Rig3DCanvas({
       setHoveredPart(null);
     };
 
-    const handleClick = () => {
+    const handlePointerUp = (e) => {
+      const moveDist = Math.hypot(e.clientX - pointerDownX, e.clientY - pointerDownY);
+      if (moveDist > 5) return; // User was dragging/orbiting the camera, not clicking a part
+      if (compact) return; // In compact preview, let user rotate freely without opening slot modal on click
+
+      const rect = canvas.getBoundingClientRect();
+      if (!rect.width || !rect.height) return;
+      mouseRef.current.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      mouseRef.current.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+
       raycasterRef.current.setFromCamera(mouseRef.current, camera);
       const intersects = raycasterRef.current.intersectObjects(rootRig.children, true);
       if (intersects.length > 0) {
@@ -923,9 +964,11 @@ export default function Rig3DCanvas({
       }
     };
 
+    canvas.addEventListener('pointerdown', handlePointerDown);
+    canvas.addEventListener('wheel', handleWheel, { passive: true });
     canvas.addEventListener('pointermove', handlePointerMove);
     canvas.addEventListener('pointerleave', handlePointerLeave);
-    canvas.addEventListener('click', handleClick);
+    canvas.addEventListener('pointerup', handlePointerUp);
 
     // 7. Render & Animation Loop
     let lastTime = performance.now();
@@ -1079,9 +1122,12 @@ export default function Rig3DCanvas({
     return () => {
       cancelAnimationFrame(animFrameRef.current);
       resizeObserver.disconnect();
+      controls.removeEventListener('start', cancelCameraLerp);
+      canvas.removeEventListener('pointerdown', handlePointerDown);
+      canvas.removeEventListener('wheel', handleWheel);
       canvas.removeEventListener('pointermove', handlePointerMove);
       canvas.removeEventListener('pointerleave', handlePointerLeave);
-      canvas.removeEventListener('click', handleClick);
+      canvas.removeEventListener('pointerup', handlePointerUp);
       controls.dispose();
       renderer.dispose();
     };
@@ -1147,15 +1193,41 @@ export default function Rig3DCanvas({
         glbPath,
         (gltf) => {
           const model = gltf.scene;
+          model.position.set(0, 0, 0);
+          model.scale.set(1, 1, 1);
           model.updateMatrixWorld(true);
-          const box = new THREE.Box3().setFromObject(model);
+
+          const box = new THREE.Box3();
+          model.traverse((child) => {
+            if (child.isMesh && child.geometry) {
+              child.geometry.computeBoundingBox();
+              const meshBox = child.geometry.boundingBox.clone();
+              meshBox.applyMatrix4(child.matrixWorld);
+              box.union(meshBox);
+            }
+          });
+
+          if (box.isEmpty()) {
+            box.setFromObject(model);
+          }
+
           const size = box.getSize(new THREE.Vector3());
-          const maxDim = Math.max(size.x, size.y, size.z);
-          const scale = 5.0 / (maxDim || 1);
-          model.scale.set(scale, scale, scale);
           const center = box.getCenter(new THREE.Vector3());
-          model.position.sub(center.multiplyScalar(scale));
-          rootRig.add(model);
+          const maxDim = Math.max(size.x, size.y, size.z) || 1;
+          const scale = 3.8 / maxDim;
+
+          const wrapper = new THREE.Group();
+          model.position.set(-center.x, -center.y, -center.z);
+          wrapper.add(model);
+          wrapper.scale.setScalar(scale);
+
+          rootRig.add(wrapper);
+          if (controlsRef.current && cameraRef.current) {
+            const preset = CAMERA_PRESETS.find((p) => p.id === cameraPreset) || CAMERA_PRESETS[0];
+            controlsRef.current.target.set(...preset.target);
+            cameraRef.current.position.set(...preset.pos);
+            controlsRef.current.update();
+          }
           setLoadingModel(false);
         },
         undefined,
@@ -1321,10 +1393,67 @@ export default function Rig3DCanvas({
     createPsuMesh,
   ]);
 
+  const handleZoomStep = useCallback((factor) => {
+    const camera = cameraRef.current;
+    const controls = controlsRef.current;
+    if (!camera || !controls) return;
+    cameraTargetPosRef.current = null;
+    cameraTargetLookRef.current = null;
+    const offset = new THREE.Vector3().subVectors(camera.position, controls.target);
+    const currentDist = offset.length();
+    const nextDist = Math.max(controls.minDistance, Math.min(controls.maxDistance, currentDist * factor));
+    offset.normalize().multiplyScalar(nextDist);
+    camera.position.copy(controls.target).add(offset);
+    controls.update();
+  }, []);
+
+  const handleResetView = useCallback(() => {
+    const preset = CAMERA_PRESETS.find((p) => p.id === cameraPreset) || CAMERA_PRESETS[0];
+    cameraTargetPosRef.current = new THREE.Vector3(...preset.pos);
+    cameraTargetLookRef.current = new THREE.Vector3(...preset.target);
+  }, [cameraPreset]);
+
   return (
     <div ref={containerRef} className={`relative w-full h-full overflow-hidden select-none ${className}`}>
       {/* Three.js WebGL Canvas */}
-      <canvas id="canvas3d" ref={canvasRef} className="w-full h-full block cursor-grab active:cursor-grabbing" />
+      <canvas
+        id="canvas3d"
+        ref={canvasRef}
+        style={{ touchAction: 'none' }}
+        className="w-full h-full block cursor-grab active:cursor-grabbing"
+      />
+
+      {/* Interactive Zoom & Reset Camera Controls */}
+      <div
+        className={`absolute ${
+          compact ? 'bottom-9 right-2 flex-col' : 'top-16 right-4 flex-col'
+        } z-20 flex items-center gap-1`}
+      >
+        <button
+          type="button"
+          onClick={() => handleZoomStep(0.82)}
+          title="Приблизить (+)"
+          className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-slate-950/80 hover:bg-slate-800 text-slate-200 border border-white/15 backdrop-blur-md flex items-center justify-center transition-all shadow-md active:scale-95"
+        >
+          <span className="material-symbols-outlined text-[16px]">add</span>
+        </button>
+        <button
+          type="button"
+          onClick={() => handleZoomStep(1.22)}
+          title="Отдалить (-)"
+          className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-slate-950/80 hover:bg-slate-800 text-slate-200 border border-white/15 backdrop-blur-md flex items-center justify-center transition-all shadow-md active:scale-95"
+        >
+          <span className="material-symbols-outlined text-[16px]">remove</span>
+        </button>
+        <button
+          type="button"
+          onClick={handleResetView}
+          title="Сбросить камеру по центру"
+          className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-slate-950/80 hover:bg-slate-800 text-cyan-400 border border-white/15 backdrop-blur-md flex items-center justify-center transition-all shadow-md active:scale-95"
+        >
+          <span className="material-symbols-outlined text-[15px]">center_focus_strong</span>
+        </button>
+      </div>
 
       {/* Loading Overlay */}
       {loadingModel && (

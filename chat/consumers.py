@@ -44,8 +44,10 @@ class ChatConsumer(AsyncWebsocketConsumer):
         message_text = str(data.get('message', '') or '').strip()
         voice_base64 = data.get('voice_base64')
         voice_duration = str(data.get('voice_duration', '') or '').strip()
+        image_base64 = data.get('image_base64')
+        attachment_name = str(data.get('attachment_name', '') or '').strip()
 
-        if not message_text and not voice_base64:
+        if not message_text and not voice_base64 and not image_base64:
             return
 
         user = self.scope.get('user')
@@ -53,7 +55,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             return
 
         result = await self.save_message_and_prepare_events(
-            user.id, message_text, voice_base64, voice_duration
+            user.id, message_text, voice_base64, voice_duration, image_base64, attachment_name
         )
         if not result:
             return
@@ -68,6 +70,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 'message': result['message'],
                 'sender': result['sender'],
                 'sender_id': result['sender_id'],
+                'image_url': result.get('image_url'),
+                'attachment_name': result.get('attachment_name', ''),
                 'voice_url': result.get('voice_url'),
                 'voice_duration': result.get('voice_duration', ''),
                 'timestamp': result['timestamp'],
@@ -91,9 +95,15 @@ class ChatConsumer(AsyncWebsocketConsumer):
                     'room_id': result['room_id'],
                     'listing_id': result['listing_id'],
                     'component_name': result['component_name'],
-                    'message': '🎤 Voice message' if result.get('voice_url') else result['message'],
+                    'message': (
+                        '🎤 Voice message'
+                        if result.get('voice_url')
+                        else ('📷 Photo' if result.get('image_url') else result['message'])
+                    ),
                     'sender': result['sender'],
                     'sender_id': result['sender_id'],
+                    'image_url': result.get('image_url'),
+                    'attachment_name': result.get('attachment_name', ''),
                     'voice_url': result.get('voice_url'),
                     'voice_duration': result.get('voice_duration', ''),
                     'unread_count': result['unread_count'],
@@ -109,13 +119,38 @@ class ChatConsumer(AsyncWebsocketConsumer):
             'message': event['message'],
             'sender': event['sender'],
             'sender_id': event['sender_id'],
+            'image_url': event.get('image_url'),
+            'attachment_name': event.get('attachment_name', ''),
             'voice_url': event.get('voice_url'),
             'voice_duration': event.get('voice_duration', ''),
             'timestamp': event['timestamp'],
         }))
 
+    def _build_ws_media_url(self, file_field):
+        if not file_field:
+            return None
+        try:
+            rel_url = file_field.url
+        except Exception:
+            return None
+        if not rel_url.startswith('/'):
+            rel_url = f'/{rel_url}'
+        scope = getattr(self, 'scope', None) or {}
+        headers = dict(scope.get('headers') or [])
+        host = headers.get(b'host', b'').decode('utf-8', errors='ignore').strip()
+        proto = headers.get(b'x-forwarded-proto', b'').decode('utf-8', errors='ignore').strip()
+        if host:
+            if 'student3.softclub.tj' in host:
+                proto = 'https'
+            elif not proto:
+                proto = 'http'
+            return f"{proto}://{host}{rel_url}"
+        return rel_url
+
     @sync_to_async
-    def save_message_and_prepare_events(self, user_id, message_text, voice_base64=None, voice_duration=''):
+    def save_message_and_prepare_events(
+        self, user_id, message_text, voice_base64=None, voice_duration='', image_base64=None, attachment_name=''
+    ):
         try:
             room = ChatRoom.objects.select_related(
                 'buyer', 'seller', 'listing__component'
@@ -143,6 +178,25 @@ class ChatConsumer(AsyncWebsocketConsumer):
             except Exception:
                 pass
 
+        image_file = None
+        if image_base64:
+            try:
+                header, data_str = image_base64.split(';base64,') if ';base64,' in image_base64 else ('', image_base64)
+                ext = 'png'
+                if 'image/jpeg' in header or 'image/jpg' in header:
+                    ext = 'jpg'
+                elif 'image/webp' in header:
+                    ext = 'webp'
+                elif 'image/gif' in header:
+                    ext = 'gif'
+                decoded_bytes = base64.b64decode(data_str)
+                safe_name = attachment_name or f"image_{uuid.uuid4().hex[:8]}.{ext}"
+                image_file = ContentFile(decoded_bytes, name=safe_name)
+                if not attachment_name:
+                    attachment_name = safe_name
+            except Exception:
+                pass
+
         if not message_text and voice_file:
             message_text = 'Voice Message'
 
@@ -150,6 +204,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
             room=room,
             sender=sender,
             text=message_text,
+            image=image_file,
+            attachment_name=attachment_name,
             voice_file=voice_file,
             voice_duration=voice_duration
         )
@@ -170,7 +226,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 comp = room.listing.component
                 comp_name = f"{comp.brand} {comp.name}".strip()
 
-        voice_url = message_obj.voice_file.url if message_obj.voice_file else None
+        voice_url = self._build_ws_media_url(message_obj.voice_file)
+        image_url = self._build_ws_media_url(message_obj.image)
 
         return {
             'message_id': message_obj.id,
@@ -181,6 +238,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
             'sender': sender.username,
             'sender_id': sender.id,
             'recipient_id': recipient.id if recipient else None,
+            'image_url': image_url,
+            'attachment_name': message_obj.attachment_name,
             'voice_url': voice_url,
             'voice_duration': message_obj.voice_duration,
             'unread_count': unread_count,
@@ -254,6 +313,8 @@ class GlobalConsumer(AsyncWebsocketConsumer):
             'message': event.get('message', ''),
             'sender': event.get('sender', ''),
             'sender_id': event.get('sender_id'),
+            'image_url': event.get('image_url'),
+            'attachment_name': event.get('attachment_name', ''),
             'voice_url': event.get('voice_url'),
             'voice_duration': event.get('voice_duration', ''),
             'unread_count': event.get('unread_count', 0),

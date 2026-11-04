@@ -166,19 +166,23 @@ html.dark {
   scrollbar-width: none;
 }
 
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(115, 118, 136, 0.45) transparent;
+}
 .custom-scrollbar::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
 }
 .custom-scrollbar::-webkit-scrollbar-track {
   background: transparent;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(115, 118, 136, 0.25);
+  background: rgba(115, 118, 136, 0.45);
   border-radius: 9999px;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(115, 118, 136, 0.45);
+  background: rgba(115, 118, 136, 0.7);
 }
 
 /* Smooth UI/UX Keyframes & Transitions */

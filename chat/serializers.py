@@ -7,26 +7,43 @@ from marketplace.models import Listing
 User = get_user_model()
 
 
+def build_full_media_url(file_field, request=None):
+    if not file_field:
+        return None
+    try:
+        rel_url = file_field.url
+    except Exception:
+        return None
+    if not rel_url.startswith('/'):
+        rel_url = f'/{rel_url}'
+    if request:
+        abs_url = request.build_absolute_uri(rel_url)
+        if 'student3.softclub.tj' in abs_url and abs_url.startswith('http://'):
+            abs_url = 'https://' + abs_url[len('http://'):]
+        return abs_url
+    return rel_url
+
+
 class MessageSerializer(serializers.ModelSerializer):
     sender_username = serializers.CharField(source='sender.username', read_only=True)
     voice_url = serializers.SerializerMethodField()
+    image_url = serializers.SerializerMethodField()
 
     class Meta:
         model = Message
         fields = [
             'id', 'sender', 'sender_username', 'text',
+            'image', 'image_url', 'attachment_name',
             'voice_file', 'voice_url', 'voice_duration',
             'created_at', 'is_read'
         ]
-        read_only_fields = ['sender', 'voice_url']
+        read_only_fields = ['sender', 'voice_url', 'image_url']
 
     def get_voice_url(self, obj):
-        if obj.voice_file:
-            request = self.context.get('request')
-            if request:
-                return request.build_absolute_uri(obj.voice_file.url)
-            return obj.voice_file.url
-        return None
+        return build_full_media_url(obj.voice_file, self.context.get('request'))
+
+    def get_image_url(self, obj):
+        return build_full_media_url(obj.image, self.context.get('request'))
 
 
 class ChatRoomSerializer(serializers.ModelSerializer):

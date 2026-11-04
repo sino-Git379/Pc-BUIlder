@@ -168,7 +168,7 @@ export default function BuilderPage() {
   };
 
   return (
-    <div className="flex-1 flex flex-col bg-background text-on-surface overflow-hidden min-h-[calc(100vh-4rem)]">
+    <div className="flex-1 flex flex-col bg-background text-on-surface overflow-hidden h-[calc(100vh-4rem)] max-h-[calc(100vh-4rem)]">
       
       {/* 1. Top Workbench Header */}
       <header className="shrink-0 bg-surface-container-lowest/95 backdrop-blur-md border-b border-outline-variant/30 px-4 py-3 sm:px-6 flex flex-wrap items-center justify-between gap-3 z-20">
@@ -262,11 +262,14 @@ export default function BuilderPage() {
       </header>
 
       {/* 2. Main Split Area: Left Slots Checklist + Center 3D Viewport + Right Telemetry */}
-      <div className="flex-1 flex flex-col lg:flex-row overflow-hidden relative">
+      <div className="flex-1 min-h-0 flex flex-col lg:flex-row overflow-hidden relative">
         
         {/* LEFT COLUMN: 8 Hardware Slots Checklist */}
-        <aside className="w-full lg:w-80 xl:w-96 shrink-0 bg-surface-container-lowest border-r border-outline-variant/30 flex flex-col overflow-y-auto custom-scrollbar z-10 max-h-72 lg:max-h-full">
-          <div className="p-3.5 border-b border-outline-variant/20 flex items-center justify-between">
+        <aside
+          style={{ overflowY: 'auto' }}
+          className="w-full lg:w-80 xl:w-96 shrink-0 bg-surface-container-lowest border-r border-outline-variant/30 flex flex-col min-h-0 max-h-72 lg:max-h-[calc(100vh-8.5rem)] overflow-y-auto overscroll-contain custom-scrollbar z-10"
+        >
+          <div className="p-3.5 border-b border-outline-variant/20 flex items-center justify-between shrink-0">
             <span className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">
               Hardware Component Slots
             </span>
@@ -275,7 +278,7 @@ export default function BuilderPage() {
             </span>
           </div>
 
-          <div className="p-3 flex flex-col gap-2">
+          <div className="p-3 pb-8 flex flex-col gap-2">
             {HARDWARE_SLOTS.map((slot) => {
               const installed = selectedPartsBySlot[slot.key];
               const isInspected = inspectSlot === slot.key;

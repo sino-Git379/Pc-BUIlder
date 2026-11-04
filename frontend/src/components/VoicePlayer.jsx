@@ -13,7 +13,24 @@ function formatTime(seconds) {
   return `${m}:${s.toString().padStart(2, '0')}`;
 }
 
+function normalizeAudioUrl(url) {
+  if (!url || typeof url !== 'string') return '';
+  if (url.startsWith('data:') || url.startsWith('blob:')) return url;
+  if (url.startsWith('http://student3.softclub.tj')) {
+    return 'https://' + url.slice('http://'.length);
+  }
+  if (
+    typeof window !== 'undefined' &&
+    window.location.protocol === 'https:' &&
+    url.startsWith(`http://${window.location.host}`)
+  ) {
+    return 'https://' + url.slice('http://'.length);
+  }
+  return url;
+}
+
 export default function VoicePlayer({ src, duration = '0:05', isMe = false }) {
+  const normalizedSrc = normalizeAudioUrl(src);
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -30,12 +47,18 @@ export default function VoicePlayer({ src, duration = '0:05', isMe = false }) {
 
   useEffect(() => {
     const audio = audioRef.current;
-    if (!audio) return;
+    if (!audio || !normalizedSrc) return;
+    setHasError(false);
 
     const handleLoadedMetadata = () => {
+      setHasError(false);
       if (audio.duration && !isNaN(audio.duration) && isFinite(audio.duration)) {
         setTotalDuration(audio.duration);
       }
+    };
+
+    const handleCanPlay = () => {
+      setHasError(false);
     };
 
     const handleTimeUpdate = () => {
@@ -53,17 +76,19 @@ export default function VoicePlayer({ src, duration = '0:05', isMe = false }) {
     };
 
     audio.addEventListener('loadedmetadata', handleLoadedMetadata);
+    audio.addEventListener('canplay', handleCanPlay);
     audio.addEventListener('timeupdate', handleTimeUpdate);
     audio.addEventListener('ended', handleEnded);
     audio.addEventListener('error', handleError);
 
     return () => {
       audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
+      audio.removeEventListener('canplay', handleCanPlay);
       audio.removeEventListener('timeupdate', handleTimeUpdate);
       audio.removeEventListener('ended', handleEnded);
       audio.removeEventListener('error', handleError);
     };
-  }, [src]);
+  }, [normalizedSrc]);
 
   const togglePlay = (e) => {
     e.stopPropagation();
@@ -115,7 +140,7 @@ export default function VoicePlayer({ src, duration = '0:05', isMe = false }) {
           : 'bg-surface-container text-on-surface'
       }`}
     >
-      <audio ref={audioRef} src={src} preload="metadata" />
+      <audio ref={audioRef} src={normalizedSrc} preload="metadata" />
 
       {/* Play/Pause Action Button */}
       <button

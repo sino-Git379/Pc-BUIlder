@@ -10,7 +10,7 @@ from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
 
 from .models import ChatRoom, Message
-from .serializers import ChatRoomSerializer, MessageSerializer
+from .serializers import ChatRoomSerializer, MessageSerializer, build_full_media_url
 
 
 class ChatRoomViewSet(viewsets.ModelViewSet):
@@ -42,8 +42,11 @@ class ChatRoomViewSet(viewsets.ModelViewSet):
         room = self.get_object()
         text = str(request.data.get('text', '') or '').strip()
         voice_duration = str(request.data.get('voice_duration', '') or '').strip()
+        attachment_name = str(request.data.get('attachment_name', '') or '').strip()
         voice_file = request.FILES.get('voice_file')
         voice_base64 = request.data.get('voice_base64')
+        image_file = request.FILES.get('image') or request.FILES.get('image_file')
+        image_base64 = request.data.get('image_base64')
 
         if not voice_file and voice_base64:
             try:
@@ -60,7 +63,28 @@ class ChatRoomViewSet(viewsets.ModelViewSet):
             except Exception:
                 pass
 
-        if not text and not voice_file:
+        if not image_file and image_base64:
+            try:
+                header, data_str = image_base64.split(';base64,') if ';base64,' in image_base64 else ('', image_base64)
+                ext = 'png'
+                if 'image/jpeg' in header or 'image/jpg' in header:
+                    ext = 'jpg'
+                elif 'image/webp' in header:
+                    ext = 'webp'
+                elif 'image/gif' in header:
+                    ext = 'gif'
+                decoded_bytes = base64.b64decode(data_str)
+                safe_name = attachment_name or f"image_{uuid.uuid4().hex[:8]}.{ext}"
+                image_file = ContentFile(decoded_bytes, name=safe_name)
+                if not attachment_name:
+                    attachment_name = safe_name
+            except Exception:
+                pass
+
+        if image_file and not attachment_name:
+            attachment_name = getattr(image_file, 'name', 'image.png')
+
+        if not text and not voice_file and not image_file:
             return Response({'text': ['This field is required.']}, status=status.HTTP_400_BAD_REQUEST)
 
         if not text and voice_file:
@@ -69,11 +93,14 @@ class ChatRoomViewSet(viewsets.ModelViewSet):
         message = room.messages.create(
             sender=request.user,
             text=text,
+            image=image_file,
+            attachment_name=attachment_name,
             voice_file=voice_file,
             voice_duration=voice_duration
         )
 
-        voice_url = request.build_absolute_uri(message.voice_file.url) if message.voice_file else None
+        voice_url = build_full_media_url(message.voice_file, request)
+        image_url = build_full_media_url(message.image, request)
 
         channel_layer = get_channel_layer()
         if channel_layer:
@@ -86,6 +113,8 @@ class ChatRoomViewSet(viewsets.ModelViewSet):
                     'message': message.text,
                     'sender': request.user.username,
                     'sender_id': request.user.id,
+                    'image_url': image_url,
+                    'attachment_name': message.attachment_name,
                     'voice_url': voice_url,
                     'voice_duration': message.voice_duration,
                     'timestamp': message.created_at.isoformat(),
@@ -119,9 +148,15 @@ class ChatRoomViewSet(viewsets.ModelViewSet):
                         'room_id': room.id,
                         'listing_id': room.listing_id,
                         'component_name': comp_name,
-                        'message': message.text if not message.voice_file else '🎤 Voice message',
+                        'message': (
+                            '🎤 Voice message'
+                            if message.voice_file
+                            else ('📷 Photo' if message.image else message.text)
+                        ),
                         'sender': request.user.username,
                         'sender_id': request.user.id,
+                        'image_url': image_url,
+                        'attachment_name': message.attachment_name,
                         'voice_url': voice_url,
                         'voice_duration': message.voice_duration,
                         'unread_count': unread_count,

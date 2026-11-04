@@ -43,13 +43,23 @@ class Message(models.Model):
         related_name='sent_messages'
     )
     text = models.TextField(blank=True, default='')
+    image = models.FileField(upload_to='chat_images/', null=True, blank=True)
+    attachment_name = models.CharField(max_length=255, blank=True, default='')
     voice_file = models.FileField(upload_to='chat_voices/', null=True, blank=True)
     voice_duration = models.CharField(max_length=20, blank=True, default='')
     created_at = models.DateTimeField(auto_now_add=True)
     is_read: bool = models.BooleanField(default=False)
 
     def __str__(self) -> str:
-        preview = self.text[:50] if self.text else (f"[Voice: {self.voice_duration}]" if self.voice_file else "")
+        preview = (
+            self.text[:50]
+            if self.text
+            else (
+                f"[Image: {self.attachment_name or self.image.name}]"
+                if self.image
+                else (f"[Voice: {self.voice_duration}]" if self.voice_file else "")
+            )
+        )
         return f"{self.sender.username}: {preview}"
 
     class Meta:

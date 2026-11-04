@@ -179,7 +179,7 @@ export default function ActiveRigSidebar() {
       >
         <aside
           id="docked-rig-sidebar"
-          className="w-full h-full lg:h-[calc(100vh-5.5rem)] bg-surface-container-lowest rounded-none lg:rounded-xl border-0 lg:border border-outline-variant/30 shadow-2xl lg:shadow-md flex flex-col overflow-hidden"
+          className="w-full h-full lg:h-[calc(100vh-5.5rem)] lg:max-h-[calc(100vh-5.5rem)] min-h-0 bg-surface-container-lowest rounded-none lg:rounded-xl border-0 lg:border border-outline-variant/30 shadow-2xl lg:shadow-md flex flex-col overflow-hidden"
         >
           {/* =========================================================================
            * 1. FIXED TOP PANEL (Header + RigSync Telemetry + Live 3D PC Constructor)
@@ -268,21 +268,27 @@ export default function ActiveRigSidebar() {
 
             {/* Interactive 3D PC Constructor Window (directly linked to RigForge Cart) */}
             <div className="p-2.5 sm:p-3 bg-surface-container-low/60 flex flex-col gap-2">
-              <div className="relative w-full h-48 sm:h-52 rounded-xl overflow-hidden bg-[#0b0e17] border border-primary/30 shadow-inner group">
-                <Rig3DCanvas
-                  selectedParts={selectedPartsBySlot}
-                  modelPreset="custom"
-                  explosion={0}
-                  lightingMode={lightingMode}
-                  showGlass={showGlass}
-                  cameraPreset={cameraPreset}
-                  compact={true}
-                  onSelectComponent={(slotKey) => {
-                    setActiveSlotPicker(slotKey);
-                    setIsExpanded3D(true);
-                  }}
-                  className="w-full h-full"
-                />
+              <div className="relative w-full h-44 sm:h-48 rounded-xl overflow-hidden bg-[#0b0e17] border border-primary/30 shadow-inner group">
+                {!isExpanded3D ? (
+                  <Rig3DCanvas
+                    selectedParts={selectedPartsBySlot}
+                    modelPreset="custom"
+                    explosion={0}
+                    lightingMode={lightingMode}
+                    showGlass={showGlass}
+                    cameraPreset={cameraPreset}
+                    compact={true}
+                    onSelectComponent={(slotKey) => {
+                      setActiveSlotPicker(slotKey);
+                      setIsExpanded3D(true);
+                    }}
+                    className="w-full h-full"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-xs text-slate-400 font-mono">
+                    3D-сцена открыта в полноэкранном режиме
+                  </div>
+                )}
 
                 {/* Top-Left Live Status Badge */}
                 <div className="absolute top-2 left-2.5 pointer-events-none flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-slate-950/75 backdrop-blur-md border border-white/10">
@@ -368,7 +374,10 @@ export default function ActiveRigSidebar() {
           {/* =========================================================================
            * 2. SCROLLABLE MIDDLE CONTAINER: BUILD COMPONENTS LIST
            * ========================================================================= */}
-          <div className="flex-1 min-h-0 overflow-y-auto custom-scrollbar p-3 sm:p-space-md flex flex-col gap-space-xs">
+          <div
+            style={{ overflowY: 'auto' }}
+            className="flex-1 min-h-[150px] overflow-y-auto overscroll-contain custom-scrollbar p-3 sm:p-space-md pb-6 flex flex-col gap-space-xs"
+          >
             <div className="flex items-center justify-between text-on-surface-variant px-1 pb-1">
               <span className="font-label-sm text-label-sm uppercase tracking-wider font-bold">
                 {t('buildComponents')} ({rigItems.length})
@@ -553,9 +562,9 @@ export default function ActiveRigSidebar() {
           </div>
 
           {/* Main Fullscreen Split Area: 3D Viewport + Hardware Slot Manager */}
-          <div className="flex-1 min-h-0 flex flex-col lg:flex-row overflow-hidden">
+          <div className="flex-1 h-[calc(100vh-3.5rem)] sm:h-[calc(100vh-4rem)] min-h-0 flex flex-col lg:flex-row overflow-hidden">
             {/* Left/Center: 3D Interactive Scene */}
-            <div className="relative flex-1 min-h-[340px] h-full bg-[#0b0e17] overflow-hidden">
+            <div className="relative flex-1 min-h-[300px] h-[54%] lg:h-full bg-[#0b0e17] overflow-hidden">
               <Rig3DCanvas
                 selectedParts={selectedPartsBySlot}
                 modelPreset="custom"
@@ -683,8 +692,8 @@ export default function ActiveRigSidebar() {
             </div>
 
             {/* Right Panel: Interactive 3D Hardware Slots & Live Component Swapper */}
-            <div className="w-full lg:w-[390px] bg-slate-950 border-t lg:border-t-0 lg:border-l border-white/10 flex flex-col h-[42%] lg:h-full shrink-0">
-              <div className="p-3.5 border-b border-white/10 flex items-center justify-between">
+            <div className="w-full lg:w-[400px] bg-slate-950 border-t lg:border-t-0 lg:border-l border-white/10 flex flex-col h-[46%] lg:h-[calc(100vh-4rem)] max-h-[46vh] lg:max-h-[calc(100vh-4rem)] min-h-0 overflow-hidden shrink-0">
+              <div className="p-3.5 border-b border-white/10 flex items-center justify-between shrink-0">
                 <div>
                   <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300">
                     Комплектующие в 3D-сборке
@@ -705,7 +714,10 @@ export default function ActiveRigSidebar() {
                 )}
               </div>
 
-              <div className="flex-1 overflow-y-auto custom-scrollbar p-3 flex flex-col gap-2">
+              <div
+                style={{ overflowY: 'auto', maxHeight: 'calc(100vh - 8.5rem)' }}
+                className="flex-1 min-h-0 overflow-y-auto overscroll-contain custom-scrollbar p-3 pb-10 flex flex-col gap-2.5"
+              >
                 {HARDWARE_SLOTS.map((slot) => {
                   const installed = selectedPartsBySlot[slot.key];
                   const rigItem = installed?._rigItem;
