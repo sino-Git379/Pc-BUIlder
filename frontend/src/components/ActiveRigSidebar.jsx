@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import { useTheme } from '../context/ThemeContext';
-import { getCardBadgesAndSpecs, getComponentImage } from '../data/hardwareMedia';
+import { getCardBadgesAndSpecs, getComponentImage, resolveComponentCategoryKind } from '../data/hardwareMedia';
+import Rig3DCanvas, { CAMERA_PRESETS, LIGHTING_MODES } from './3d/Rig3DCanvas';
 
 export default function ActiveRigSidebar() {
   const {
@@ -20,6 +21,62 @@ export default function ActiveRigSidebar() {
   const { t } = useTheme();
 
   const navigate = useNavigate();
+
+  // 3D Viewport Controls & Expansion States
+  const [isExpanded3D, setIsExpanded3D] = useState(false);
+  const [explosion, setExplosion] = useState(0);
+  const [isPlayingExplosion, setIsPlayingExplosion] = useState(false);
+  const [lightingMode, setLightingMode] = useState('cyan');
+  const [showGlass, setShowGlass] = useState(true);
+  const [cameraPreset, setCameraPreset] = useState('iso');
+
+  // Map rigItems into a slot-keyed dictionary: { case, cpu, gpu, memory, ... }
+  const selectedPartsBySlot = useMemo(() => {
+    const map = {};
+    for (const item of rigItems) {
+      const comp = item.component || item;
+      const kind = resolveComponentCategoryKind(comp);
+      if (kind) {
+        map[kind] = comp;
+      }
+    }
+    return map;
+  }, [rigItems]);
+
+  // Exploded view animation loop
+  useEffect(() => {
+    let animId;
+    let forward = true;
+    if (isPlayingExplosion) {
+      const step = () => {
+        setExplosion((prev) => {
+          let next = prev + (forward ? 0.012 : -0.012);
+          if (next >= 1) {
+            next = 1;
+            forward = false;
+          } else if (next <= 0) {
+            next = 0;
+            forward = true;
+          }
+          return next;
+        });
+        animId = requestAnimationFrame(step);
+      };
+      animId = requestAnimationFrame(step);
+    }
+    return () => cancelAnimationFrame(animId);
+  }, [isPlayingExplosion]);
+
+  // Handle ESC key to exit expanded 3D view
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && isExpanded3D) {
+        setIsExpanded3D(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isExpanded3D]);
 
   // Lock body scroll on mobile/tablet when full-screen drawer is active
   React.useEffect(() => {
@@ -167,76 +224,73 @@ export default function ActiveRigSidebar() {
               </div>
             </div>
 
-            {/* Interactive 3D PC Builder Action Card */}
-            <div className="p-3 sm:p-3.5 bg-gradient-to-r from-cyan-950/40 to-slate-900/60 border-b border-cyan-500/20 flex flex-col gap-2">
-              <button
-                type="button"
-                onClick={() => {
-                  navigate('/builder');
-                  setIsRigOpen(false);
-                }}
-                className="w-full rounded-xl p-3 bg-gradient-to-r from-cyan-950/80 via-slate-900 to-blue-950/80 border border-cyan-500/40 hover:border-cyan-400 flex items-center justify-between group transition-all duration-300 shadow-md hover:shadow-cyan-500/10"
-              >
-                <div className="flex items-center gap-2.5 text-left min-w-0">
-                  <div className="w-10 h-10 rounded-xl bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-cyan-300 group-hover:scale-105 transition-transform shrink-0">
-                    <span className="material-symbols-outlined text-[22px]">view_in_ar</span>
-                  </div>
-                  <div className="min-w-0">
-                    <div className="flex items-center gap-1.5">
-                      <span className="font-bold text-sm text-cyan-200">3D-Конструктор ПК</span>
-                      <span className="px-1.5 py-0.2 rounded font-mono text-[9px] font-bold bg-cyan-500/30 text-cyan-300 border border-cyan-500/40">
-                        3D LIVE
-                      </span>
-                    </div>
-                    <p className="text-[11px] text-slate-300 truncate">
-                      Интерактивная 3D-сборка и взрыв-схема
-                    </p>
-                  </div>
+            {/* Embedded 3D PC Builder Viewport Window (replaces AI Visualizer) */}
+            <div className="p-3 sm:p-3.5 bg-surface-container-low/80 border-b border-outline-variant/20 flex flex-col gap-2">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-1.5">
+                  <span className="material-symbols-outlined text-[18px] text-cyan-400 animate-pulse">view_in_ar</span>
+                  <span className="font-bold text-xs text-on-surface uppercase tracking-wider">3D Конструктор ПК</span>
+                  <span className="px-1.5 py-0.2 rounded font-mono text-[9px] font-extrabold bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">
+                    3D LIVE
+                  </span>
                 </div>
-                <span className="material-symbols-outlined text-cyan-400 group-hover:translate-x-1 transition-transform shrink-0">
-                  arrow_forward
+                <span className="text-[11px] text-on-surface-variant font-medium">
+                  {Object.keys(selectedPartsBySlot).length} / 8 узлов
                 </span>
-              </button>
-            </div>
+              </div>
 
-            {/* RigForge AI 3D Visualizer Card with Primary "Generate Build" Action */}
-            <div className="p-3 sm:p-3.5 bg-surface-container-low/60 flex flex-col gap-2">
-              <div
-                onClick={() => openModal('aiVisualizer')}
-                className="w-full rounded-xl relative overflow-hidden bg-surface-container-high border border-primary/30 flex items-center justify-between p-3 group transition-all duration-300 hover:border-primary shadow-xs cursor-pointer"
-              >
-                <div className="flex items-center gap-2.5 min-w-0">
-                  <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary group-hover:scale-105 transition-transform shrink-0">
-                    <span className="material-symbols-outlined text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>
-                      auto_awesome
+              {/* 3D Canvas Box */}
+              <div className="relative w-full h-64 rounded-xl overflow-hidden bg-slate-950 border border-cyan-500/30 shadow-inner group">
+                <Rig3DCanvas
+                  selectedParts={selectedPartsBySlot}
+                  modelPreset="custom"
+                  explosion={0}
+                  lightingMode={lightingMode}
+                  showGlass={showGlass}
+                  cameraPreset={cameraPreset}
+                  className="w-full h-full"
+                />
+
+                {/* Top-Right Quick Expand Icon Button */}
+                <div className="absolute top-2 right-2 flex items-center gap-1.5 z-10">
+                  <button
+                    type="button"
+                    onClick={() => setShowGlass((prev) => !prev)}
+                    title={showGlass ? 'Снять боковое стекло' : 'Установить стекло'}
+                    className="w-8 h-8 rounded-lg bg-black/60 hover:bg-white/20 text-slate-300 border border-white/15 backdrop-blur-md flex items-center justify-center transition-all duration-200 shadow-md text-xs"
+                  >
+                    <span className="material-symbols-outlined text-[16px]">
+                      {showGlass ? 'visibility' : 'visibility_off'}
                     </span>
-                  </div>
-                  <div className="min-w-0">
-                    <div className="flex items-center gap-1.5">
-                      <h4 className="font-body-sm text-body-sm font-bold text-on-surface truncate">
-                        {t('aiVisualizer')}
-                      </h4>
-                      <span className="px-1.5 py-0.2 rounded font-mono text-[9px] font-bold bg-secondary-fixed/40 text-on-secondary-fixed">
-                        3D CAD
-                      </span>
-                    </div>
-                    <p className="font-label-sm text-[11px] text-on-surface-variant truncate">
-                      {t('aiDesc')}
-                    </p>
-                  </div>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setIsExpanded3D(true)}
+                    title="Увеличить 3D-конструктор для детального осмотра"
+                    className="w-8 h-8 rounded-lg bg-cyan-500/90 hover:bg-cyan-400 text-black border border-cyan-400/80 backdrop-blur-md flex items-center justify-center transition-all duration-200 shadow-lg hover:scale-110 active:scale-95 group/btn"
+                  >
+                    <span className="material-symbols-outlined text-[19px] font-bold transition-transform group-hover/btn:scale-110">
+                      open_in_full
+                    </span>
+                  </button>
                 </div>
 
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    openModal('aiVisualizer');
-                  }}
-                  className="btn-interactive px-3 py-1.5 rounded-lg bg-primary hover:bg-on-primary-fixed-variant text-on-primary font-body-sm text-xs font-bold flex items-center gap-1 shadow-sm shrink-0"
-                >
-                  <span className="material-symbols-outlined text-[15px]">view_in_ar</span>
-                  <span>{t('generateBuild')}</span>
-                </button>
+                {/* Bottom Overlay Hint & Controls */}
+                <div className="absolute bottom-2 left-2 right-2 pointer-events-none flex items-center justify-between text-[10px] text-slate-300 bg-black/70 backdrop-blur-xs px-2.5 py-1.5 rounded-lg border border-white/10">
+                  <span className="flex items-center gap-1">
+                    <span className="material-symbols-outlined text-[13px] text-cyan-400">touch_app</span>
+                    Вращайте модель мышкой
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setIsExpanded3D(true)}
+                    className="pointer-events-auto text-cyan-300 hover:text-cyan-200 font-bold flex items-center gap-1 hover:underline"
+                  >
+                    <span>Рассмотреть детально</span>
+                    <span className="material-symbols-outlined text-[13px]">fullscreen</span>
+                  </button>
+                </div>
               </div>
 
               {/* Just Added To Rig Pill (Compact) */}
@@ -420,6 +474,180 @@ export default function ActiveRigSidebar() {
           </div>
         </aside>
       </div>
+
+      {/* =========================================================================
+       * Fullscreen 3D PC Builder Inspection Modal (при нажатии на иконку в углу)
+       * ========================================================================= */}
+      {isExpanded3D && (
+        <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex flex-col animate-in fade-in duration-200">
+          {/* Header */}
+          <div className="h-16 px-4 sm:px-6 border-b border-cyan-500/20 bg-slate-950/90 backdrop-blur-lg flex items-center justify-between z-20">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-cyan-500/15 border border-cyan-500/40 flex items-center justify-center text-cyan-300 shadow-inner">
+                <span className="material-symbols-outlined text-[24px]">view_in_ar</span>
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <h2 className="text-white font-extrabold text-base sm:text-lg">
+                    3D-Осмотр конфигурации ПК
+                  </h2>
+                  <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-cyan-500 text-black">
+                    3D LIVE
+                  </span>
+                </div>
+                <p className="text-slate-400 text-xs hidden sm:block">
+                  Интерактивный Three.js вьюпорт: вращайте ПК мышкой, масштабируйте колесом и исследуйте узлы
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 sm:gap-3">
+              <button
+                type="button"
+                onClick={() => {
+                  navigate('/builder');
+                  setIsExpanded3D(false);
+                  setIsRigOpen(false);
+                }}
+                className="hidden md:flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-cyan-950/80 hover:bg-cyan-900 border border-cyan-500/40 text-cyan-300 text-xs font-bold transition-all shadow-sm"
+              >
+                <span className="material-symbols-outlined text-[17px]">build</span>
+                <span>Открыть полную мастерскую</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setIsExpanded3D(false)}
+                className="w-10 h-10 rounded-xl bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all hover:scale-105 active:scale-95 border border-white/10"
+                title="Закрыть (Esc)"
+              >
+                <span className="material-symbols-outlined text-[24px]">close</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Main 3D Viewport */}
+          <div className="relative flex-1 w-full bg-radial from-slate-900 via-slate-950 to-black overflow-hidden select-none">
+            <Rig3DCanvas
+              selectedParts={selectedPartsBySlot}
+              modelPreset="custom"
+              explosion={explosion}
+              lightingMode={lightingMode}
+              showGlass={showGlass}
+              cameraPreset={cameraPreset}
+              className="w-full h-full"
+            />
+
+            {/* Top Camera Presets Floating Bar */}
+            <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 p-1.5 rounded-2xl bg-slate-950/80 border border-cyan-500/30 backdrop-blur-xl shadow-2xl">
+              {CAMERA_PRESETS.map((preset) => (
+                <button
+                  key={preset.id}
+                  type="button"
+                  onClick={() => setCameraPreset(preset.id)}
+                  className={`px-3 py-1.5 rounded-xl font-label-sm text-xs font-bold transition-all flex items-center gap-1.5 ${
+                    cameraPreset === preset.id
+                      ? 'bg-cyan-500 text-black shadow-md'
+                      : 'text-slate-300 hover:text-white hover:bg-white/10'
+                  }`}
+                >
+                  <span className="material-symbols-outlined text-[15px]">
+                    {preset.id === 'iso' ? 'rotate_90_degrees_ccw' : preset.id === 'glass' ? 'visibility' : preset.id === 'front' ? 'crop_portrait' : 'layers'}
+                  </span>
+                  <span className="hidden sm:inline">{preset.name}</span>
+                </button>
+              ))}
+            </div>
+
+            {/* Bottom-Left Lighting & Glass Controls */}
+            <div className="absolute bottom-4 left-4 z-20 flex flex-col gap-2 p-3 rounded-2xl bg-slate-950/85 border border-cyan-500/30 backdrop-blur-xl shadow-2xl max-w-[280px]">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                  Подсветка & Стекло
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setShowGlass((prev) => !prev)}
+                  className={`px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1 transition-all ${
+                    showGlass
+                      ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40'
+                      : 'bg-white/10 text-slate-400 hover:bg-white/15'
+                  }`}
+                >
+                  <span className="material-symbols-outlined text-[14px]">
+                    {showGlass ? 'visibility' : 'visibility_off'}
+                  </span>
+                  <span>{showGlass ? 'Стекло вкл' : 'Стекло снято'}</span>
+                </button>
+              </div>
+
+              {/* Lighting Profiles */}
+              <div className="flex items-center gap-1.5 pt-1">
+                {LIGHTING_MODES.map((mode) => (
+                  <button
+                    key={mode.id}
+                    type="button"
+                    onClick={() => setLightingMode(mode.id)}
+                    title={mode.name}
+                    className={`w-7 h-7 rounded-lg border flex items-center justify-center transition-all ${
+                      lightingMode === mode.id
+                        ? 'border-cyan-400 scale-110 shadow-lg'
+                        : 'border-white/20 opacity-70 hover:opacity-100 hover:scale-105'
+                    }`}
+                    style={{
+                      backgroundColor: `#${mode.primaryColor.toString(16).padStart(6, '0')}`,
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Bottom-Right Exploded View Disassembly Slider */}
+            <div className="absolute bottom-4 right-4 z-20 flex flex-col gap-2 p-3 sm:p-4 rounded-2xl bg-slate-950/85 border border-cyan-500/30 backdrop-blur-xl shadow-2xl w-[300px] sm:w-[340px]">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-1.5">
+                  <span className="material-symbols-outlined text-[18px] text-cyan-400">scatter_plot</span>
+                  <span className="text-xs font-bold text-white uppercase tracking-wider">
+                    Взрыв-схема (Exploded View)
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setIsPlayingExplosion((prev) => !prev)}
+                  className={`p-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center ${
+                    isPlayingExplosion
+                      ? 'bg-cyan-500 text-black shadow-md'
+                      : 'bg-white/10 text-cyan-300 hover:bg-white/20'
+                  }`}
+                  title={isPlayingExplosion ? 'Пауза' : 'Авто-анимация'}
+                >
+                  <span className="material-symbols-outlined text-[16px]">
+                    {isPlayingExplosion ? 'pause' : 'play_arrow'}
+                  </span>
+                </button>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <input
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                  value={explosion}
+                  onChange={(e) => {
+                    setExplosion(parseFloat(e.target.value));
+                    setIsPlayingExplosion(false);
+                  }}
+                  className="w-full accent-cyan-400 cursor-pointer h-2 bg-slate-800 rounded-lg"
+                />
+                <span className="font-mono text-xs font-bold text-cyan-300 w-10 text-right">
+                  {Math.round(explosion * 100)}%
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
