@@ -27,7 +27,7 @@ export default function MobileBottomNav() {
     if (user) {
       navigate('/profile');
     } else {
-      openModal('auth', { initialTab: 'login' });
+      navigate('/accounts/login');
     }
   };
 

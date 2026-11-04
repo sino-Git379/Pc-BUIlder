@@ -388,21 +388,48 @@ export function AppProvider({ children }) {
         quantity: 1,
       };
 
+      // Helper to identify category key for strictly one part per category
+      const getCategoryKey = (item) => {
+        const c = item.component || item;
+        if (!c) return null;
+        if (c.category_id != null) return `cat-id-${c.category_id}`;
+        if (typeof c.category === 'number') return `cat-id-${c.category}`;
+        if (typeof c.category === 'object' && c.category?.id != null) return `cat-id-${c.category.id}`;
+        if (c.category_name) return `cat-name-${c.category_name.toLowerCase().trim()}`;
+        if (typeof c.category === 'string') return `cat-name-${c.category.toLowerCase().trim()}`;
+        if (typeof c.category === 'object' && c.category?.name) return `cat-name-${c.category.name.toLowerCase().trim()}`;
+        if (typeof c.category === 'object' && c.category?.slug) return `cat-slug-${c.category.slug.toLowerCase().trim()}`;
+        return null;
+      };
+
       setRigItems((prev) => {
-        const existingIdx = prev.findIndex(
-          (item) =>
+        const targetCategory = getCategoryKey(entry);
+        let replacedItem = null;
+
+        const filtered = prev.filter((item) => {
+          const itemCat = getCategoryKey(item);
+          const isSameCategory = targetCategory && itemCat && targetCategory === itemCat;
+          const isSameItem =
             (listingId && item.listing_id === listingId) ||
-            (!listingId && item.component_id === compId)
-        );
-        if (existingIdx > -1) {
-          const updated = [...prev];
-          updated[existingIdx] = {
-            ...updated[existingIdx],
-            quantity: updated[existingIdx].quantity + 1,
-          };
-          return updated;
+            (!listingId && item.component_id === compId);
+          if (isSameCategory || isSameItem) {
+            replacedItem = item;
+            return false;
+          }
+          return true;
+        });
+
+        if (replacedItem && (replacedItem.component?.name || replacedItem.id) !== (comp.name || entry.id)) {
+          addToast({
+            type: 'info',
+            title: 'Деталь заменена / Part Replaced',
+            message: `${replacedItem.component?.name || 'Предыдущая деталь'} заменена на ${comp.name}.`,
+            duration: 3500,
+          });
         }
-        return [entry, ...prev];
+
+        // В сборке строго один товар каждого типа/категории
+        return [{ ...entry, quantity: 1 }, ...filtered];
       });
 
       setJustAddedItem(entry);
@@ -428,8 +455,9 @@ export function AppProvider({ children }) {
       prev
         .map((item) => {
           if (item.id !== itemId) return item;
-          const nextQty = item.quantity + delta;
-          return nextQty > 0 ? { ...item, quantity: nextQty } : null;
+          // Strictly one component per category in PC builder
+          if (delta < 0) return null;
+          return { ...item, quantity: 1 };
         })
         .filter(Boolean)
     );

@@ -288,7 +288,7 @@ export default function Navbar() {
               <div className="flex items-center gap-space-xs">
                 <button
                   type="button"
-                  onClick={() => openModal('auth', { initialTab: 'login' })}
+                  onClick={() => navigate('/accounts/login')}
                   className="btn-interactive px-space-md py-1.5 rounded-lg bg-primary hover:bg-on-primary-fixed-variant text-on-primary font-body-sm text-body-sm font-bold shadow-sm flex items-center gap-1.5"
                 >
                   <span className="material-symbols-outlined text-[18px]">person</span>
@@ -347,19 +347,33 @@ export default function Navbar() {
                 )}
 
                 {user.role === 'Admin' && (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setMenuOpen(false);
-                      openModal('adminPanel');
-                    }}
-                    className="px-4 py-2 text-left font-body-sm text-body-sm text-tertiary font-semibold hover:bg-surface-container-low flex items-center gap-2.5 transition-colors"
-                  >
-                    <span className="material-symbols-outlined text-[18px] text-tertiary">
-                      admin_panel_settings
-                    </span>
-                    <span>{t('adminPanel')}</span>
-                  </button>
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setMenuOpen(false);
+                        openModal('adminPanel');
+                      }}
+                      className="px-4 py-2 text-left font-body-sm text-body-sm text-tertiary font-semibold hover:bg-surface-container-low flex items-center gap-2.5 transition-colors"
+                    >
+                      <span className="material-symbols-outlined text-[18px] text-tertiary">
+                        admin_panel_settings
+                      </span>
+                      <span>{t('adminPanel')}</span>
+                    </button>
+                    <a
+                      href="/secret-management/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setMenuOpen(false)}
+                      className="px-4 py-2 text-left font-body-sm text-body-sm text-tertiary hover:bg-surface-container-low flex items-center gap-2.5 transition-colors"
+                    >
+                      <span className="material-symbols-outlined text-[18px] text-tertiary">
+                        security
+                      </span>
+                      <span>Django Admin</span>
+                    </a>
+                  </>
                 )}
 
                 <button

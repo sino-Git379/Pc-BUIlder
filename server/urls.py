@@ -1,12 +1,22 @@
 from django.contrib import admin
 from django.urls import path, include
+from django.http import Http404
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 from django.views.generic import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
-from .page_views import MarketplacePage, ComponentsPage, ComponentPickerPage, BuildsPage, BuilderPage, ListingDetailPage
+from .page_views import (
+    MarketplacePage, ComponentsPage, ComponentPickerPage,
+    BuildsPage, BuilderPage, ListingDetailPage,
+    LoginPageView, RegisterPageView
+)
 
 spa_view = TemplateView.as_view(template_name='spa_index.html')
+
+
+def admin_hidden_404(request, *args, **kwargs):
+    raise Http404("Page not found")
+
 
 urlpatterns = [
     path('', MarketplacePage.as_view(), name='marketplace'),
@@ -19,10 +29,16 @@ urlpatterns = [
     path('profile/', spa_view, name='profile-page'),
     path('components/', ComponentsPage.as_view(), name='components'),
     path('components/picker/', ComponentPickerPage.as_view(), name='component-picker'),
-    path('accounts/login/', spa_view, name='sign-in'),
-    path('accounts/register/', spa_view, name='create-account'),
+    path('accounts/login/', LoginPageView.as_view(), name='sign-in'),
+    path('login/', LoginPageView.as_view(), name='login-direct'),
+    path('accounts/register/', RegisterPageView.as_view(), name='create-account'),
+    path('register/', RegisterPageView.as_view(), name='register-direct'),
     path('accounts/session/', spa_view, name='account-menu'),
-    path('admin/', admin.site.urls),
+    # Protected custom admin path instead of standard /admin/
+    path('secret-management/', admin.site.urls),
+    # Conceal standard admin path with 404
+    path('admin/', admin_hidden_404),
+    path('admin/<path:subpath>', admin_hidden_404),
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     path('api/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),

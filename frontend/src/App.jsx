@@ -12,28 +12,26 @@ import MarketplaceAndBuilderPage from './pages/MarketplaceAndBuilderPage';
 import CheckoutEscrowPage from './pages/CheckoutEscrowPage';
 import LiveMessengerPage from './pages/LiveMessengerPage';
 import ProfilePage from './pages/ProfilePage';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 
 function RouteSynchronizer() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { setIsRigOpen, openModal, user } = useApp();
+  const { setIsRigOpen, user } = useApp();
 
   useEffect(() => {
     const path = location.pathname;
     if (path.startsWith('/builder')) {
       setIsRigOpen(true);
-    } else if (path.startsWith('/accounts/login')) {
-      openModal('auth', { initialTab: 'login' });
-    } else if (path.startsWith('/accounts/register')) {
-      openModal('auth', { initialTab: 'register' });
     } else if (path.startsWith('/accounts/session')) {
       if (user) {
         navigate('/profile');
       } else {
-        openModal('auth', { initialTab: 'login' });
+        navigate('/accounts/login');
       }
     }
-  }, [location.pathname, setIsRigOpen, openModal, user, navigate]);
+  }, [location.pathname, setIsRigOpen, user, navigate]);
 
   return null;
 }
@@ -53,6 +51,10 @@ export default function App() {
                 <Route path="/builds/*" element={<MarketplaceAndBuilderPage />} />
                 <Route path="/components/*" element={<MarketplaceAndBuilderPage />} />
                 <Route path="/parts/*" element={<MarketplaceAndBuilderPage />} />
+                <Route path="/accounts/login" element={<LoginPage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/accounts/register" element={<RegisterPage />} />
+                <Route path="/register" element={<RegisterPage />} />
                 <Route path="/accounts/*" element={<MarketplaceAndBuilderPage />} />
                 <Route path="/checkout/*" element={<CheckoutEscrowPage />} />
                 <Route path="/profile/*" element={<ProfilePage />} />

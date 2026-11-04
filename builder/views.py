@@ -55,12 +55,16 @@ class BuildViewSet(viewsets.ModelViewSet):
         except (TypeError, ValueError):
             return Response({'quantity': ['Enter a positive whole number.']}, status=status.HTTP_400_BAD_REQUEST)
 
+        # Replace any existing component of the same category: strictly one component per category
+        if component.category_id:
+            BuildItem.objects.filter(build=build, component__category_id=component.category_id).delete()
+
         build_item, created = BuildItem.objects.get_or_create(
-            build=build, component=component, defaults={'quantity': quantity}
+            build=build, component=component, defaults={'quantity': 1}
         )
 
         if not created:
-            build_item.quantity = quantity
+            build_item.quantity = 1
             build_item.save()
 
         # get_object() prefetches items; discard that cache after mutating the build.
