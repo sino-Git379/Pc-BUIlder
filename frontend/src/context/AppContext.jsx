@@ -62,7 +62,9 @@ export function AppProvider({ children }) {
     } catch (_) {}
     return [];
   });
-  const [isRigOpen, setIsRigOpen] = useState(false);
+  const [isRigOpen, setIsRigOpen] = useState(() => {
+    return typeof window !== 'undefined' ? window.innerWidth >= 1024 : true;
+  });
   const [justAddedItem, setJustAddedItem] = useState(null);
   const [savedBuilds, setSavedBuilds] = useState([]);
   const [orders, setOrders] = useState([]);

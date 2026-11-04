@@ -26,29 +26,123 @@ export const STITCH_IMAGES = {
 };
 
 export function resolveComponentCategoryKind(component = {}) {
-  const raw = `${component.category_name || ''} ${component.name || ''} ${component.brand || ''}`.toLowerCase();
-  if (raw.includes('gpu') || raw.includes('видеокарт') || raw.includes('rtx') || raw.includes('radeon') || raw.includes('graphics')) {
+  const catObjName =
+    typeof component.category === 'object' && component.category !== null
+      ? `${component.category.name || ''} ${component.category.slug || ''}`
+      : typeof component.category === 'string'
+      ? component.category
+      : '';
+  const raw = `${component.category_name || ''} ${catObjName} ${component.name || ''} ${component.brand || ''}`.toLowerCase();
+
+  if (
+    raw.includes('gpu') ||
+    raw.includes('видеокарт') ||
+    raw.includes('rtx') ||
+    raw.includes('gtx') ||
+    raw.includes('radeon') ||
+    raw.includes('geforce') ||
+    raw.includes('graphics') ||
+    raw.includes('rx 7')
+  ) {
     return 'gpu';
   }
-  if (raw.includes('cpu') || raw.includes('процессор') || raw.includes('ryzen') || raw.includes('core i')) {
+  if (
+    raw.includes('cpu') ||
+    raw.includes('processor') ||
+    raw.includes('процессор') ||
+    raw.includes('ryzen') ||
+    raw.includes('core i') ||
+    raw.includes('threadripper') ||
+    raw.includes('pentium') ||
+    raw.includes('xeon')
+  ) {
     return 'cpu';
   }
-  if (raw.includes('motherboard') || raw.includes('материнск') || raw.includes('b650') || raw.includes('z790') || raw.includes('b760')) {
+  if (
+    raw.includes('motherboard') ||
+    raw.includes('mainboard') ||
+    raw.includes('материнск') ||
+    raw.includes('b650') ||
+    raw.includes('x670') ||
+    raw.includes('z790') ||
+    raw.includes('b760') ||
+    raw.includes('b550') ||
+    raw.includes('x870') ||
+    raw.includes('tomahawk') ||
+    raw.includes('maximus') ||
+    raw.includes('aorus')
+  ) {
     return 'motherboard';
   }
-  if (raw.includes('ram') || raw.includes('memory') || raw.includes('память') || raw.includes('ddr') || raw.includes('dominator') || raw.includes('flare') || raw.includes('vengeance')) {
+  if (
+    raw.includes('ram') ||
+    raw.includes('memory') ||
+    raw.includes('память') ||
+    raw.includes('озу') ||
+    raw.includes('ddr') ||
+    raw.includes('dominator') ||
+    raw.includes('flare') ||
+    raw.includes('vengeance') ||
+    raw.includes('trident') ||
+    raw.includes('fury')
+  ) {
     return 'memory';
   }
-  if (raw.includes('storage') || raw.includes('nvme') || raw.includes('ssd') || raw.includes('990 pro')) {
+  if (
+    raw.includes('storage') ||
+    raw.includes('накопител') ||
+    raw.includes('nvme') ||
+    raw.includes('ssd') ||
+    raw.includes('hdd') ||
+    raw.includes('m.2') ||
+    raw.includes('990 pro') ||
+    raw.includes('980 pro') ||
+    raw.includes('sn850')
+  ) {
     return 'storage';
   }
-  if (raw.includes('cool') || raw.includes('охлажден') || raw.includes('kraken') || raw.includes('aio')) {
+  if (
+    raw.includes('cool') ||
+    raw.includes('кулер') ||
+    raw.includes('охлажден') ||
+    raw.includes('сжо') ||
+    raw.includes('kraken') ||
+    raw.includes('aio') ||
+    raw.includes('noctua') ||
+    raw.includes('nh-d15') ||
+    raw.includes('liquid') ||
+    raw.includes('arctic') ||
+    raw.includes('deepcool')
+  ) {
     return 'cooling';
   }
-  if (raw.includes('psu') || raw.includes('power') || raw.includes('блок питания') || raw.includes('блоки питания') || raw.includes('gx-850') || raw.includes('rm750')) {
+  if (
+    raw.includes('psu') ||
+    raw.includes('power') ||
+    raw.includes('блок питания') ||
+    raw.includes('блоки питания') ||
+    raw.includes('gx-850') ||
+    raw.includes('rm750') ||
+    raw.includes('rm850') ||
+    raw.includes('rm1000') ||
+    raw.includes('seasonic') ||
+    raw.includes('850w') ||
+    raw.includes('750w') ||
+    raw.includes('1000w')
+  ) {
     return 'psu';
   }
-  if (raw.includes('case') || raw.includes('chassis') || raw.includes('корпус') || raw.includes('o11') || raw.includes('airflow') || raw.includes('flow') || raw.includes('lancool')) {
+  if (
+    raw.includes('case') ||
+    raw.includes('chassis') ||
+    raw.includes('корпус') ||
+    raw.includes('o11') ||
+    raw.includes('airflow') ||
+    raw.includes('4000d') ||
+    raw.includes('5000d') ||
+    raw.includes('flow') ||
+    raw.includes('lancool')
+  ) {
     return 'case';
   }
   return 'other';

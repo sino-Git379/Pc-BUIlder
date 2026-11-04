@@ -5,13 +5,26 @@ import { useTheme } from '../context/ThemeContext';
 import { getCardBadgesAndSpecs, getComponentImage, resolveComponentCategoryKind } from '../data/hardwareMedia';
 import Rig3DCanvas, { CAMERA_PRESETS, LIGHTING_MODES } from './3d/Rig3DCanvas';
 
+const HARDWARE_SLOTS = [
+  { key: 'motherboard', label: 'Материнская плата', icon: 'developer_board' },
+  { key: 'cpu', label: 'Процессор (CPU)', icon: 'memory' },
+  { key: 'gpu', label: 'Видеокарта (GPU)', icon: 'videogame_asset' },
+  { key: 'memory', label: 'Оперативная память (RAM)', icon: 'storage' },
+  { key: 'cooling', label: 'Охлаждение', icon: 'mode_fan' },
+  { key: 'storage', label: 'Накопитель (SSD)', icon: 'hard_drive' },
+  { key: 'psu', label: 'Блок питания (PSU)', icon: 'bolt' },
+  { key: 'case', label: 'Корпус ПК', icon: 'desktop_windows' },
+];
+
 export default function ActiveRigSidebar() {
   const {
     rigItems,
+    listings,
+    components,
     isRigOpen,
     setIsRigOpen,
     justAddedItem,
-    updateRigQty,
+    addToRig,
     removeFromRig,
     clearRig,
     rigMetrics,
@@ -22,26 +35,54 @@ export default function ActiveRigSidebar() {
 
   const navigate = useNavigate();
 
-  // 3D Viewport Controls & Expansion States
+  // 3D Viewport Controls & Fullscreen Editor States
   const [isExpanded3D, setIsExpanded3D] = useState(false);
   const [explosion, setExplosion] = useState(0);
   const [isPlayingExplosion, setIsPlayingExplosion] = useState(false);
   const [lightingMode, setLightingMode] = useState('cyan');
   const [showGlass, setShowGlass] = useState(true);
   const [cameraPreset, setCameraPreset] = useState('iso');
+  const [activeSlotPicker, setActiveSlotPicker] = useState(null);
 
-  // Map rigItems into a slot-keyed dictionary: { case, cpu, gpu, memory, ... }
+  // Map rigItems into a slot-keyed dictionary: { case, cpu, gpu, memory, motherboard, cooling, storage, psu }
   const selectedPartsBySlot = useMemo(() => {
     const map = {};
     for (const item of rigItems) {
       const comp = item.component || item;
       const kind = resolveComponentCategoryKind(comp);
-      if (kind) {
-        map[kind] = comp;
+      if (kind && kind !== 'other') {
+        map[kind] = { ...comp, _rigItem: item };
       }
     }
     return map;
   }, [rigItems]);
+
+  // Catalog items grouped by slot for quick replacement inside the Fullscreen 3D Editor
+  const catalogBySlot = useMemo(() => {
+    const map = {
+      motherboard: [],
+      cpu: [],
+      gpu: [],
+      memory: [],
+      cooling: [],
+      storage: [],
+      psu: [],
+      case: [],
+    };
+    const seenCompIds = new Set();
+    const sourceList = [...(listings || []), ...(components || [])];
+    for (const entry of sourceList) {
+      const comp = entry.component || entry;
+      const cid = comp?.id || entry?.id;
+      if (!comp || seenCompIds.has(cid)) continue;
+      const kind = resolveComponentCategoryKind(comp);
+      if (map[kind]) {
+        seenCompIds.add(cid);
+        map[kind].push(entry);
+      }
+    }
+    return map;
+  }, [listings, components]);
 
   // Exploded view animation loop
   useEffect(() => {
@@ -78,16 +119,16 @@ export default function ActiveRigSidebar() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isExpanded3D]);
 
-  // Lock body scroll on mobile/tablet when full-screen drawer is active
-  React.useEffect(() => {
-    if (isRigOpen && window.innerWidth < 1024) {
+  // Lock body scroll on mobile/tablet when full-screen drawer is active or 3D fullscreen is open
+  useEffect(() => {
+    if ((isRigOpen && window.innerWidth < 1024) || isExpanded3D) {
       const originalOverflow = document.body.style.overflow;
       document.body.style.overflow = 'hidden';
       return () => {
         document.body.style.overflow = originalOverflow;
       };
     }
-  }, [isRigOpen]);
+  }, [isRigOpen, isExpanded3D]);
 
   const latestItem = justAddedItem || rigItems[0] || null;
 
@@ -114,6 +155,8 @@ export default function ActiveRigSidebar() {
       ? t('zeroPartsSelected')
       : `${rigMetrics.totalParts} ${rigMetrics.totalParts === 1 ? t('partSelected') : t('partsSelected')}`;
 
+  const installedSlotsCount = Object.keys(selectedPartsBySlot).length;
+
   return (
     <>
       {/* Mobile Backdrop for Rig Drawer */}
@@ -128,7 +171,7 @@ export default function ActiveRigSidebar() {
       {/* Responsive Builder Drawer: Full Screen on Mobile/Tablet, Fixed Docked Split-Panel on Desktop */}
       <div
         aria-hidden={!isRigOpen}
-        className={`sidebar-slide-transition shrink-0 z-50 lg:z-30 ${
+        className={`sidebar-slide-transition shrink-0 z-40 lg:z-30 ${
           isRigOpen
             ? 'fixed inset-0 w-full max-w-full opacity-100 translate-x-0 pointer-events-auto p-0 lg:p-0 lg:sticky lg:top-20 lg:self-start lg:w-[410px] lg:max-w-[410px] lg:ml-gutter'
             : 'fixed lg:static inset-0 w-0 max-w-0 opacity-0 translate-x-full lg:translate-x-10 pointer-events-none m-0 p-0'
@@ -139,25 +182,25 @@ export default function ActiveRigSidebar() {
           className="w-full h-full lg:h-[calc(100vh-5.5rem)] bg-surface-container-lowest rounded-none lg:rounded-xl border-0 lg:border border-outline-variant/30 shadow-2xl lg:shadow-md flex flex-col overflow-hidden"
         >
           {/* =========================================================================
-           * 1. FIXED TOP PANEL (Header + RigSync Telemetry + AI Visualizer & Generate Build)
+           * 1. FIXED TOP PANEL (Header + RigSync Telemetry + Live 3D PC Constructor)
            * ========================================================================= */}
           <div className="shrink-0 flex flex-col bg-surface-container-lowest border-b border-outline-variant/20">
             {/* Header */}
-            <div className="p-3.5 sm:p-space-md flex items-center justify-between border-b border-outline-variant/15">
+            <div className="px-3.5 py-2.5 sm:px-space-md sm:py-3 flex items-center justify-between border-b border-outline-variant/15">
               <div className="flex items-center gap-space-sm">
-                <div className="w-9 h-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
-                  <span className="material-symbols-outlined text-[20px]">build_circle</span>
+                <div className="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+                  <span className="material-symbols-outlined text-[19px]">build_circle</span>
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <h3 className="font-headline-sm text-headline-sm font-bold text-on-surface">
+                    <h3 className="font-headline-sm text-sm sm:text-base font-bold text-on-surface">
                       {t('rigCartTitle')}
                     </h3>
-                    <span className="px-2 py-0.5 rounded-full bg-primary/10 text-primary font-label-sm text-[11px] font-bold transition-all">
+                    <span className="px-2 py-0.5 rounded-full bg-primary/10 text-primary font-label-sm text-[10px] font-bold transition-all">
                       {partsCountLabel}
                     </span>
                   </div>
-                  <p className="font-body-sm text-[12px] text-on-surface-variant">
+                  <p className="font-body-sm text-[11px] text-on-surface-variant">
                     {t('activeBuild')}
                   </p>
                 </div>
@@ -177,70 +220,55 @@ export default function ActiveRigSidebar() {
                 <button
                   id="close-rig-drawer-btn"
                   onClick={() => setIsRigOpen(false)}
-                  className="btn-interactive p-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container"
-                  title={t('collapseCart')}
+                  className="btn-interactive p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container"
+                  title="Close Builder Drawer"
                   type="button"
                 >
-                  <span className="material-symbols-outlined text-[20px]">close</span>
+                  <span className="material-symbols-outlined text-[19px]">close</span>
                 </button>
               </div>
             </div>
 
-            {/* RigSync v4.2 Live Telemetry & Compatibility Banner */}
+            {/* RigSync Compatibility Telemetry Banner (100% Compatible) */}
             <div
-              className={`px-3.5 py-2.5 sm:px-space-md sm:py-space-sm flex items-start gap-space-sm transition-colors duration-300 border-b border-outline-variant/15 ${
-                rigMetrics.isCompatible ? 'bg-secondary-fixed/20' : 'bg-error-container/35'
+              className={`px-3.5 py-2 border-b flex items-start gap-2 transition-colors ${
+                rigMetrics.isCompatible
+                  ? 'bg-secondary-fixed/20 border-secondary/20'
+                  : 'bg-error-container/30 border-error/30'
               }`}
             >
-              <div
-                className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5 transition-colors duration-300 ${
-                  rigMetrics.isCompatible
-                    ? 'bg-secondary text-on-secondary'
-                    : 'bg-error text-on-error'
+              <span
+                className={`material-symbols-outlined text-[17px] mt-0.5 shrink-0 ${
+                  rigMetrics.isCompatible ? 'text-secondary' : 'text-error'
                 }`}
+                style={{ fontVariationSettings: "'FILL' 1" }}
               >
-                <span className="material-symbols-outlined text-[15px]">
-                  {rigMetrics.isCompatible ? 'check' : 'priority_high'}
-                </span>
-              </div>
+                {rigMetrics.isCompatible ? 'verified' : 'warning'}
+              </span>
               <div className="flex-1 min-w-0">
-                <div className="flex items-center justify-between gap-1 flex-wrap">
+                <div className="flex items-center justify-between gap-1">
                   <span
-                    className={`font-label-sm text-[11px] font-bold uppercase tracking-wide ${
+                    className={`font-label-md text-[11px] font-bold uppercase tracking-wider ${
                       rigMetrics.isCompatible ? 'text-on-secondary-fixed-variant' : 'text-error'
                     }`}
                   >
                     {rigMetrics.isCompatible
-                      ? t('fullyCompatible')
+                      ? `100% ${t('compatibleStatus')}`
                       : t('compatibilityAlert')}
                   </span>
                   <span className="font-label-sm text-[10px] font-semibold text-secondary px-1.5 py-0.5 rounded bg-surface-container-lowest">
                     {t('estWattage')}: {rigMetrics.totalTdp}W / {rigMetrics.psuWattage}W
                   </span>
                 </div>
-                <p className="font-body-sm text-[11px] text-on-surface-variant mt-0.5 leading-snug">
+                <p className="font-body-sm text-[10px] text-on-surface-variant mt-0.5 leading-snug truncate">
                   {rigMetrics.summaryNote}
                 </p>
               </div>
             </div>
 
-            {/* Embedded 3D PC Builder Viewport Window (replaces AI Visualizer) */}
-            <div className="p-3 sm:p-3.5 bg-surface-container-low/80 border-b border-outline-variant/20 flex flex-col gap-2">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-1.5">
-                  <span className="material-symbols-outlined text-[18px] text-cyan-400 animate-pulse">view_in_ar</span>
-                  <span className="font-bold text-xs text-on-surface uppercase tracking-wider">3D Конструктор ПК</span>
-                  <span className="px-1.5 py-0.2 rounded font-mono text-[9px] font-extrabold bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">
-                    3D LIVE
-                  </span>
-                </div>
-                <span className="text-[11px] text-on-surface-variant font-medium">
-                  {Object.keys(selectedPartsBySlot).length} / 8 узлов
-                </span>
-              </div>
-
-              {/* 3D Canvas Box */}
-              <div className="relative w-full h-64 rounded-xl overflow-hidden bg-slate-950 border border-cyan-500/30 shadow-inner group">
+            {/* Interactive 3D PC Constructor Window (directly linked to RigForge Cart) */}
+            <div className="p-2.5 sm:p-3 bg-surface-container-low/60 flex flex-col gap-2">
+              <div className="relative w-full h-48 sm:h-52 rounded-xl overflow-hidden bg-[#0b0e17] border border-primary/30 shadow-inner group">
                 <Rig3DCanvas
                   selectedParts={selectedPartsBySlot}
                   modelPreset="custom"
@@ -248,18 +276,44 @@ export default function ActiveRigSidebar() {
                   lightingMode={lightingMode}
                   showGlass={showGlass}
                   cameraPreset={cameraPreset}
+                  compact={true}
+                  onSelectComponent={(slotKey) => {
+                    setActiveSlotPicker(slotKey);
+                    setIsExpanded3D(true);
+                  }}
                   className="w-full h-full"
                 />
 
-                {/* Top-Right Quick Expand Icon Button */}
-                <div className="absolute top-2 right-2 flex items-center gap-1.5 z-10">
+                {/* Top-Left Live Status Badge */}
+                <div className="absolute top-2 left-2.5 pointer-events-none flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-slate-950/75 backdrop-blur-md border border-white/10">
+                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+                  <span className="font-mono text-[10px] font-bold text-slate-200 tracking-wide">
+                    3D СБОРКА ({installedSlotsCount}/8)
+                  </span>
+                </div>
+
+                {/* Top-Right Controls: Camera Cycle, Glass Toggle & Fullscreen Expand Button */}
+                <div className="absolute top-2 right-2 flex items-center gap-1 z-10">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const idx = CAMERA_PRESETS.findIndex((p) => p.id === cameraPreset);
+                      const nextPreset = CAMERA_PRESETS[(idx + 1) % CAMERA_PRESETS.length];
+                      setCameraPreset(nextPreset.id);
+                    }}
+                    title="Сменить ракурс камеры"
+                    className="w-7 h-7 rounded-lg bg-slate-950/75 hover:bg-slate-800 text-slate-200 border border-white/15 backdrop-blur-md flex items-center justify-center transition-all shadow-sm"
+                  >
+                    <span className="material-symbols-outlined text-[15px]">cameraswitch</span>
+                  </button>
+
                   <button
                     type="button"
                     onClick={() => setShowGlass((prev) => !prev)}
-                    title={showGlass ? 'Снять боковое стекло' : 'Установить стекло'}
-                    className="w-8 h-8 rounded-lg bg-black/60 hover:bg-white/20 text-slate-300 border border-white/15 backdrop-blur-md flex items-center justify-center transition-all duration-200 shadow-md text-xs"
+                    title={showGlass ? 'Снять боковое стекло' : 'Закрыть боковое стекло'}
+                    className="w-7 h-7 rounded-lg bg-slate-950/75 hover:bg-slate-800 text-slate-200 border border-white/15 backdrop-blur-md flex items-center justify-center transition-all shadow-sm"
                   >
-                    <span className="material-symbols-outlined text-[16px]">
+                    <span className="material-symbols-outlined text-[15px]">
                       {showGlass ? 'visibility' : 'visibility_off'}
                     </span>
                   </button>
@@ -267,27 +321,25 @@ export default function ActiveRigSidebar() {
                   <button
                     type="button"
                     onClick={() => setIsExpanded3D(true)}
-                    title="Увеличить 3D-конструктор для детального осмотра"
-                    className="w-8 h-8 rounded-lg bg-cyan-500/90 hover:bg-cyan-400 text-black border border-cyan-400/80 backdrop-blur-md flex items-center justify-center transition-all duration-200 shadow-lg hover:scale-110 active:scale-95 group/btn"
+                    title="Развернуть 3D-конструктор на весь экран"
+                    className="w-7 h-7 rounded-lg bg-primary hover:bg-primary/90 text-on-primary border border-primary/50 backdrop-blur-md flex items-center justify-center transition-all duration-200 shadow-md hover:scale-105 active:scale-95"
                   >
-                    <span className="material-symbols-outlined text-[19px] font-bold transition-transform group-hover/btn:scale-110">
-                      open_in_full
-                    </span>
+                    <span className="material-symbols-outlined text-[16px]">open_in_full</span>
                   </button>
                 </div>
 
-                {/* Bottom Overlay Hint & Controls */}
-                <div className="absolute bottom-2 left-2 right-2 pointer-events-none flex items-center justify-between text-[10px] text-slate-300 bg-black/70 backdrop-blur-xs px-2.5 py-1.5 rounded-lg border border-white/10">
-                  <span className="flex items-center gap-1">
-                    <span className="material-symbols-outlined text-[13px] text-cyan-400">touch_app</span>
-                    Вращайте модель мышкой
+                {/* Bottom Interactive Hint Bar */}
+                <div className="absolute bottom-1.5 left-2 right-2 pointer-events-none flex items-center justify-between text-[10px] text-slate-300 bg-slate-950/75 backdrop-blur-xs px-2.5 py-1 rounded-lg border border-white/10">
+                  <span className="flex items-center gap-1 truncate">
+                    <span className="material-symbols-outlined text-[13px] text-cyan-400">3d_rotation</span>
+                    <span>Вращайте мышью • Колесо — зум</span>
                   </span>
                   <button
                     type="button"
                     onClick={() => setIsExpanded3D(true)}
-                    className="pointer-events-auto text-cyan-300 hover:text-cyan-200 font-bold flex items-center gap-1 hover:underline"
+                    className="pointer-events-auto text-cyan-300 hover:text-cyan-200 font-bold flex items-center gap-0.5 shrink-0 ml-2"
                   >
-                    <span>Рассмотреть детально</span>
+                    <span>На весь экран</span>
                     <span className="material-symbols-outlined text-[13px]">fullscreen</span>
                   </button>
                 </div>
@@ -295,9 +347,9 @@ export default function ActiveRigSidebar() {
 
               {/* Just Added To Rig Pill (Compact) */}
               {latestItem && (
-                <div className="px-2.5 py-1.5 rounded-lg bg-surface-container-lowest border border-outline-variant/20 flex items-center justify-between gap-2 shadow-xs">
+                <div className="px-2.5 py-1 rounded-lg bg-surface-container-lowest border border-outline-variant/20 flex items-center justify-between gap-2 shadow-xs">
                   <div className="flex items-center gap-1.5 min-w-0">
-                    <span className="w-2 h-2 rounded-full bg-primary animate-ping shrink-0"></span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary animate-ping shrink-0"></span>
                     <span className="font-label-sm text-[10px] font-bold uppercase text-primary shrink-0">
                       {t('justAdded')}:
                     </span>
@@ -314,9 +366,9 @@ export default function ActiveRigSidebar() {
           </div>
 
           {/* =========================================================================
-           * 2. SCROLLABLE MIDDLE CONTAINER: BUILD COMPONENTS LIST ONLY
+           * 2. SCROLLABLE MIDDLE CONTAINER: BUILD COMPONENTS LIST
            * ========================================================================= */}
-          <div className="flex-1 min-h-0 overflow-y-auto custom-scrollbar p-3.5 sm:p-space-md flex flex-col gap-space-xs">
+          <div className="flex-1 min-h-0 overflow-y-auto custom-scrollbar p-3 sm:p-space-md flex flex-col gap-space-xs">
             <div className="flex items-center justify-between text-on-surface-variant px-1 pb-1">
               <span className="font-label-sm text-label-sm uppercase tracking-wider font-bold">
                 {t('buildComponents')} ({rigItems.length})
@@ -327,85 +379,64 @@ export default function ActiveRigSidebar() {
             </div>
 
             {rigItems.length === 0 ? (
-              <div className="my-auto p-6 rounded-xl bg-surface-container-low border border-outline-variant/20 text-center flex flex-col items-center gap-2">
-                <span className="material-symbols-outlined text-[32px] text-outline">memory</span>
-                <div className="font-body-md text-body-md font-bold text-on-surface">
-                  {t('emptyRig')}
+              <div className="my-auto py-6 text-center flex flex-col items-center gap-2">
+                <div className="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center text-outline">
+                  <span className="material-symbols-outlined text-[22px]">memory</span>
                 </div>
-                <p className="font-body-sm text-[12px] text-on-surface-variant max-w-[260px] leading-relaxed">
+                <div className="font-body-md text-body-md font-semibold text-on-surface">
+                  {t('emptyRigTitle')}
+                </div>
+                <p className="font-body-sm text-xs text-on-surface-variant max-w-[230px]">
                   {t('emptyRigDesc')}
                 </p>
               </div>
             ) : (
               rigItems.map((item) => {
+                const key = item.id || item.listing_id || item.component_id;
                 const comp = item.component || {};
+                const img = getComponentImage(comp);
                 const meta = getCardBadgesAndSpecs(item);
-                const specLine = meta.specs
-                  .slice(0, 2)
-                  .map((s) => `${s.value}`)
-                  .join(' • ');
+                const lineTotal = (parseFloat(item.price || 0) * (item.quantity || 1)).toFixed(2);
 
                 return (
                   <div
-                    key={item.id}
-                    className="animate-item-in p-2.5 sm:p-space-sm rounded-xl bg-surface-container-lowest border border-outline-variant/25 flex items-center gap-space-sm shadow-xs hover:border-primary/40 hover:shadow-sm transition-all duration-200"
+                    key={key}
+                    className="p-2.5 rounded-xl bg-surface-container-low/70 hover:bg-surface-container border border-outline-variant/20 transition-all flex items-center gap-2.5 group"
                   >
-                    <div
-                      onClick={() => openModal('productDetails', { item })}
-                      className="w-12 h-12 rounded-lg bg-surface-container-low p-1 shrink-0 flex items-center justify-center cursor-pointer group/img"
-                    >
+                    <div className="w-11 h-11 rounded-lg bg-surface-container-lowest p-1 flex items-center justify-center shrink-0 border border-outline-variant/15">
                       <img
+                        src={img}
                         alt={comp.name}
-                        className="w-full h-full object-contain group-hover/img:scale-110 transition-transform duration-200"
-                        src={getComponentImage(comp)}
+                        className="max-h-full max-w-full object-contain"
                       />
                     </div>
+
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center justify-between gap-1">
-                        <span className="font-label-sm text-[10px] font-bold text-primary uppercase truncate">
-                          {meta.categoryLabel.split('•')[0]}
+                      <div className="flex items-start justify-between gap-1">
+                        <span className="font-label-sm text-[10px] font-bold uppercase text-primary tracking-wider">
+                          {meta.categoryBadge}
                         </span>
-                        <span className="font-headline-sm text-headline-sm font-bold text-on-surface text-[14px]">
-                          ${(parseFloat(item.price || 0) * (item.quantity || 1)).toFixed(2)}
-                        </span>
-                      </div>
-                      <div
-                        onClick={() => openModal('productDetails', { item })}
-                        className="font-body-sm text-[12px] font-bold text-on-surface truncate cursor-pointer hover:text-primary transition-colors leading-tight my-0.5"
-                      >
-                        {comp.name}
-                      </div>
-                      <div className="font-label-sm text-[10px] text-on-surface-variant truncate">
-                        {specLine}
-                      </div>
-                      <div className="flex items-center justify-between mt-1.5 pt-1.5 border-t border-outline-variant/10">
-                        <div className="flex items-center bg-surface-container-low rounded-md p-0.5">
-                          <button
-                            type="button"
-                            onClick={() => updateRigQty(item.id, -1)}
-                            className="btn-interactive w-5 h-5 rounded flex items-center justify-center text-on-surface hover:bg-surface-container font-bold text-xs"
-                          >
-                            -
-                          </button>
-                          <span className="w-6 text-center font-label-md text-xs font-bold">
-                            {item.quantity || 1}
-                          </span>
-                          <button
-                            type="button"
-                            onClick={() => updateRigQty(item.id, 1)}
-                            className="btn-interactive w-5 h-5 rounded flex items-center justify-center text-on-surface hover:bg-surface-container font-bold text-xs"
-                          >
-                            +
-                          </button>
-                        </div>
                         <button
                           type="button"
-                          onClick={() => removeFromRig(item.id)}
-                          className="btn-interactive p-1 text-outline hover:text-error flex items-center gap-1 font-label-sm text-xs"
-                          title={t('removePart')}
+                          onClick={() => removeFromRig(key)}
+                          title="Удалить из сборки"
+                          className="text-outline hover:text-error transition-colors p-0.5 rounded"
                         >
                           <span className="material-symbols-outlined text-[15px]">delete</span>
                         </button>
+                      </div>
+
+                      <h4 className="font-body-sm text-xs font-bold text-on-surface truncate">
+                        {comp.name}
+                      </h4>
+
+                      <div className="flex items-center justify-between mt-1">
+                        <span className="font-label-sm text-[10px] text-on-surface-variant font-mono truncate">
+                          {meta.socket} • {meta.tdp > 0 ? `${meta.tdp}W` : '0W'}
+                        </span>
+                        <span className="font-body-sm text-xs font-extrabold text-on-surface">
+                          ${lineTotal}
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -415,24 +446,15 @@ export default function ActiveRigSidebar() {
           </div>
 
           {/* =========================================================================
-           * 3. FIXED BOTTOM PANEL (Totals, Shipping, Make Offer, Save Build, Checkout)
+           * 3. FIXED BOTTOM ACTION BAR (Financial Summary & Primary Actions)
            * ========================================================================= */}
-          <div className="shrink-0 p-3.5 sm:p-space-md border-t border-outline-variant/20 bg-surface-container-lowest flex flex-col gap-2.5 shadow-[0_-4px_12px_rgba(0,0,0,0.03)]">
-            <div className="p-2.5 rounded-lg bg-surface-container-low flex flex-col gap-1.5">
-              <div className="flex items-center justify-between font-body-sm text-[11px] text-on-surface-variant">
-                <span>{t('estWattage')}:</span>
-                <span className="font-label-sm text-[11px] font-bold text-secondary flex items-center gap-1">
-                  <span className="material-symbols-outlined text-[13px]">bolt</span>
-                  {rigMetrics.totalTdp}W ({rigMetrics.recommendedPsu}W {t('recommended')})
-                </span>
+          <div className="shrink-0 p-3 sm:p-space-md bg-surface-container-low/90 border-t border-outline-variant/25 flex flex-col gap-2">
+            <div className="flex flex-col gap-1 text-xs">
+              <div className="flex items-center justify-between text-on-surface-variant">
+                <span>{t('escrowProtection')}:</span>
+                <span className="font-semibold text-secondary">{t('includedFree')}</span>
               </div>
-              <div className="flex items-center justify-between font-body-sm text-[11px] text-on-surface-variant">
-                <span>{t('shippingLogistics')}:</span>
-                <span className="font-label-sm text-[11px] font-bold text-secondary">
-                  {t('freeShipping')}
-                </span>
-              </div>
-              <div className="flex items-center justify-between font-body-md text-sm pt-1.5 border-t border-outline-variant/20">
+              <div className="flex items-center justify-between font-body-md text-sm pt-1 border-t border-outline-variant/20">
                 <span className="font-bold text-on-surface">{t('buildSubtotal')}:</span>
                 <span className="font-headline-sm text-base sm:text-lg font-extrabold text-on-surface">
                   ${rigMetrics.subtotal.toFixed(2)}
@@ -476,173 +498,325 @@ export default function ActiveRigSidebar() {
       </div>
 
       {/* =========================================================================
-       * Fullscreen 3D PC Builder Inspection Modal (при нажатии на иконку в углу)
+       * FULLSCREEN 3D PC EDITOR & INSPECTOR (по нажатию на кнопку разворачивания)
        * ========================================================================= */}
       {isExpanded3D && (
-        <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex flex-col animate-in fade-in duration-200">
-          {/* Header */}
-          <div className="h-16 px-4 sm:px-6 border-b border-cyan-500/20 bg-slate-950/90 backdrop-blur-lg flex items-center justify-between z-20">
+        <div className="fixed inset-0 z-50 bg-[#070a12]/95 backdrop-blur-xl flex flex-col animate-in fade-in duration-200">
+          {/* Top Bar */}
+          <div className="h-14 sm:h-16 px-4 sm:px-6 border-b border-white/10 bg-slate-950/90 flex items-center justify-between shrink-0 z-20">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-cyan-500/15 border border-cyan-500/40 flex items-center justify-center text-cyan-300 shadow-inner">
-                <span className="material-symbols-outlined text-[24px]">view_in_ar</span>
+              <div className="w-9 h-9 rounded-xl bg-primary/20 border border-primary/40 flex items-center justify-center text-cyan-400">
+                <span className="material-symbols-outlined text-[22px]">view_in_ar</span>
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <h2 className="text-white font-extrabold text-base sm:text-lg">
-                    3D-Осмотр конфигурации ПК
+                  <h2 className="text-white font-bold text-sm sm:text-base">
+                    Интерактивный 3D-Конструктор ПК
                   </h2>
-                  <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-cyan-500 text-black">
-                    3D LIVE
+                  <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+                    {installedSlotsCount} / 8 УЗЛОВ
                   </span>
                 </div>
                 <p className="text-slate-400 text-xs hidden sm:block">
-                  Интерактивный Three.js вьюпорт: вращайте ПК мышкой, масштабируйте колесом и исследуйте узлы
+                  Все изменения синхронизированы с корзиной RigForge Cart в реальном времени
                 </p>
               </div>
             </div>
 
-            <div className="flex items-center gap-2 sm:gap-3">
-              <button
-                type="button"
-                onClick={() => {
-                  navigate('/builder');
-                  setIsExpanded3D(false);
-                  setIsRigOpen(false);
-                }}
-                className="hidden md:flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-cyan-950/80 hover:bg-cyan-900 border border-cyan-500/40 text-cyan-300 text-xs font-bold transition-all shadow-sm"
-              >
-                <span className="material-symbols-outlined text-[17px]">build</span>
-                <span>Открыть полную мастерскую</span>
-              </button>
+            {/* Compatibility & Price Pill + Close Button */}
+            <div className="flex items-center gap-3">
+              <div className="hidden md:flex items-center gap-3 px-3.5 py-1.5 rounded-xl bg-slate-900 border border-white/10 text-xs">
+                <span className="flex items-center gap-1 font-bold text-emerald-400">
+                  <span className="material-symbols-outlined text-[16px]">verified</span>
+                  {rigMetrics.isCompatible ? '100% Compatible' : 'Check Socket'}
+                </span>
+                <span className="text-slate-600">|</span>
+                <span className="font-mono text-slate-300">
+                  {rigMetrics.totalTdp}W / {rigMetrics.psuWattage}W
+                </span>
+                <span className="text-slate-600">|</span>
+                <span className="font-extrabold text-cyan-400">
+                  ${rigMetrics.subtotal.toFixed(2)}
+                </span>
+              </div>
 
               <button
                 type="button"
                 onClick={() => setIsExpanded3D(false)}
-                className="w-10 h-10 rounded-xl bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all hover:scale-105 active:scale-95 border border-white/10"
-                title="Закрыть (Esc)"
+                className="px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs flex items-center gap-1.5 transition-all border border-white/10"
+                title="Свернуть обратно в панель (Esc)"
               >
-                <span className="material-symbols-outlined text-[24px]">close</span>
+                <span className="material-symbols-outlined text-[18px]">close_fullscreen</span>
+                <span className="hidden sm:inline">Свернуть</span>
               </button>
             </div>
           </div>
 
-          {/* Main 3D Viewport */}
-          <div className="relative flex-1 w-full bg-radial from-slate-900 via-slate-950 to-black overflow-hidden select-none">
-            <Rig3DCanvas
-              selectedParts={selectedPartsBySlot}
-              modelPreset="custom"
-              explosion={explosion}
-              lightingMode={lightingMode}
-              showGlass={showGlass}
-              cameraPreset={cameraPreset}
-              className="w-full h-full"
-            />
+          {/* Main Fullscreen Split Area: 3D Viewport + Hardware Slot Manager */}
+          <div className="flex-1 min-h-0 flex flex-col lg:flex-row overflow-hidden">
+            {/* Left/Center: 3D Interactive Scene */}
+            <div className="relative flex-1 min-h-[340px] h-full bg-[#0b0e17] overflow-hidden">
+              <Rig3DCanvas
+                selectedParts={selectedPartsBySlot}
+                modelPreset="custom"
+                explosion={explosion}
+                lightingMode={lightingMode}
+                showGlass={showGlass}
+                cameraPreset={cameraPreset}
+                compact={false}
+                onSelectComponent={(slotKey) => setActiveSlotPicker(slotKey)}
+                className="w-full h-full"
+              />
 
-            {/* Top Camera Presets Floating Bar */}
-            <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 p-1.5 rounded-2xl bg-slate-950/80 border border-cyan-500/30 backdrop-blur-xl shadow-2xl">
-              {CAMERA_PRESETS.map((preset) => (
-                <button
-                  key={preset.id}
-                  type="button"
-                  onClick={() => setCameraPreset(preset.id)}
-                  className={`px-3 py-1.5 rounded-xl font-label-sm text-xs font-bold transition-all flex items-center gap-1.5 ${
-                    cameraPreset === preset.id
-                      ? 'bg-cyan-500 text-black shadow-md'
-                      : 'text-slate-300 hover:text-white hover:bg-white/10'
-                  }`}
-                >
-                  <span className="material-symbols-outlined text-[15px]">
-                    {preset.id === 'iso' ? 'rotate_90_degrees_ccw' : preset.id === 'glass' ? 'visibility' : preset.id === 'front' ? 'crop_portrait' : 'layers'}
-                  </span>
-                  <span className="hidden sm:inline">{preset.name}</span>
-                </button>
-              ))}
-            </div>
-
-            {/* Bottom-Left Lighting & Glass Controls */}
-            <div className="absolute bottom-4 left-4 z-20 flex flex-col gap-2 p-3 rounded-2xl bg-slate-950/85 border border-cyan-500/30 backdrop-blur-xl shadow-2xl max-w-[280px]">
-              <div className="flex items-center justify-between">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
-                  Подсветка & Стекло
-                </span>
-                <button
-                  type="button"
-                  onClick={() => setShowGlass((prev) => !prev)}
-                  className={`px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1 transition-all ${
-                    showGlass
-                      ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40'
-                      : 'bg-white/10 text-slate-400 hover:bg-white/15'
-                  }`}
-                >
-                  <span className="material-symbols-outlined text-[14px]">
-                    {showGlass ? 'visibility' : 'visibility_off'}
-                  </span>
-                  <span>{showGlass ? 'Стекло вкл' : 'Стекло снято'}</span>
-                </button>
-              </div>
-
-              {/* Lighting Profiles */}
-              <div className="flex items-center gap-1.5 pt-1">
-                {LIGHTING_MODES.map((mode) => (
+              {/* Top Floating Camera Angles */}
+              <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1 p-1.5 rounded-2xl bg-slate-950/85 border border-white/15 backdrop-blur-xl shadow-2xl">
+                {CAMERA_PRESETS.map((preset) => (
                   <button
-                    key={mode.id}
+                    key={preset.id}
                     type="button"
-                    onClick={() => setLightingMode(mode.id)}
-                    title={mode.name}
-                    className={`w-7 h-7 rounded-lg border flex items-center justify-center transition-all ${
-                      lightingMode === mode.id
-                        ? 'border-cyan-400 scale-110 shadow-lg'
-                        : 'border-white/20 opacity-70 hover:opacity-100 hover:scale-105'
+                    onClick={() => setCameraPreset(preset.id)}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+                      cameraPreset === preset.id
+                        ? 'bg-primary text-on-primary shadow-md'
+                        : 'text-slate-300 hover:text-white hover:bg-white/10'
                     }`}
-                    style={{
-                      backgroundColor: `#${mode.primaryColor.toString(16).padStart(6, '0')}`,
-                    }}
-                  />
+                  >
+                    <span className="material-symbols-outlined text-[15px]">
+                      {preset.id === 'iso'
+                        ? 'view_in_ar'
+                        : preset.id === 'glass'
+                        ? 'visibility'
+                        : preset.id === 'front'
+                        ? 'crop_portrait'
+                        : 'layers'}
+                    </span>
+                    <span className="hidden sm:inline">{preset.name}</span>
+                  </button>
                 ))}
               </div>
-            </div>
 
-            {/* Bottom-Right Exploded View Disassembly Slider */}
-            <div className="absolute bottom-4 right-4 z-20 flex flex-col gap-2 p-3 sm:p-4 rounded-2xl bg-slate-950/85 border border-cyan-500/30 backdrop-blur-xl shadow-2xl w-[300px] sm:w-[340px]">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-1.5">
-                  <span className="material-symbols-outlined text-[18px] text-cyan-400">scatter_plot</span>
-                  <span className="text-xs font-bold text-white uppercase tracking-wider">
-                    Взрыв-схема (Exploded View)
+              {/* Bottom-Left Lighting & Glass Panel Controls */}
+              <div className="absolute bottom-4 left-4 z-20 flex flex-col gap-2 p-3 rounded-2xl bg-slate-950/85 border border-white/15 backdrop-blur-xl shadow-2xl">
+                <div className="flex items-center justify-between gap-4">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                    ARGB Подсветка
                   </span>
+                  <button
+                    type="button"
+                    onClick={() => setShowGlass((prev) => !prev)}
+                    className={`px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1 transition-all ${
+                      showGlass
+                        ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40'
+                        : 'bg-white/10 text-slate-300 hover:bg-white/15'
+                    }`}
+                  >
+                    <span className="material-symbols-outlined text-[14px]">
+                      {showGlass ? 'visibility' : 'visibility_off'}
+                    </span>
+                    <span>{showGlass ? 'Стекло вкл' : 'Стекло снято'}</span>
+                  </button>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => setIsPlayingExplosion((prev) => !prev)}
-                  className={`p-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center ${
-                    isPlayingExplosion
-                      ? 'bg-cyan-500 text-black shadow-md'
-                      : 'bg-white/10 text-cyan-300 hover:bg-white/20'
-                  }`}
-                  title={isPlayingExplosion ? 'Пауза' : 'Авто-анимация'}
-                >
-                  <span className="material-symbols-outlined text-[16px]">
-                    {isPlayingExplosion ? 'pause' : 'play_arrow'}
-                  </span>
-                </button>
+
+                <div className="flex items-center gap-2 pt-0.5">
+                  {LIGHTING_MODES.map((mode) => (
+                    <button
+                      key={mode.id}
+                      type="button"
+                      onClick={() => setLightingMode(mode.id)}
+                      title={mode.name}
+                      className={`w-7 h-7 rounded-lg border transition-all ${
+                        lightingMode === mode.id
+                          ? 'border-white scale-110 shadow-lg ring-2 ring-cyan-400/50'
+                          : 'border-white/20 opacity-70 hover:opacity-100'
+                      }`}
+                      style={{
+                        backgroundColor: `#${mode.primaryColor.toString(16).padStart(6, '0')}`,
+                      }}
+                    />
+                  ))}
+                </div>
               </div>
 
-              <div className="flex items-center gap-3">
-                <input
-                  type="range"
-                  min="0"
-                  max="1"
-                  step="0.01"
-                  value={explosion}
-                  onChange={(e) => {
-                    setExplosion(parseFloat(e.target.value));
-                    setIsPlayingExplosion(false);
-                  }}
-                  className="w-full accent-cyan-400 cursor-pointer h-2 bg-slate-800 rounded-lg"
-                />
-                <span className="font-mono text-xs font-bold text-cyan-300 w-10 text-right">
-                  {Math.round(explosion * 100)}%
-                </span>
+              {/* Bottom-Right Exploded View Disassembly Slider */}
+              <div className="absolute bottom-4 right-4 z-20 flex flex-col gap-2 p-3.5 rounded-2xl bg-slate-950/85 border border-white/15 backdrop-blur-xl shadow-2xl w-[280px] sm:w-[320px]">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1.5">
+                    <span className="material-symbols-outlined text-[17px] text-cyan-400">scatter_plot</span>
+                    <span className="text-xs font-bold text-white uppercase tracking-wider">
+                      Взрыв-схема (Разборка)
+                    </span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setIsPlayingExplosion((prev) => !prev)}
+                    className={`px-2 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1 ${
+                      isPlayingExplosion
+                        ? 'bg-cyan-500 text-black'
+                        : 'bg-white/10 text-cyan-300 hover:bg-white/20'
+                    }`}
+                  >
+                    <span className="material-symbols-outlined text-[15px]">
+                      {isPlayingExplosion ? 'pause' : 'play_arrow'}
+                    </span>
+                    <span>{isPlayingExplosion ? 'Стоп' : 'Авто'}</span>
+                  </button>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <input
+                    type="range"
+                    min="0"
+                    max="1"
+                    step="0.01"
+                    value={explosion}
+                    onChange={(e) => {
+                      setExplosion(parseFloat(e.target.value));
+                      setIsPlayingExplosion(false);
+                    }}
+                    className="w-full accent-cyan-400 cursor-pointer h-1.5 bg-slate-800 rounded-lg"
+                  />
+                  <span className="font-mono text-xs font-bold text-cyan-300 w-9 text-right">
+                    {Math.round(explosion * 100)}%
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Panel: Interactive 3D Hardware Slots & Live Component Swapper */}
+            <div className="w-full lg:w-[390px] bg-slate-950 border-t lg:border-t-0 lg:border-l border-white/10 flex flex-col h-[42%] lg:h-full shrink-0">
+              <div className="p-3.5 border-b border-white/10 flex items-center justify-between">
+                <div>
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300">
+                    Комплектующие в 3D-сборке
+                  </h3>
+                  <p className="text-[11px] text-slate-400">
+                    Нажмите на слот для добавления, замены или удаления
+                  </p>
+                </div>
+                {rigItems.length > 0 && (
+                  <button
+                    type="button"
+                    onClick={clearRig}
+                    className="px-2.5 py-1 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-400 text-xs font-semibold flex items-center gap-1 transition-colors"
+                  >
+                    <span className="material-symbols-outlined text-[15px]">delete_sweep</span>
+                    <span>Очистить</span>
+                  </button>
+                )}
+              </div>
+
+              <div className="flex-1 overflow-y-auto custom-scrollbar p-3 flex flex-col gap-2">
+                {HARDWARE_SLOTS.map((slot) => {
+                  const installed = selectedPartsBySlot[slot.key];
+                  const rigItem = installed?._rigItem;
+                  const itemKey = rigItem ? rigItem.id || rigItem.listing_id || rigItem.component_id : null;
+                  const isPickerOpen = activeSlotPicker === slot.key;
+                  const slotOptions = catalogBySlot[slot.key] || [];
+
+                  return (
+                    <div
+                      key={slot.key}
+                      className={`rounded-xl border transition-all ${
+                        installed
+                          ? 'bg-slate-900/90 border-cyan-500/30'
+                          : 'bg-slate-900/40 border-white/10 hover:border-white/20'
+                      }`}
+                    >
+                      <div className="p-2.5 flex items-center justify-between gap-2.5">
+                        <div className="flex items-center gap-2.5 min-w-0 flex-1">
+                          <div
+                            className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 ${
+                              installed
+                                ? 'bg-cyan-500/15 text-cyan-300 border border-cyan-500/30'
+                                : 'bg-white/5 text-slate-500'
+                            }`}
+                          >
+                            <span className="material-symbols-outlined text-[19px]">{slot.icon}</span>
+                          </div>
+
+                          <div className="min-w-0 flex-1">
+                            <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                              {slot.label}
+                            </div>
+                            {installed ? (
+                              <div className="text-xs font-bold text-white truncate">
+                                {installed.name}
+                              </div>
+                            ) : (
+                              <div className="text-xs text-slate-500 italic">Не выбрано</div>
+                            )}
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-1 shrink-0">
+                          <button
+                            type="button"
+                            onClick={() => setActiveSlotPicker(isPickerOpen ? null : slot.key)}
+                            className="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-cyan-500 hover:text-black text-slate-200 text-[11px] font-bold transition-colors flex items-center gap-1"
+                          >
+                            <span className="material-symbols-outlined text-[14px]">
+                              {installed ? 'swap_horiz' : 'add'}
+                            </span>
+                            <span>{installed ? 'Заменить' : 'Выбрать'}</span>
+                          </button>
+
+                          {installed && itemKey && (
+                            <button
+                              type="button"
+                              onClick={() => removeFromRig(itemKey)}
+                              title="Удалить компонент из 3D-сборки"
+                              className="p-1.5 rounded-lg bg-red-500/10 hover:bg-red-500/25 text-red-400 transition-colors flex items-center justify-center"
+                            >
+                              <span className="material-symbols-outlined text-[15px]">delete</span>
+                            </button>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Inline Catalog Picker for this Slot */}
+                      {isPickerOpen && (
+                        <div className="border-t border-white/10 p-2 bg-slate-950/90 flex flex-col gap-1.5 max-h-48 overflow-y-auto custom-scrollbar">
+                          {slotOptions.length === 0 ? (
+                            <div className="text-xs text-slate-500 py-2 text-center">
+                              Нет доступных товаров этой категории
+                            </div>
+                          ) : (
+                            slotOptions.map((option) => {
+                              const comp = option.component || option;
+                              const price = parseFloat(option.price || comp.msrp || 199).toFixed(2);
+                              const isCurrent = installed && (installed.id === comp.id || installed.name === comp.name);
+                              return (
+                                <button
+                                  key={option.id || `comp-${comp.id}`}
+                                  type="button"
+                                  onClick={() => {
+                                    addToRig(option, false);
+                                    setActiveSlotPicker(null);
+                                  }}
+                                  className={`w-full p-2 rounded-lg text-left flex items-center justify-between gap-2 transition-colors ${
+                                    isCurrent
+                                      ? 'bg-cyan-500/20 border border-cyan-500/40 text-cyan-200'
+                                      : 'hover:bg-white/10 text-slate-200'
+                                  }`}
+                                >
+                                  <div className="min-w-0 flex-1">
+                                    <div className="text-xs font-bold truncate">{comp.name}</div>
+                                    <div className="text-[10px] text-slate-400 font-mono">
+                                      {comp.brand || 'OEM'}
+                                    </div>
+                                  </div>
+                                  <span className="text-xs font-extrabold text-cyan-400 shrink-0">
+                                    ${price}
+                                  </span>
+                                </button>
+                              );
+                            })
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>

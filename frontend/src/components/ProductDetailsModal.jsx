@@ -227,15 +227,6 @@ export default function ProductDetailsModal({ item, onClose }) {
                 <div className="flex items-center gap-2">
                   <button
                     type="button"
-                    onClick={() => openModal('aiVisualizer')}
-                    className="px-3 py-1.5 rounded-lg bg-surface-container-lowest hover:bg-surface-container border border-primary/40 font-body-sm text-body-sm font-semibold text-primary flex items-center gap-1.5 transition-colors shadow-sm"
-                    title="Visualize in 3D Rig Studio"
-                  >
-                    <span className="material-symbols-outlined text-[16px]">auto_awesome</span>
-                    <span>3D Render</span>
-                  </button>
-                  <button
-                    type="button"
                     onClick={handleChatWithSeller}
                     className="px-3 py-1.5 rounded-lg bg-surface-container-lowest hover:bg-surface-container border border-outline-variant/50 font-body-sm text-body-sm font-semibold text-on-surface flex items-center gap-1.5 transition-colors shadow-sm"
                   >

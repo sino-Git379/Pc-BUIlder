@@ -2130,7 +2130,6 @@ export default function ModalManager() {
         {renderedModal === 'productDetails' && (
           <ProductDetailsModal item={renderedProps.item} onClose={closeModal} />
         )}
-        {renderedModal === 'aiVisualizer' && <AiVisualizerModal onClose={closeModal} />}
         {renderedModal === 'makeOffer' && (
           <MakeOfferModal props={renderedProps} onClose={closeModal} />
         )}
