@@ -25,13 +25,17 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-a*ls-mci8y1oub-lg^$
 
 DEBUG = os.getenv('DJANGO_DEBUG', 'True').lower() in ('true', '1', 'yes')
 
-ALLOWED_HOSTS = [h.strip() for h in os.getenv('ALLOWED_HOSTS', '*').split(',') if h.strip()]
+ALLOWED_HOSTS = [
+    h.strip()
+    for h in os.getenv('ALLOWED_HOSTS', 'student3.softclub.tj,www.student3.softclub.tj,157.180.29.248,localhost,127.0.0.1,*').split(',')
+    if h.strip()
+]
 
 CSRF_TRUSTED_ORIGINS = [
     o.strip()
     for o in os.getenv(
         'CSRF_TRUSTED_ORIGINS',
-        'http://localhost,http://127.0.0.1,http://localhost:80,http://localhost:8000'
+        'https://student3.softclub.tj,http://student3.softclub.tj,http://157.180.29.248,http://localhost,http://127.0.0.1'
     ).split(',')
     if o.strip()
 ]
